@@ -1,0 +1,108 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<ItemGroup>
+	  <Compile Remove="LogConsole\**" />
+	  <EmbeddedResource Remove="LogConsole\**" />
+	  <None Remove="LogConsole\**" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Remove="Tools\LogConsole.xaml" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Folder Include="Properties\PublishProfiles\" />
+	</ItemGroup>
+	
+	<PropertyGroup>
+		<OutputType>Library</OutputType>
+		<TargetFramework>net6.0</TargetFramework>
+		<Platforms>x64</Platforms>
+		<Version>1.8.0</Version>
+		<AssemblyVersion>1.8.0.0</AssemblyVersion>
+		<FileVersion>1.8.0.0</FileVersion>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+		<PlatformTarget>x64</PlatformTarget>
+		<OutputPath>..\Fuzible\bin\x64\Debug</OutputPath>
+		<Optimize>False</Optimize>
+		<DebugType>portable</DebugType>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+	  <Optimize>False</Optimize>
+	  <DebugType>portable</DebugType>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <PackageReference Include="DeveloperForce.Force" Version="2.1.0" />
+	  <PackageReference Include="EPPlus" Version="4.5.3.3" />
+	  <PackageReference Include="ExcelDataReader" Version="3.7.0" />
+	  <PackageReference Include="HtmlAgilityPack" Version="1.12.0" />
+	  <PackageReference Include="HttpToSocks5Proxy" Version="1.4.0" />
+	  <PackageReference Include="MailKit" Version="4.11.0" />
+	  <PackageReference Include="Microsoft.Azure.Services.AppAuthentication" Version="1.6.2" />
+	  <PackageReference Include="Microsoft.Data.SqlClient" Version="5.2.2" />
+	  <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="7.0.13" />
+	  <PackageReference Include="MongoDB.Driver" Version="3.3.0" />
+	  <PackageReference Include="MySqlConnector" Version="2.4.0" />
+	  <PackageReference Include="Npgsql" Version="9.0.3" />
+	  <PackageReference Include="Oracle.ManagedDataAccess.Core" Version="23.8.0" />
+	  <PackageReference Include="RestSharp" Version="112.1.0" />
+	  <PackageReference Include="SSH.NET" Version="2024.2.0" />
+	  <PackageReference Include="System.Data.Common" Version="4.3.0" />
+	  <PackageReference Include="System.Data.Odbc" Version="6.0.2" />
+	  <PackageReference Include="System.Data.OleDb" Version="6.0.1" />
+	  <PackageReference Include="System.DirectoryServices" Version="8.0.0" />
+	  <PackageReference Include="System.DirectoryServices.AccountManagement" Version="9.0.4" />
+	  <PackageReference Include="System.Management" Version="6.0.2" />
+	  <PackageReference Include="System.Text.Encoding.CodePages" Version="9.0.4" />
+	  <PackageReference Include="TaskScheduler" Version="2.12.1" />
+	  <PackageReference Include="Ude.NetStandard" Version="1.2.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Page Include="Tools\LogConsole.xaml">
+	    <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+	    <Generator>MSBuild:Compile</Generator>
+	  </Page>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Reference Include="System.Web.Extensions">
+	    <HintPath>..\..\JSONConvertDataSet-master\MyDataConvert\bin\Debug\System.Web.Extensions.dll</HintPath>
+	  </Reference>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Update="Languages\Languages.Designer.cs">
+	    <DesignTime>True</DesignTime>
+	    <AutoGen>True</AutoGen>
+	    <DependentUpon>Languages.resx</DependentUpon>
+	  </Compile>
+	  <Compile Update="Properties\Resources.Designer.cs">
+	    <DesignTime>True</DesignTime>
+	    <AutoGen>True</AutoGen>
+	    <DependentUpon>Resources.resx</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <EmbeddedResource Update="Languages\Languages.EN.resx">
+	    <Generator>PublicResXFileCodeGenerator</Generator>
+	  </EmbeddedResource>
+	  <EmbeddedResource Update="Languages\Languages.FR.resx">
+	    <Generator>PublicResXFileCodeGenerator</Generator>
+	  </EmbeddedResource>
+	  <EmbeddedResource Update="Languages\Languages.resx">
+	    <Generator>PublicResXFileCodeGenerator</Generator>
+	    <LastGenOutput>Languages.Designer.cs</LastGenOutput>
+	  </EmbeddedResource>
+	  <EmbeddedResource Update="Properties\Resources.resx">
+	    <Generator>ResXFileCodeGenerator</Generator>
+	    <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+	  </EmbeddedResource>
+	</ItemGroup>
+
+</Project>

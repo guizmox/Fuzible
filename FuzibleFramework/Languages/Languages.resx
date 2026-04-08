@@ -1,0 +1,2070 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ad_abortedfields" xml:space="preserve">
+    <value>Some fields were not parsable : </value>
+  </data>
+  <data name="ad_addobject" xml:space="preserve">
+    <value>New entry added</value>
+  </data>
+  <data name="ad_addobject_pwd" xml:space="preserve">
+    <value>Adding password to AD entry</value>
+  </data>
+  <data name="ad_cantaddprimarykeytosource" xml:space="preserve">
+    <value>Can't add a Primary Key on Source data</value>
+  </data>
+  <data name="ad_cantsynchronizewithoutpk" xml:space="preserve">
+    <value>Synchronization Aborted. Can't go further without any Primary Key</value>
+  </data>
+  <data name="ad_deleteobject" xml:space="preserve">
+    <value>Deleting existing AD Object</value>
+  </data>
+  <data name="ad_deleteobject_tag" xml:space="preserve">
+    <value>Desactivating AD entry</value>
+  </data>
+  <data name="ad_dontdeletecritical" xml:space="preserve">
+    <value>Can't delete a Critical System Object</value>
+  </data>
+  <data name="ad_dontupdatecritical" xml:space="preserve">
+    <value>Can't update a Critical System Object</value>
+  </data>
+  <data name="ad_errorwhileactivatingentry" xml:space="preserve">
+    <value>Error while activating AD Entry </value>
+  </data>
+  <data name="ad_ignoreobject" xml:space="preserve">
+    <value>Ignoring existing AD Object</value>
+  </data>
+  <data name="ad_missingfieldname" xml:space="preserve">
+    <value>Missing 'name' field - Can't Add AD Object (</value>
+  </data>
+  <data name="ad_parsingdata01" xml:space="preserve">
+    <value>  - Parsing Data : </value>
+  </data>
+  <data name="ad_parsingdata02" xml:space="preserve">
+    <value> rows retrieved</value>
+  </data>
+  <data name="ad_unabletoaddobject" xml:space="preserve">
+    <value>Unable to Add AD Object (</value>
+  </data>
+  <data name="ad_unabletodeleteobject" xml:space="preserve">
+    <value>Unable to delete Active Directory object</value>
+  </data>
+  <data name="ad_unabletoreadproperties" xml:space="preserve">
+    <value>Unable de read Active Directory Properties from Query :</value>
+  </data>
+  <data name="ad_updateobject" xml:space="preserve">
+    <value>Updated AD entry</value>
+  </data>
+  <data name="fi_cantaddnetworkpathtocache" xml:space="preserve">
+    <value>Can't add Network Path to Cache </value>
+  </data>
+  <data name="fi_cantextractraw" xml:space="preserve">
+    <value>Can't extract raw data from file</value>
+  </data>
+  <data name="fi_cmd_args" xml:space="preserve">
+    <value> | With Arguments : </value>
+  </data>
+  <data name="fi_cmd_command" xml:space="preserve">
+    <value>Command : </value>
+  </data>
+  <data name="fi_cmd_exitcode" xml:space="preserve">
+    <value>External Process Exited with non-zero Exit code of : </value>
+  </data>
+  <data name="fi_cmd_killedtimeout" xml:space="preserve">
+    <value>External Process was Killed - Timeout</value>
+  </data>
+  <data name="fi_cmd_success" xml:space="preserve">
+    <value>External Process Ran Successfully</value>
+  </data>
+  <data name="fi_copy_norows" xml:space="preserve">
+    <value>No Rows in datasource. Can't create file.</value>
+  </data>
+  <data name="fi_copy_subquery" xml:space="preserve">
+    <value>Subquery Detected : Getting Data From : </value>
+  </data>
+  <data name="fi_csv_file" xml:space="preserve">
+    <value>File </value>
+  </data>
+  <data name="fi_csv_filecantberead" xml:space="preserve">
+    <value> Can't be Read !</value>
+  </data>
+  <data name="fi_csv_fileempty" xml:space="preserve">
+    <value> is empty.</value>
+  </data>
+  <data name="fi_csv_headerA" xml:space="preserve">
+    <value>File A : First Row is the Header : </value>
+  </data>
+  <data name="fi_csv_headercantberead" xml:space="preserve">
+    <value>File Header can't be Read (</value>
+  </data>
+  <data name="fi_csv_separatorA" xml:space="preserve">
+    <value>File A : CSV Separator Detected : </value>
+  </data>
+  <data name="fi_csv_unabletoprocess" xml:space="preserve">
+    <value>Unable to process input data</value>
+  </data>
+  <data name="fi_excelsub_cantapplystyle" xml:space="preserve">
+    <value>Can't apply Style to Excel sheet</value>
+  </data>
+  <data name="fi_excelsub_interpretformulas" xml:space="preserve">
+    <value>Applying Formulas Interpretation : Detecting data starting with '='</value>
+  </data>
+  <data name="fi_noheader" xml:space="preserve">
+    <value>:No Header</value>
+  </data>
+  <data name="fi_patterngenerator_create" xml:space="preserve">
+    <value>WILL CREATE NEW FILE : </value>
+  </data>
+  <data name="fi_patterngenerator_delete" xml:space="preserve">
+    <value>WILL DELETE EXISTING FILE : </value>
+  </data>
+  <data name="fi_simulation_intermediatepathsftp" xml:space="preserve">
+    <value>INTERMEDIATE (S) FTP DIRECTORY : </value>
+  </data>
+  <data name="fi_simulation_willavoiddeletesql" xml:space="preserve">
+    <value>Will not perform DELETE statement in Source database : </value>
+  </data>
+  <data name="fi_simulation_willcreatelocalpath" xml:space="preserve">
+    <value>WILL CREATE LOCAL DIRECTORY : </value>
+  </data>
+  <data name="fi_simulation_willcreatenewcsv" xml:space="preserve">
+    <value>WILL CREATE NEW CSV FILE : </value>
+  </data>
+  <data name="fi_simulation_willcreatenewjson" xml:space="preserve">
+    <value>WILL CREATE NEW JSON FILE : </value>
+  </data>
+  <data name="fi_simulation_willcreatenewxls" xml:space="preserve">
+    <value>WILL CREATE NEW XLS FILE : </value>
+  </data>
+  <data name="fi_simulation_willcreatenewxml" xml:space="preserve">
+    <value>WILL CREATE NEW XML FILE : </value>
+  </data>
+  <data name="fi_simulation_willpostwork" xml:space="preserve">
+    <value>WILL POST-WORK INPUT FILE(S) -</value>
+  </data>
+  <data name="fi_simulation_willpostworksftp" xml:space="preserve">
+    <value>WILL POST-WORK INPUT FILE(S) ON (S)FTP - </value>
+  </data>
+  <data name="fi_simulation_willuploadtoftp" xml:space="preserve">
+    <value>WILL UPLOAD FILE TO FTP</value>
+  </data>
+  <data name="fi_simulation_willuploadtosftp" xml:space="preserve">
+    <value>WILL UPLOAD FILE TO SFTP</value>
+  </data>
+  <data name="fi_simulation_willwriteintoxls" xml:space="preserve">
+    <value>WILL WRITE INTO XLS FILE : </value>
+  </data>
+  <data name="fi_synchro_applypk" xml:space="preserve">
+    <value>Applying Primary Key on both Source and Target Data</value>
+  </data>
+  <data name="fi_synchro_cantgofurther" xml:space="preserve">
+    <value>Can't go further.</value>
+  </data>
+  <data name="fi_synchro_errortargetquery" xml:space="preserve">
+    <value>Synchro.Mode : Error(s) In Target Query : </value>
+  </data>
+  <data name="fi_synchro_noprimarykey" xml:space="preserve">
+    <value>Synchro. Mode : No Primary Key (</value>
+  </data>
+  <data name="fi_synchro_pkfromshssource" xml:space="preserve">
+    <value>Synchro. Mode : Target Table Empty : Smart Primary Key Detection on Source DataTable  (</value>
+  </data>
+  <data name="fi_synchro_pkfromshstarget" xml:space="preserve">
+    <value>Synchro. Mode : Target Table Empty : Smart Primary Key Detection on Target DataTable  (</value>
+  </data>
+  <data name="fi_synchro_pkfromsource" xml:space="preserve">
+    <value>Synchro. Mode : Get Primary Key From Source DataTable : </value>
+  </data>
+  <data name="fi_synchro_rowssource" xml:space="preserve">
+    <value>Synchro. Mode : Rows SOURCE  (</value>
+  </data>
+  <data name="fi_synchro_rowstarget" xml:space="preserve">
+    <value>Synchro. Mode : Rows TARGET  (</value>
+  </data>
+  <data name="fi_synchro_rowstodelete" xml:space="preserve">
+    <value>Synchro. Mode : Rows To DELETE (</value>
+  </data>
+  <data name="fi_synchro_rowstoinsert" xml:space="preserve">
+    <value>Synchro. Mode : Rows To INSERT (</value>
+  </data>
+  <data name="fi_synchro_rowstoupdate" xml:space="preserve">
+    <value>Synchro. Mode : Rows To UPDATE (</value>
+  </data>
+  <data name="fi_synchro_store01" xml:space="preserve">
+    <value>Synchro. Mode : Store (</value>
+  </data>
+  <data name="fi_synchro_store02" xml:space="preserve">
+    <value> row(s)) in file : </value>
+  </data>
+  <data name="fi_typechange_wrong01" xml:space="preserve">
+    <value>Wrong File Type (</value>
+  </data>
+  <data name="fi_typechange_wrong02" xml:space="preserve">
+    <value>) : Changing To </value>
+  </data>
+  <data name="fi_unknowncell" xml:space="preserve">
+    <value>UNKNOWN_CELL_</value>
+  </data>
+  <data name="fi_xlsenddimensiondetected" xml:space="preserve">
+    <value>Excel Sheet Dimension Ends At</value>
+  </data>
+  <data name="fi_xls_addcoltodatatable" xml:space="preserve">
+    <value>Excel Append Mode : Adding Column to Datatable : </value>
+  </data>
+  <data name="fi_xls_addcoltoexcel" xml:space="preserve">
+    <value>Excel Append Mode : Adding Column to Excel Sheet :</value>
+  </data>
+  <data name="fi_xls_cantbeconverted01" xml:space="preserve">
+    <value>File </value>
+  </data>
+  <data name="fi_xls_cantbeconverted02" xml:space="preserve">
+    <value> Can't be Converted : </value>
+  </data>
+  <data name="fi_xls_cantreadatposition" xml:space="preserve">
+    <value>Unable to read Excel data at index (row, column)</value>
+  </data>
+  <data name="fi_xls_createcantcreate" xml:space="preserve">
+    <value>Can't Create Excel File (</value>
+  </data>
+  <data name="fi_xls_createschemaappend" xml:space="preserve">
+    <value>Excel Worksheet &amp; Schema found in file. Appending data in the same Worksheet (</value>
+  </data>
+  <data name="fi_xls_createschemanotmatch" xml:space="preserve">
+    <value>Excel Worksheet found in file but Schema does not match. Appending data in a new Worksheet (</value>
+  </data>
+  <data name="fi_xls_firstrowheader" xml:space="preserve">
+    <value>File A : First Row is the Header : </value>
+  </data>
+  <data name="fi_xls_startdimensiondetected" xml:space="preserve">
+    <value>Excel Sheet Dimension Starts At</value>
+  </data>
+  <data name="fi_xls_startdimensionnotfound" xml:space="preserve">
+    <value>Excel Sheet Dimension was not found !</value>
+  </data>
+  <data name="fi_xmljson_cantberead01" xml:space="preserve">
+    <value>File </value>
+  </data>
+  <data name="fi_xmljson_cantberead02" xml:space="preserve">
+    <value> Can't be Read : </value>
+  </data>
+  <data name="fi_xml_create_warning" xml:space="preserve">
+    <value>You're inserting more than one row in an XML file, a row script tag must be defined in the Job. Default value used (</value>
+  </data>
+  <data name="fi_zip_nofilefound" xml:space="preserve">
+    <value>Unable to find Source File. ZIP File does not exists and/or file not found</value>
+  </data>
+  <data name="fi_zip_sourcefound" xml:space="preserve">
+    <value>Source File Found in ZIP : </value>
+  </data>
+  <data name="ftp_downloadfromftp" xml:space="preserve">
+    <value>Download File From FTP Server ( </value>
+  </data>
+  <data name="ftp_downloadfromsftp" xml:space="preserve">
+    <value>Download File From SFTP Server ( </value>
+  </data>
+  <data name="ftp_download_ftpok" xml:space="preserve">
+    <value>Download Complete, status {0}</value>
+  </data>
+  <data name="ftp_ftpcreatedirok" xml:space="preserve">
+    <value>FTP CREATE DIR : </value>
+  </data>
+  <data name="ftp_ftpdeletestatus" xml:space="preserve">
+    <value>FTP DELETE : </value>
+  </data>
+  <data name="ftp_ftpmovefileok" xml:space="preserve">
+    <value> - MOVE FILE : </value>
+  </data>
+  <data name="ftp_sftpcreatedirok" xml:space="preserve">
+    <value>SFTP CREATE DIR : Success</value>
+  </data>
+  <data name="ftp_sftpdeleteko" xml:space="preserve">
+    <value>Unable to delete file on distant server : </value>
+  </data>
+  <data name="ftp_sftpdeleteok" xml:space="preserve">
+    <value>SFTP DELETE : Success</value>
+  </data>
+  <data name="ftp_sftpmovefileok" xml:space="preserve">
+    <value>SFTP MOVE FILE : Success</value>
+  </data>
+  <data name="ftp_sftpunabletocreatepath" xml:space="preserve">
+    <value>Unable to create distant directory : </value>
+  </data>
+  <data name="ftp_sftpunabletomovefile" xml:space="preserve">
+    <value>Unable to move file on distant server : </value>
+  </data>
+  <data name="ftp_uploadonftp" xml:space="preserve">
+    <value>Upload File on FTP Server ( </value>
+  </data>
+  <data name="ftp_uploadonsftp" xml:space="preserve">
+    <value>Upload File on SFTP Server ( </value>
+  </data>
+  <data name="jr_col_abnormal" xml:space="preserve">
+    <value>Abnormal State</value>
+  </data>
+  <data name="jr_col_args" xml:space="preserve">
+    <value>Dynamic Params.</value>
+  </data>
+  <data name="jr_col_avgtime" xml:space="preserve">
+    <value>Average Duration</value>
+  </data>
+  <data name="jr_col_dtexec" xml:space="preserve">
+    <value>Execution Date</value>
+  </data>
+  <data name="jr_col_globalstate" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="jr_col_job" xml:space="preserve">
+    <value>Job</value>
+  </data>
+  <data name="jr_col_maxtime" xml:space="preserve">
+    <value>Max. Duration</value>
+  </data>
+  <data name="jr_col_messages" xml:space="preserve">
+    <value>Messages</value>
+  </data>
+  <data name="jr_col_mintime" xml:space="preserve">
+    <value>Min. Duration</value>
+  </data>
+  <data name="jr_col_nbexec" xml:space="preserve">
+    <value>Executions Count</value>
+  </data>
+  <data name="jr_col_planif" xml:space="preserve">
+    <value>Planification Model</value>
+  </data>
+  <data name="jr_col_state" xml:space="preserve">
+    <value>State</value>
+  </data>
+  <data name="jr_col_statistics" xml:space="preserve">
+    <value>Statistics</value>
+  </data>
+  <data name="jr_col_status" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="jr_col_time" xml:space="preserve">
+    <value>Duration</value>
+  </data>
+  <data name="jr_col_witherror" xml:space="preserve">
+    <value>With Errors</value>
+  </data>
+  <data name="jr_col_withwarn" xml:space="preserve">
+    <value>With Warnings</value>
+  </data>
+  <data name="log_jobended01" xml:space="preserve">
+    <value>RUNNING TIME : </value>
+  </data>
+  <data name="log_jobended02" xml:space="preserve">
+    <value>ERRORS : </value>
+  </data>
+  <data name="log_jobended03" xml:space="preserve">
+    <value>WARNINGS : </value>
+  </data>
+  <data name="log_jobfinished" xml:space="preserve">
+    <value> - JOB FINISHED (</value>
+  </data>
+  <data name="log_jobfinished_errors" xml:space="preserve">
+    <value>WITH ERRORS</value>
+  </data>
+  <data name="log_jobfinished_noerrors" xml:space="preserve">
+    <value>NO ERRORS</value>
+  </data>
+  <data name="log_jobstarted" xml:space="preserve">
+    <value> - JOB STARTED : </value>
+  </data>
+  <data name="log_jobstarteddynparams" xml:space="preserve">
+    <value>WITH DYNAMIC PARAMETERS : </value>
+  </data>
+  <data name="log_rowreport" xml:space="preserve">
+    <value>Rows Report</value>
+  </data>
+  <data name="log_rowreport01" xml:space="preserve">
+    <value>Destination</value>
+  </data>
+  <data name="log_rowreport02" xml:space="preserve">
+    <value>Rows Source</value>
+  </data>
+  <data name="log_rowreport03" xml:space="preserve">
+    <value>Rows Target</value>
+  </data>
+  <data name="log_rowreport04" xml:space="preserve">
+    <value>Inserted</value>
+  </data>
+  <data name="log_rowreport05" xml:space="preserve">
+    <value>Updated</value>
+  </data>
+  <data name="log_rowreport06" xml:space="preserve">
+    <value>Deleted</value>
+  </data>
+  <data name="log_rowreport07" xml:space="preserve">
+    <value>Processing Date</value>
+  </data>
+  <data name="log_rowreport08" xml:space="preserve">
+    <value>Summary</value>
+  </data>
+  <data name="log_sqlcantfindpattern" xml:space="preserve">
+    <value>Can't find SQL pattern in INI file for </value>
+  </data>
+  <data name="log_sqlnotables" xml:space="preserve">
+    <value>Can't LOG in SQL. Tables not created.</value>
+  </data>
+  <data name="log_sqlrunningtime" xml:space="preserve">
+    <value> - Running Time : </value>
+  </data>
+  <data name="ma_msg_dynparams_loopquantity_01" xml:space="preserve">
+    <value>Pre-Command generated multiple rows through Dynamic Parameter  </value>
+  </data>
+  <data name="ma_msg_dynparams_loopquantity_02" xml:space="preserve">
+    <value>Job will be looped </value>
+  </data>
+  <data name="ma_msg_dynparams_loopquantity_03" xml:space="preserve">
+    <value>times. Each iteration will apply each of the Pre-Command results to that Dynamic Parameter.</value>
+  </data>
+  <data name="ma_msg_dynparams_loopquantity_04" xml:space="preserve">
+    <value>Starting New Job Iteration from Dynamic Parameter : </value>
+  </data>
+  <data name="ma_msg_dynparams_nodataforloop" xml:space="preserve">
+    <value>No Data has been retrieved from pre-command.  Job will not be executed.</value>
+  </data>
+  <data name="ma_msg_logsqlcantreach" xml:space="preserve">
+    <value>LOG Database is unreachable. Data will only be stored in LOG files.</value>
+  </data>
+  <data name="ma_msg_saveclientjobs_ko" xml:space="preserve">
+    <value>Unable to Save Client Jobs in Service Database</value>
+  </data>
+  <data name="ma_msg_toomucherrorsduringjob01" xml:space="preserve">
+    <value>Too much Errors while processing Job (&gt; </value>
+  </data>
+  <data name="ma_msg_toomucherrorsduringjob02" xml:space="preserve">
+    <value>) : Aborting.</value>
+  </data>
+  <data name="mb_buildhtml_records" xml:space="preserve">
+    <value> record(s)</value>
+  </data>
+  <data name="mb_cantbuildfilefromraw" xml:space="preserve">
+    <value>Unable to build a file from Raw Data. Unexpected data has been provided.</value>
+  </data>
+  <data name="mb_cantgeetpwdinquery" xml:space="preserve">
+    <value>Can't get password from Query (ex : OUTPUT:SELECT * from mymail@myserver.com[password]) : Using connexion string password instead.</value>
+  </data>
+  <data name="mb_htmltemplate_empty_keyword" xml:space="preserve">
+    <value>No Replacement Keyword has been set in the Job. Query Data HTML Content will be added at the end of the Template File instead.</value>
+  </data>
+  <data name="mb_htmltemplate_file_ko" xml:space="preserve">
+    <value>Unable to load HTML Template File</value>
+  </data>
+  <data name="mb_htmltemplate_no_keyword" xml:space="preserve">
+    <value>Replacement Keyword has not been found in the Template File. Query Data HTML Content will be added at the end of the Template File instead.</value>
+  </data>
+  <data name="mb_htmltemplate_no_keyword_but_found" xml:space="preserve">
+    <value>Found Keyword in HTML Template. Will Replace it with Query Data formatted in HTML</value>
+  </data>
+  <data name="mb_htmltemplate_no_keyword_detect_from_query" xml:space="preserve">
+    <value>No Keyword has been set from Job. Trying to find it using Query Alias : </value>
+  </data>
+  <data name="mb_htmltemplate_no_keyword_not_found" xml:space="preserve">
+    <value>Keyword was not found in HTML Template</value>
+  </data>
+  <data name="mb_htmltemplate_parsing_ko" xml:space="preserve">
+    <value>Unable to Parse HTML from File. Default Template will be used.</value>
+  </data>
+  <data name="mb_log_errors" xml:space="preserve">
+    <value>- ERRORS : </value>
+  </data>
+  <data name="mb_log_errors01" xml:space="preserve">
+    <value>FINISHED WITH ERRORS (RUNNING TIME : </value>
+  </data>
+  <data name="mb_log_errors02" xml:space="preserve">
+    <value>CHECK LOG FILES FOR DETAILS</value>
+  </data>
+  <data name="mb_log_header" xml:space="preserve">
+    <value>[Fuzible - Job Report] : </value>
+  </data>
+  <data name="mb_log_success" xml:space="preserve">
+    <value>SUCCESSFULLY FINISHED (RUNNING TIME : </value>
+  </data>
+  <data name="mb_log_warnings" xml:space="preserve">
+    <value>- WARNINGS : </value>
+  </data>
+  <data name="mb_retrieve" xml:space="preserve">
+    <value> - RETRIEVE MAILS </value>
+  </data>
+  <data name="mb_retrieve_changemethod" xml:space="preserve">
+    <value>Trying another method</value>
+  </data>
+  <data name="mb_retrieve_unknownmail01" xml:space="preserve">
+    <value>Unrecognized address : </value>
+  </data>
+  <data name="mb_retrieve_unknownmail02" xml:space="preserve">
+    <value>. Can't Get Data.</value>
+  </data>
+  <data name="mb_send_autogenerate" xml:space="preserve">
+    <value>This e-mail was auto-generated by &lt;a href="https://github.com/guizmox/Fuzible" target="_blank"&gt;The Fuzible Application&lt;/a&gt;</value>
+  </data>
+  <data name="mb_send_exceedslimit" xml:space="preserve">
+    <value>Can't add file to mail. Size exceeds limit (</value>
+  </data>
+  <data name="mb_send_pj01" xml:space="preserve">
+    <value>Attached </value>
+  </data>
+  <data name="mb_send_pj02" xml:space="preserve">
+    <value> File : </value>
+  </data>
+  <data name="mb_send_pj03" xml:space="preserve">
+    <value> row(s).</value>
+  </data>
+  <data name="mb_send_unrecognizedmail" xml:space="preserve">
+    <value>Can't add recipient in mail : Unrecognized address : </value>
+  </data>
+  <data name="mb_simulation_delete" xml:space="preserve">
+    <value>GET MAILS - DELETE : </value>
+  </data>
+  <data name="mb_simulation_flag" xml:space="preserve">
+    <value>GET MAILS - FLAG READ : </value>
+  </data>
+  <data name="mb_simulation_move" xml:space="preserve">
+    <value>GET MAILS - MOVE : </value>
+  </data>
+  <data name="mb_simulation_sendaddcc" xml:space="preserve">
+    <value>MAIL ADD CC : </value>
+  </data>
+  <data name="mb_simulation_sendaddto" xml:space="preserve">
+    <value>MAIL ADD TO : </value>
+  </data>
+  <data name="mb_simulation_sendattachment" xml:space="preserve">
+    <value>MAIL ADD ATTACHMENT : </value>
+  </data>
+  <data name="mb_simulation_sendbody" xml:space="preserve">
+    <value>MAIL BODY : </value>
+  </data>
+  <data name="mb_simulation_sendobject" xml:space="preserve">
+    <value>MAIL ADD SUBJECT : </value>
+  </data>
+  <data name="msg_downloadingfile" xml:space="preserve">
+    <value>Downloading a File : </value>
+  </data>
+  <data name="msg_send_report_endjob" xml:space="preserve">
+    <value>Sending Mail Report to : </value>
+  </data>
+  <data name="mt_comparedt_comparedel" xml:space="preserve">
+    <value> -&gt; COMPARED (DELETE) </value>
+  </data>
+  <data name="mt_comparedt_compareiu" xml:space="preserve">
+    <value> -&gt; COMPARED (INSERT+UPDATE) </value>
+  </data>
+  <data name="mt_comparedt_indexbroken" xml:space="preserve">
+    <value>Internal Datatable index is broken. You should TRUNCATE the target table.</value>
+  </data>
+  <data name="mt_comparedt_invalidpk01" xml:space="preserve">
+    <value>Invalid Primary Key { </value>
+  </data>
+  <data name="mt_comparedt_invalidpk02" xml:space="preserve">
+    <value> }. Can't perform synchronization comparison with value.</value>
+  </data>
+  <data name="mt_crossjoinmerge" xml:space="preserve">
+    <value> -&gt; CROSS-JOIN MERGE </value>
+  </data>
+  <data name="mt_crossjoin_manualjoinbypass" xml:space="preserve">
+    <value> -&gt; One or more manual join fields are missing. Will bypass it and use automatic mode [</value>
+  </data>
+  <data name="mt_crossjoin_nolink" xml:space="preserve">
+    <value>No link found between Datasets : both of the querie must have common field(s) (alias(es)) that will be used to link them</value>
+  </data>
+  <data name="mt_crossjoin_perform" xml:space="preserve">
+    <value> -&gt; Performing Cross-Join Query - [</value>
+  </data>
+  <data name="mt_csvtodt_errors01" xml:space="preserve">
+    <value>Too Many Errors (</value>
+  </data>
+  <data name="mt_csvtodt_errors02" xml:space="preserve">
+    <value>) -&gt; Cancelling CSV to Dataset Integration</value>
+  </data>
+  <data name="mt_deletesql" xml:space="preserve">
+    <value> -&gt; DELETE </value>
+  </data>
+  <data name="mt_getdata_aborted" xml:space="preserve">
+    <value> -&gt; Source Operation Failed. Query Aborted.</value>
+  </data>
+  <data name="mt_getdata_invalidunion" xml:space="preserve">
+    <value> -&gt; Invalid UNION Quer(y)(ies). Can't merge Data.</value>
+  </data>
+  <data name="mt_getdata_start" xml:space="preserve">
+    <value> -&gt; Getting Source Data (</value>
+  </data>
+  <data name="mt_insertsql" xml:space="preserve">
+    <value> -&gt; INSERT </value>
+  </data>
+  <data name="mt_preparing" xml:space="preserve">
+    <value>Preparing Multithreading Operation : </value>
+  </data>
+  <data name="mt_primarykeycombination_percent" xml:space="preserve">
+    <value>Primary Key Detection Status for Combination : </value>
+  </data>
+  <data name="mt_repsync_mergeallownull" xml:space="preserve">
+    <value> -&gt; Column 'Allow Null' Mismatch : </value>
+  </data>
+  <data name="mt_repsync_mergeko01" xml:space="preserve">
+    <value> -&gt; Can't Merge Data From </value>
+  </data>
+  <data name="mt_repsync_mergeko02" xml:space="preserve">
+    <value> - Columns Mismatch (</value>
+  </data>
+  <data name="mt_repsync_mergetypemismatch" xml:space="preserve">
+    <value> -&gt; Column Type Mismatch [</value>
+  </data>
+  <data name="mt_repsync_mergingcopydt" xml:space="preserve">
+    <value> -&gt; Copying Datatable (</value>
+  </data>
+  <data name="mt_repsync_mergingdata" xml:space="preserve">
+    <value> -&gt; Merging Source Data (</value>
+  </data>
+  <data name="mt_repsync_mergingdt" xml:space="preserve">
+    <value> -&gt; Merging Datatable (</value>
+  </data>
+  <data name="mt_repsync_queryfailed01" xml:space="preserve">
+    <value>Query in Source Failed (</value>
+  </data>
+  <data name="mt_repsync_queryfailed02" xml:space="preserve">
+    <value>) - Operation Aborted.</value>
+  </data>
+  <data name="mt_repsync_queryfailed03" xml:space="preserve">
+    <value>No Rows in DataSource (</value>
+  </data>
+  <data name="mt_repsync_queryfailed04" xml:space="preserve">
+    <value>Target Operation Failed. Query Aborted.</value>
+  </data>
+  <data name="mt_repsync_queryfailed_retry" xml:space="preserve">
+    <value>Query was unsuccessful and is being retried</value>
+  </data>
+  <data name="mt_rework_bypass01" xml:space="preserve">
+    <value>Bypassing Data Filtering, Transformation(s), Function(s), Aggregation(s) : Table does not exists. Requested Table </value>
+  </data>
+  <data name="mt_rework_bypass02" xml:space="preserve">
+    <value> -&gt; Source contains </value>
+  </data>
+  <data name="mt_rework_bypass03" xml:space="preserve">
+    <value> Table(s)."</value>
+  </data>
+  <data name="mt_rework_bypassfunction01" xml:space="preserve">
+    <value>Bypassing unrecognized SQL </value>
+  </data>
+  <data name="mt_rework_bypassfunction02" xml:space="preserve">
+    <value> Function (missing parameter(s)) : </value>
+  </data>
+  <data name="mt_rework_bypassfunction03" xml:space="preserve">
+    <value> Function : </value>
+  </data>
+  <data name="mt_rework_bypassfunction04" xml:space="preserve">
+    <value>File not found for Anonymization Function : </value>
+  </data>
+  <data name="mt_rework_bypassfunction05" xml:space="preserve">
+    <value>Using default random values instead.</value>
+  </data>
+  <data name="mt_rework_bypassingcasewhen" xml:space="preserve">
+    <value>Bypassing unrecognized SQL 'CASE ... WHEN' Function : </value>
+  </data>
+  <data name="mt_rework_bypassingtransformation" xml:space="preserve">
+    <value>Bypassing unrecognized SQL Function. Missing parenthesis(es) : </value>
+  </data>
+  <data name="mt_rework_cantapplytransformation" xml:space="preserve">
+    <value> : Can't Apply Field Transformation (</value>
+  </data>
+  <data name="mt_rework_cantfiltercrossjoin" xml:space="preserve">
+    <value>Can't Filter Cross-Join Data. No rows were returned.</value>
+  </data>
+  <data name="mt_rework_cantorderby01" xml:space="preserve">
+    <value> : Can't Order By Dataset (</value>
+  </data>
+  <data name="mt_rework_cantorderby02" xml:space="preserve">
+    <value>). It can happen if ORDER BY condition has unusual characters (ex : SQL function) and the linked field has no alias.</value>
+  </data>
+  <data name="mt_rework_cantperformgroupby01" xml:space="preserve">
+    <value> : Can't Perform 'GROUP BY' Operation</value>
+  </data>
+  <data name="mt_rework_cantperformgroupby02" xml:space="preserve">
+    <value> : Can't Perform Math Operations (Group By : </value>
+  </data>
+  <data name="mt_rework_casewhen_bypass" xml:space="preserve">
+    <value>Bypassing unrecognized SQL 'CASE ... WHEN' Function (Bad index)</value>
+  </data>
+  <data name="mt_shsfield" xml:space="preserve">
+    <value> -&gt; DATA ANALYSIS - FIELD : </value>
+  </data>
+  <data name="mt_source_filesourcepostworkko" xml:space="preserve">
+    <value>There were errors during Job execution : No Source file will be removed/moved/zipped</value>
+  </data>
+  <data name="mt_source_sqlpartialdelete" xml:space="preserve">
+    <value> - Partial Delete in Source with conditions : [</value>
+  </data>
+  <data name="mt_source_sqlpartialdeleteerrors" xml:space="preserve">
+    <value>There were errors during Job execution : No data will be removed in the Source table.</value>
+  </data>
+  <data name="mt_source_sqlpartialdeletemorethan2tables" xml:space="preserve">
+    <value>There are more than 2 tables in your Source Query. We cannot determine which rows should be deleted. Bypassing...</value>
+  </data>
+  <data name="mt_source_sqlpartialdeleteok01" xml:space="preserve">
+    <value>Partial Delete in Source removed </value>
+  </data>
+  <data name="mt_source_sqlpartialdeleteok02" xml:space="preserve">
+    <value> row(s) !</value>
+  </data>
+  <data name="mt_target_a" xml:space="preserve">
+    <value> - Target A</value>
+  </data>
+  <data name="mt_target_b" xml:space="preserve">
+    <value> - Target B</value>
+  </data>
+  <data name="mt_target_directstreamcopy" xml:space="preserve">
+    <value>Starting Parallelized Source-Target Copy  : </value>
+  </data>
+  <data name="mt_target_directstreamcopy_changereadspeed" xml:space="preserve">
+    <value>Adjusting Read Speed (ms / 1000 rows) to match Write Speed : </value>
+  </data>
+  <data name="mt_target_directstreamcopy_synchroinfo" xml:space="preserve">
+    <value>Read/Write Synchronization Details : </value>
+  </data>
+  <data name="mt_target_failed" xml:space="preserve">
+    <value> -&gt; Target Operation Failed. Query Aborted.</value>
+  </data>
+  <data name="mt_target_partial" xml:space="preserve">
+    <value>(Partial)</value>
+  </data>
+  <data name="mt_target_replication" xml:space="preserve">
+    <value>Replication (</value>
+  </data>
+  <data name="mt_target_rows" xml:space="preserve">
+    <value> Rows)</value>
+  </data>
+  <data name="mt_target_sqlpartialdelete" xml:space="preserve">
+    <value> - Partial Delete in Target with conditions : [</value>
+  </data>
+  <data name="mt_target_sqlpartialdeleteok01" xml:space="preserve">
+    <value>Partial Delete in Target removed </value>
+  </data>
+  <data name="mt_target_sqlpartialdeleteok02" xml:space="preserve">
+    <value> row(s).</value>
+  </data>
+  <data name="mt_target_synchro" xml:space="preserve">
+    <value>Synchronization (</value>
+  </data>
+  <data name="mt_target_to" xml:space="preserve">
+    <value> To </value>
+  </data>
+  <data name="mt_threadsinvoked" xml:space="preserve">
+    <value> Thread(s) invoked.</value>
+  </data>
+  <data name="mt_updatesql" xml:space="preserve">
+    <value> -&gt; UPDATE </value>
+  </data>
+  <data name="ns_connectionok" xml:space="preserve">
+    <value>Connection OK (cluster ID : </value>
+  </data>
+  <data name="ns_connectionokcantgetdb" xml:space="preserve">
+    <value>Can't get databases list : </value>
+  </data>
+  <data name="ns_connectstatus" xml:space="preserve">
+    <value>Connection Status :</value>
+  </data>
+  <data name="ns_dropcollection_ko" xml:space="preserve">
+    <value>' was not removed for an unknown reason !</value>
+  </data>
+  <data name="ns_dropcollection_ok" xml:space="preserve">
+    <value>' successfully removed</value>
+  </data>
+  <data name="ns_get_insertdata" xml:space="preserve">
+    <value>Insert data from dataset on </value>
+  </data>
+  <data name="ns_get_norowstoinsert" xml:space="preserve">
+    <value>No Rows to Insert !</value>
+  </data>
+  <data name="ns_get_nothingtoinsert" xml:space="preserve">
+    <value>Nothing to insert on </value>
+  </data>
+  <data name="ns_get_subquery" xml:space="preserve">
+    <value>Subquery Detected : Getting Data From : </value>
+  </data>
+  <data name="ns_partialdelete01" xml:space="preserve">
+    <value>Partial Delete : Removed </value>
+  </data>
+  <data name="ns_partialdelete02" xml:space="preserve">
+    <value> record(s) from Collection '</value>
+  </data>
+  <data name="ns_prepostcommand" xml:space="preserve">
+    <value>PRE/POST COMMAND</value>
+  </data>
+  <data name="ns_prepostcommand_result" xml:space="preserve">
+    <value>MongoDB Pre/post command result value : </value>
+  </data>
+  <data name="ns_searchpk_cantcreateindex" xml:space="preserve">
+    <value>Can't create Unique Key in Collection (collection:</value>
+  </data>
+  <data name="ns_searchpk_cantgetindex01" xml:space="preserve">
+    <value>Can't retrieve Unique Key from Collection '</value>
+  </data>
+  <data name="ns_searchpk_cantgetindex02" xml:space="preserve">
+    <value>Can't retrieve Unique Key from Collection (collection:</value>
+  </data>
+  <data name="ns_searchpk_cantgetindex03" xml:space="preserve">
+    <value>,searching root:</value>
+  </data>
+  <data name="ns_synchrostore01" xml:space="preserve">
+    <value>Synchro. Mode : Store (</value>
+  </data>
+  <data name="ns_synchrostore02" xml:space="preserve">
+    <value> row(s)) in collection : </value>
+  </data>
+  <data name="ns_synchro_errorsintargetquery" xml:space="preserve">
+    <value>Synchro.Mode : Error(s) In Target Query: Can't Go Further</value>
+  </data>
+  <data name="ns_synchro_errorsintargetquery02" xml:space="preserve">
+    <value>Synchro. Mode : Error(s) In Target Query (</value>
+  </data>
+  <data name="ns_synchro_errorsintargetquery03" xml:space="preserve">
+    <value>) : Can't Go Further</value>
+  </data>
+  <data name="ns_synchro_noprimarykey01" xml:space="preserve">
+    <value>Synchro. Mode : No Primary Key (</value>
+  </data>
+  <data name="ns_synchro_pkfromsource" xml:space="preserve">
+    <value>Synchro. Mode : Get Primary Key From Source DataTable : </value>
+  </data>
+  <data name="ns_synchro_pkfromsource_shs" xml:space="preserve">
+    <value>Synchro. Mode : Target Table Empty : Smart Primary Key Detection on Source DataTable  (</value>
+  </data>
+  <data name="ns_synchro_pkfromtarget" xml:space="preserve">
+    <value>Synchro. Mode : Get Primary Key From Target Collection : </value>
+  </data>
+  <data name="ns_synchro_pkfromtarget_shs" xml:space="preserve">
+    <value>Synchro. Mode : Target Table Empty : Smart Primary Key Detection on Target DataTable  (</value>
+  </data>
+  <data name="ns_synchro_rowssource" xml:space="preserve">
+    <value>Synchro. Mode : Rows SOURCE  (</value>
+  </data>
+  <data name="ns_synchro_rowstarget" xml:space="preserve">
+    <value>Synchro. Mode : Rows TARGET  (</value>
+  </data>
+  <data name="ns_synchro_rowstodelete" xml:space="preserve">
+    <value>Synchro. Mode : Rows To DELETE (</value>
+  </data>
+  <data name="ns_synchro_rowstoinsert" xml:space="preserve">
+    <value>Synchro. Mode : Rows To INSERT (</value>
+  </data>
+  <data name="ns_synchro_rowstoupdate" xml:space="preserve">
+    <value>Synchro. Mode : Rows To UPDATE (</value>
+  </data>
+  <data name="ns_synchro_unabletodeletedata" xml:space="preserve">
+    <value>Synchro. Mode : Unable to delete data (</value>
+  </data>
+  <data name="ns_synchro_unabletodeleterow" xml:space="preserve">
+    <value>Synchro. Mode : Unable to delete row (</value>
+  </data>
+  <data name="ns_synchro_unabletoupdatedata" xml:space="preserve">
+    <value>Synchro. Mode : Unable to update data (</value>
+  </data>
+  <data name="ns_synchro_unabletoupdaterow" xml:space="preserve">
+    <value>Synchro. Mode : Unable to update row (</value>
+  </data>
+  <data name="par_askpw01" xml:space="preserve">
+    <value>An User requested a password recovery :</value>
+  </data>
+  <data name="par_askpw02" xml:space="preserve">
+    <value>- Asked by : </value>
+  </data>
+  <data name="par_askpw03" xml:space="preserve">
+    <value>- From Computer : </value>
+  </data>
+  <data name="par_askpw04" xml:space="preserve">
+    <value>- Job ID : </value>
+  </data>
+  <data name="par_askpw05" xml:space="preserve">
+    <value>- Job Name : </value>
+  </data>
+  <data name="par_askpw06" xml:space="preserve">
+    <value>- Job Password (Encrypted) : </value>
+  </data>
+  <data name="par_askpw07" xml:space="preserve">
+    <value>- Job Password (Decrypted) : </value>
+  </data>
+  <data name="par_askpw08" xml:space="preserve">
+    <value>- Initial Job ID : </value>
+  </data>
+  <data name="par_askpw09" xml:space="preserve">
+    <value>- Password Requested</value>
+  </data>
+  <data name="par_cancelsubjobnodata" xml:space="preserve">
+    <value>No data has been retrieved. Sub-Job(s) will not be executed.</value>
+  </data>
+  <data name="par_client_cantreadini" xml:space="preserve">
+    <value>Can't read INI File : </value>
+  </data>
+  <data name="par_client_errorsdistantdb" xml:space="preserve">
+    <value>Error while connecting to distant DB</value>
+  </data>
+  <data name="par_client_errorsqlcommand" xml:space="preserve">
+    <value>Error while executing SQL command</value>
+  </data>
+  <data name="par_client_flood_datetimeconvertko" xml:space="preserve">
+    <value>Can't convert Datetime :</value>
+  </data>
+  <data name="par_client_nouserconfigured" xml:space="preserve">
+    <value>No user configured. You must run the Main Application (Fuzible.exe)</value>
+  </data>
+  <data name="par_client_request_date" xml:space="preserve">
+    <value>&gt; Request Date : </value>
+  </data>
+  <data name="par_client_request_datelaunch" xml:space="preserve">
+    <value>&gt; Requested Launch Date/Time : </value>
+  </data>
+  <data name="par_client_request_endtime" xml:space="preserve">
+    <value>&gt; End Time : </value>
+  </data>
+  <data name="par_client_request_laststatus" xml:space="preserve">
+    <value>Last Execution Status : </value>
+  </data>
+  <data name="par_client_request_message" xml:space="preserve">
+    <value>&gt; Message : </value>
+  </data>
+  <data name="par_client_request_stacktime" xml:space="preserve">
+    <value>&gt; Stack Time : </value>
+  </data>
+  <data name="par_client_request_starttime" xml:space="preserve">
+    <value>&gt; Start Time : </value>
+  </data>
+  <data name="par_client_request_status" xml:space="preserve">
+    <value>&gt; Status : </value>
+  </data>
+  <data name="par_client_request_user" xml:space="preserve">
+    <value>&gt; User : </value>
+  </data>
+  <data name="par_client_stacked_position" xml:space="preserve">
+    <value>[INF] Job Stacked in Position </value>
+  </data>
+  <data name="par_conn_cantcreatenewconn" xml:space="preserve">
+    <value>Can't create new connection in DB : </value>
+  </data>
+  <data name="par_conn_cantcreatenewconnid" xml:space="preserve">
+    <value>Can't create new connection ID !</value>
+  </data>
+  <data name="par_conn_cantcreatenewconnparams" xml:space="preserve">
+    <value>Can't create new connection params in DB : </value>
+  </data>
+  <data name="par_conn_cantgetdatafromdb" xml:space="preserve">
+    <value>Can't retrieve data from DB : </value>
+  </data>
+  <data name="par_conn_localpath" xml:space="preserve">
+    <value>Local Path</value>
+  </data>
+  <data name="par_conn_localsqlite" xml:space="preserve">
+    <value>Local SQLite Database</value>
+  </data>
+  <data name="par_conn_registrationlimited" xml:space="preserve">
+    <value>Can't add/modify a connection : You reached the License limit. </value>
+  </data>
+  <data name="par_conn_usagedynparams" xml:space="preserve">
+    <value>[Dynamic Params]</value>
+  </data>
+  <data name="par_conn_usagequeries" xml:space="preserve">
+    <value>[Queries]</value>
+  </data>
+  <data name="par_conn_usagesource" xml:space="preserve">
+    <value>[Conn. String Source]</value>
+  </data>
+  <data name="par_conn_usagesourceprepost" xml:space="preserve">
+    <value>[Conn. String Pre/Post Command(s) Source]</value>
+  </data>
+  <data name="par_conn_usagetarget" xml:space="preserve">
+    <value>[Conn. String Target]</value>
+  </data>
+  <data name="par_conn_usagetargetprepost" xml:space="preserve">
+    <value>[Conn. String Pre/Post Command(s) Target]</value>
+  </data>
+  <data name="par_conn_wsdemo" xml:space="preserve">
+    <value>Fuzible Demo Webservice</value>
+  </data>
+  <data name="par_createtables_alreadycreated" xml:space="preserve">
+    <value>) already created.</value>
+  </data>
+  <data name="par_createtables_client" xml:space="preserve">
+    <value>Client App Jobs table (</value>
+  </data>
+  <data name="par_createtables_log" xml:space="preserve">
+    <value>Log tables (</value>
+  </data>
+  <data name="par_createtables_planif" xml:space="preserve">
+    <value>Planification table (</value>
+  </data>
+  <data name="par_createtables_stack" xml:space="preserve">
+    <value>Stack table (</value>
+  </data>
+  <data name="par_dbcorrupted" xml:space="preserve">
+    <value>Database is corrupted. Can't launch the program.</value>
+  </data>
+  <data name="par_errors_cantcrossquerymultiples" xml:space="preserve">
+    <value>You can't perform a cross-query with queries having multiple-source table/file patterns</value>
+  </data>
+  <data name="par_errors_cantjoinmultiples01" xml:space="preserve">
+    <value>You can't perform a multi-table/file query with joins</value>
+  </data>
+  <data name="par_errors_cantjoinmultiples02" xml:space="preserve">
+    <value>Join forbidden</value>
+  </data>
+  <data name="par_errors_cantmultiplesamealiases" xml:space="preserve">
+    <value>Multiple fields with same alias found. Query will fail.</value>
+  </data>
+  <data name="par_errors_cantsubqueryfield" xml:space="preserve">
+    <value>Can't perform a subquery at 'field' level.</value>
+  </data>
+  <data name="par_errors_filenotfound" xml:space="preserve">
+    <value>File not found.</value>
+  </data>
+  <data name="par_errors_invalidoutput01" xml:space="preserve">
+    <value>Invalid Output</value>
+  </data>
+  <data name="par_errors_invalidoutput02" xml:space="preserve">
+    <value>Missing 'OUTPUT:SELECT [...]' sentence.</value>
+  </data>
+  <data name="par_errors_linkmissestableref01" xml:space="preserve">
+    <value>Link field misses table reference (</value>
+  </data>
+  <data name="par_errors_linkmissestableref02" xml:space="preserve">
+    <value>). Will assume the link to be a simple condition and will try to filter table consequently.</value>
+  </data>
+  <data name="par_errors_linkmissestableref03" xml:space="preserve">
+    <value>Unrecognized link function (</value>
+  </data>
+  <data name="par_errors_missingfields01" xml:space="preserve">
+    <value>No field to query</value>
+  </data>
+  <data name="par_errors_missingfields02" xml:space="preserve">
+    <value>Missing 'SELECT' field(s).</value>
+  </data>
+  <data name="par_errors_missingfrom01" xml:space="preserve">
+    <value>Nothing to query</value>
+  </data>
+  <data name="par_errors_missingfrom02" xml:space="preserve">
+    <value>Missing 'FROM' clause.</value>
+  </data>
+  <data name="par_errors_missingjoinfield" xml:space="preserve">
+    <value>Missing join field(s) for </value>
+  </data>
+  <data name="par_errors_multitablesmissaliases" xml:space="preserve">
+    <value>Multiple tables in Query. Missing alias.</value>
+  </data>
+  <data name="par_errors_nodynparam" xml:space="preserve">
+    <value>Dynamic Parameter is out of bounds</value>
+  </data>
+  <data name="par_errors_notableassociated" xml:space="preserve">
+    <value>No table associated.</value>
+  </data>
+  <data name="par_errors_notabletofield" xml:space="preserve">
+    <value>No table associated with that field.</value>
+  </data>
+  <data name="par_errors_ordergroupmissesfieldref" xml:space="preserve">
+    <value>'Group By / Order By' clause misses field reference.</value>
+  </data>
+  <data name="par_errors_parenthesismismatch" xml:space="preserve">
+    <value>Parenthesis Count Mismatch in Query.</value>
+  </data>
+  <data name="par_errors_unknownjoin" xml:space="preserve">
+    <value>Unknown Join Type</value>
+  </data>
+  <data name="par_errors_unknownjoinop" xml:space="preserve">
+    <value>Unknown Join Operator</value>
+  </data>
+  <data name="par_errors_unrecognizedmail" xml:space="preserve">
+    <value>Unrecognized e-mail adress.</value>
+  </data>
+  <data name="par_errors_unrecognizedsqltable" xml:space="preserve">
+    <value>Unrecognized SQL table name.</value>
+  </data>
+  <data name="par_errors_unreferencedlinkjoin" xml:space="preserve">
+    <value>Unreferenced link in join (</value>
+  </data>
+  <data name="par_errors_wheremissingfield" xml:space="preserve">
+    <value>'Where' clause misses field reference.</value>
+  </data>
+  <data name="par_errors_wheresynchrofail" xml:space="preserve">
+    <value>Synchronization Job will fail because that 'Where' condition does not exists as a column in Target. You can rewrite your query like this : OUTPUT:SELECT * FROM (Your Original Query) as MyQuery</value>
+  </data>
+  <data name="par_errors_whereweird" xml:space="preserve">
+    <value>Weird SQL condition. Query may fail.</value>
+  </data>
+  <data name="par_executepost" xml:space="preserve">
+    <value>Post-Job </value>
+  </data>
+  <data name="par_executepre" xml:space="preserve">
+    <value>Pre-Job </value>
+  </data>
+  <data name="par_executepreport_filesource" xml:space="preserve">
+    <value>SHELL COMMAND IN SOURCE : </value>
+  </data>
+  <data name="par_executepreport_filetarget" xml:space="preserve">
+    <value>SHELL COMMAND IN TARGET : </value>
+  </data>
+  <data name="par_executepreport_mongosource" xml:space="preserve">
+    <value>MONGODB COMMAND IN SOURCE : </value>
+  </data>
+  <data name="par_executepreport_mongotarget" xml:space="preserve">
+    <value>MONGODB COMMAND IN TARGET : </value>
+  </data>
+  <data name="par_executepreport_replacejobparam01" xml:space="preserve">
+    <value>Replacing Job Parameter </value>
+  </data>
+  <data name="par_executepreport_replacejobparam02" xml:space="preserve">
+    <value> by pre/post command result value : </value>
+  </data>
+  <data name="par_executepreport_resultfromws" xml:space="preserve">
+    <value>API Result Message : </value>
+  </data>
+  <data name="par_executepreport_simuwillexec" xml:space="preserve">
+    <value>WILL EXECUTE </value>
+  </data>
+  <data name="par_executepreport_sqlsource" xml:space="preserve">
+    <value>SQL COMMAND IN SOURCE : </value>
+  </data>
+  <data name="par_executepreport_sqltarget" xml:space="preserve">
+    <value>SQL COMMAND IN TARGET : </value>
+  </data>
+  <data name="par_executeprepost01" xml:space="preserve">
+    <value>Executing </value>
+  </data>
+  <data name="par_executeprepost04" xml:space="preserve">
+    <value>Command(s) in Source</value>
+  </data>
+  <data name="par_executeprepost05" xml:space="preserve">
+    <value>Command(s) in Target</value>
+  </data>
+  <data name="par_executeprepost_fileval" xml:space="preserve">
+    <value>SHELL Pre/post command result value : </value>
+  </data>
+  <data name="par_executeprepost_sqlval" xml:space="preserve">
+    <value>SQL Pre/post command result value : </value>
+  </data>
+  <data name="par_jobsummary" xml:space="preserve">
+    <value>Job Summary : </value>
+  </data>
+  <data name="par_jobsummary_rowsdeleted" xml:space="preserve">
+    <value>Deleted : </value>
+  </data>
+  <data name="par_jobsummary_rowsinserted" xml:space="preserve">
+    <value>Inserted : </value>
+  </data>
+  <data name="par_jobsummary_rowsretrieved" xml:space="preserve">
+    <value>Rows Retrieved : </value>
+  </data>
+  <data name="par_jobsummary_rowsupdated" xml:space="preserve">
+    <value>Updated : </value>
+  </data>
+  <data name="par_loadusersko" xml:space="preserve">
+    <value>Unable to retrieve Users List : </value>
+  </data>
+  <data name="par_nofileortablewithpattern" xml:space="preserve">
+    <value>No file/table/collection matching with pattern : </value>
+  </data>
+  <data name="par_planif_collisionjob" xml:space="preserve">
+    <value>&gt; Collision with Job : </value>
+  </data>
+  <data name="par_planif_collisionjobmodel" xml:space="preserve">
+    <value> - Planification Model : </value>
+  </data>
+  <data name="par_planif_invalidlength" xml:space="preserve">
+    <value>Invalid Length. Expecting 6.</value>
+  </data>
+  <data name="par_planif_missingdays" xml:space="preserve">
+    <value>Missing 'Days' element(s)</value>
+  </data>
+  <data name="par_planif_missinghours" xml:space="preserve">
+    <value>Missing 'Hours' element(s)</value>
+  </data>
+  <data name="par_planif_missingminutes" xml:space="preserve">
+    <value>Missing 'Minutes' element(s)</value>
+  </data>
+  <data name="par_planif_missingmonths" xml:space="preserve">
+    <value>Missing 'Months' element(s)</value>
+  </data>
+  <data name="par_planif_missingweeks" xml:space="preserve">
+    <value>Missing 'Weeks' element(s)</value>
+  </data>
+  <data name="par_planif_running" xml:space="preserve">
+    <value>Running</value>
+  </data>
+  <data name="par_planif_week" xml:space="preserve">
+    <value>Week </value>
+  </data>
+  <data name="par_planif_witherrors" xml:space="preserve">
+    <value>Finished with errors</value>
+  </data>
+  <data name="par_purgestack_rows" xml:space="preserve">
+    <value> row(s)</value>
+  </data>
+  <data name="par_register_cantcompilews" xml:space="preserve">
+    <value>Can't compile user data. Nothing was sent.</value>
+  </data>
+  <data name="par_register_cantsendmail" xml:space="preserve">
+    <value>Can't send mail. Please contact us.</value>
+  </data>
+  <data name="par_register_defaultstatus" xml:space="preserve">
+    <value>Data was successfully sent.</value>
+  </data>
+  <data name="par_register_toomanyjobs" xml:space="preserve">
+    <value>Too many Jobs detected for that registration license. Nothing was sent.</value>
+  </data>
+  <data name="par_samplejobinfo" xml:space="preserve">
+    <value>This is a sample Job to showcase how to write queries when not using SQL sources.</value>
+  </data>
+  <data name="par_samplejobinfo_ws" xml:space="preserve">
+    <value>This is a sample Job to showcase how to write queries when calling a webservice. It's also configured as a Synchronization Job</value>
+  </data>
+  <data name="par_singlequerymultithreaderror" xml:space="preserve">
+    <value>Can't start multithread operation. Nothing to compute...</value>
+  </data>
+  <data name="par_singlequerynoquery" xml:space="preserve">
+    <value>No Query was found to process...</value>
+  </data>
+  <data name="par_splitcsv01" xml:space="preserve">
+    <value> row(s).</value>
+  </data>
+  <data name="par_splitcsv02" xml:space="preserve">
+    <value>Splitting </value>
+  </data>
+  <data name="par_splitcsv03" xml:space="preserve">
+    <value> has been splitted in </value>
+  </data>
+  <data name="par_splitcsv04" xml:space="preserve">
+    <value> files.</value>
+  </data>
+  <data name="par_splitcsv05" xml:space="preserve">
+    <value>Creating a new file : </value>
+  </data>
+  <data name="par_stack_insertplanified" xml:space="preserve">
+    <value>[INF] Inserting Planified Job Into Stack Table (</value>
+  </data>
+  <data name="par_stack_insertplanified_stacked" xml:space="preserve">
+    <value>[INF] Job Stacked in Position </value>
+  </data>
+  <data name="par_startjobaborting" xml:space="preserve">
+    <value>Aborting Sub-Job(s) execution because of errors</value>
+  </data>
+  <data name="par_startjobcantrunpostcmd" xml:space="preserve">
+    <value>Can't Run Post-Job Command(s) in Source : Errors Detected !</value>
+  </data>
+  <data name="par_startjobcantstartmultithread" xml:space="preserve">
+    <value>Can't start multithread operation. Nothing to compute...</value>
+  </data>
+  <data name="par_startjobkounhandled" xml:space="preserve">
+    <value>Unhandled Exception. Skipping Job.</value>
+  </data>
+  <data name="par_startjobnoqueries" xml:space="preserve">
+    <value>No Queries in Job. Nothing to do...</value>
+  </data>
+  <data name="par_startjobreport01" xml:space="preserve">
+    <value>RUNNING TIME : </value>
+  </data>
+  <data name="par_startjobreport02" xml:space="preserve">
+    <value> - ERRORS : </value>
+  </data>
+  <data name="par_startjobreport03" xml:space="preserve">
+    <value> - WARNINGS : </value>
+  </data>
+  <data name="par_startsubjob" xml:space="preserve">
+    <value>SUB-JOB STARTED - </value>
+  </data>
+  <data name="par_taskmanager_taskname" xml:space="preserve">
+    <value>Fuzible Service App : Check &amp; Launch for planified or invoked Jobs.</value>
+  </data>
+  <data name="sftp_sshkeyfile_invalid" xml:space="preserve">
+    <value>OpenSSH Key File is invalid/missing</value>
+  </data>
+  <data name="shs_comparedt_changes" xml:space="preserve">
+    <value>Data differences detected on the following columns : </value>
+  </data>
+  <data name="shs_comparedt_convertcolumntype" xml:space="preserve">
+    <value>Conflicting column type on Primary Key : converting </value>
+  </data>
+  <data name="shs_comparedt_perform" xml:space="preserve">
+    <value>Performing Comparison Operation With Primary Key (</value>
+  </data>
+  <data name="shs_comparedt_pkmismatch" xml:space="preserve">
+    <value>Source &amp; Target don't have the same Primary Key.</value>
+  </data>
+  <data name="shs_comparedt_unabletopksource" xml:space="preserve">
+    <value>Unable to Apply Primary Key to Source Data (</value>
+  </data>
+  <data name="shs_comparedt_unabletopktarget" xml:space="preserve">
+    <value>Unable to Apply Primary Key to Target Data (</value>
+  </data>
+  <data name="shs_convertcolumns_bulk" xml:space="preserve">
+    <value>Converting Columns for Bulk Copy</value>
+  </data>
+  <data name="shs_convertcolumns_merge" xml:space="preserve">
+    <value>Merging Converted Columns...</value>
+  </data>
+  <data name="shs_crossjoin_keys" xml:space="preserve">
+    <value>Cross-Join Data With Key Column(s) : </value>
+  </data>
+  <data name="shs_crossjoin_ko" xml:space="preserve">
+    <value>Can't perform Cross-Join Operation : </value>
+  </data>
+  <data name="shs_crossjoin_misslinkprimary" xml:space="preserve">
+    <value>Primary Table misses link field : </value>
+  </data>
+  <data name="shs_crossjoin_misslinksecondary" xml:space="preserve">
+    <value>Secondary Table misses link field : </value>
+  </data>
+  <data name="shs_distinct_info01" xml:space="preserve">
+    <value>Distinct Operation on Source Data : Removed </value>
+  </data>
+  <data name="shs_distinct_info02" xml:space="preserve">
+    <value> Rows</value>
+  </data>
+  <data name="shs_fillcsvdt_invalidheader01" xml:space="preserve">
+    <value>Invalid Header Size (Max Row Length:</value>
+  </data>
+  <data name="shs_fillcsvdt_invalidheader02" xml:space="preserve">
+    <value>,Header Length:</value>
+  </data>
+  <data name="shs_fillcsvdt_ko" xml:space="preserve">
+    <value>Can't fill datatable with CSV array.</value>
+  </data>
+  <data name="shs_findpk_ko" xml:space="preserve">
+    <value>Can't find Primary Key in datatable.</value>
+  </data>
+  <data name="shs_findpk_multiplekeys" xml:space="preserve">
+    <value>Multiple Unique Combinations Found in Source : </value>
+  </data>
+  <data name="shs_header_computeko" xml:space="preserve">
+    <value>Unable to compute file to auto-detect an header.</value>
+  </data>
+  <data name="shs_header_invalidrowlen" xml:space="preserve">
+    <value>Invalid Row Length (row:</value>
+  </data>
+  <data name="shs_header_mismatch" xml:space="preserve">
+    <value>Header match between file &amp; query : </value>
+  </data>
+  <data name="shs_header_unicity01" xml:space="preserve">
+    <value>File Header Detection : </value>
+  </data>
+  <data name="shs_header_unicity02" xml:space="preserve">
+    <value> % of values unicity between the first row and the other ones. Assuming the first row to be the header : </value>
+  </data>
+  <data name="shs_header_unicity03" xml:space="preserve">
+    <value> % of ressemblances between the first row and the other ones. Assuming the first row to be the header : </value>
+  </data>
+  <data name="shs_joindt_cantfilter" xml:space="preserve">
+    <value>Can't Filter Data with condition : </value>
+  </data>
+  <data name="shs_operation_cancelled" xml:space="preserve">
+    <value>Multithread Operation has been Cancelled</value>
+  </data>
+  <data name="shs_tool_checkconn_ad" xml:space="preserve">
+    <value>Unable to get connection to Active Directory : </value>
+  </data>
+  <data name="shs_tool_checkconn_file01" xml:space="preserve">
+    <value>Target Path is available (</value>
+  </data>
+  <data name="shs_tool_checkconn_file02" xml:space="preserve">
+    <value> file(s))</value>
+  </data>
+  <data name="shs_tool_checkconn_filepathcreated" xml:space="preserve">
+    <value>Target Path Just Created</value>
+  </data>
+  <data name="shs_tool_checkconn_filepathko" xml:space="preserve">
+    <value>Target Path unavailable (</value>
+  </data>
+  <data name="shs_tool_checkconn_filepathko02" xml:space="preserve">
+    <value>Target Path unavailable</value>
+  </data>
+  <data name="shs_tool_checkconn_mb" xml:space="preserve">
+    <value>Unable to get connection to Mailbox : </value>
+  </data>
+  <data name="shs_tool_checkconn_sql_ko" xml:space="preserve">
+    <value>Unable to Connect : </value>
+  </data>
+  <data name="shs_tool_checkconn_sql_noparams" xml:space="preserve">
+    <value>Undefined Parameters !</value>
+  </data>
+  <data name="shs_tool_checkconn_status" xml:space="preserve">
+    <value>Connection Status : </value>
+  </data>
+  <data name="shs_tool_checkconn_ws01" xml:space="preserve">
+    <value>Connection with Host OK (</value>
+  </data>
+  <data name="shs_tool_checkconn_ws02" xml:space="preserve">
+    <value>Can't Connect to Host (</value>
+  </data>
+  <data name="shs_tool_checkipko" xml:space="preserve">
+    <value>No network adapters with an IPv4 address in the system!</value>
+  </data>
+  <data name="shs_tool_filterquery_ko" xml:space="preserve">
+    <value>Can't Filter Data</value>
+  </data>
+  <data name="shs_tool_filterquery_kocol" xml:space="preserve">
+    <value>Can't Filter Data. Unknown Column : </value>
+  </data>
+  <data name="shs_tool_filterquery_kosubq" xml:space="preserve">
+    <value>Can't Filter Data. Subquery Error/Empty : </value>
+  </data>
+  <data name="shs_tool_replacestringko" xml:space="preserve">
+    <value>String cannot be of zero length.</value>
+  </data>
+  <data name="shs_transform_abnormal" xml:space="preserve">
+    <value>Abnormal Header Detected ! (variable array sizes in header)</value>
+  </data>
+  <data name="shs_transform_abnormalprop" xml:space="preserve">
+    <value>Abnormal Header</value>
+  </data>
+  <data name="shs_transform_commonroot" xml:space="preserve">
+    <value>Common Root</value>
+  </data>
+  <data name="shs_transform_hyperfile" xml:space="preserve">
+    <value>Hyperfile</value>
+  </data>
+  <data name="shs_transform_inputrows" xml:space="preserve">
+    <value>Input Rows : </value>
+  </data>
+  <data name="shs_transform_nodatanopivot" xml:space="preserve">
+    <value>No Input Data ; Can't perform Pivot Operation</value>
+  </data>
+  <data name="shs_transform_outputrows" xml:space="preserve">
+    <value> / Output Rows : </value>
+  </data>
+  <data name="shs_transform_pivoting" xml:space="preserve">
+    <value>: Pivoting Input Data</value>
+  </data>
+  <data name="shs_transform_pivotingarray" xml:space="preserve">
+    <value>Pivoting Array Fields : </value>
+  </data>
+  <data name="shs_transform_pivotingcr" xml:space="preserve">
+    <value>: Pivoting Input Data By Common Root</value>
+  </data>
+  <data name="shs_transform_pivotingcrinfo" xml:space="preserve">
+    <value>Pivoting </value>
+  </data>
+  <data name="shs_transform_pivotingcrnoroot" xml:space="preserve">
+    <value>Aborting Data Transformation. Can't find specified root(s).</value>
+  </data>
+  <data name="shs_transform_pivotingcrnothing" xml:space="preserve">
+    <value>Aborting Data Transformation. Nothing to Pivot.</value>
+  </data>
+  <data name="shs_transform_pivotingrc" xml:space="preserve">
+    <value>: Pivoting Input Data By Flipping Rows &lt;&gt; Columns</value>
+  </data>
+  <data name="shs_transform_pivotingrccols" xml:space="preserve">
+    <value> Columns</value>
+  </data>
+  <data name="shs_transform_pivotingrcinfo" xml:space="preserve">
+    <value>Pivoting </value>
+  </data>
+  <data name="shs_transform_pivotingrcrows" xml:space="preserve">
+    <value> Rows / </value>
+  </data>
+  <data name="shs_transform_pivotingrctoomuchrows" xml:space="preserve">
+    <value>Row Count Exceeds 999. Can't Transform Data.</value>
+  </data>
+  <data name="shs_transform_rowstocol" xml:space="preserve">
+    <value>Rows to Columns</value>
+  </data>
+  <data name="sql_addpkintarget_info" xml:space="preserve">
+    <value>Add Primary Key In Target table (</value>
+  </data>
+  <data name="sql_anonymize_column" xml:space="preserve">
+    <value>Anonymize Column</value>
+  </data>
+  <data name="sql_anonymize_column_ko" xml:space="preserve">
+    <value>Anonymization Failed</value>
+  </data>
+  <data name="sql_bulkcopy_convert" xml:space="preserve">
+    <value>Converting column data to prepare Bulk Copy : </value>
+  </data>
+  <data name="sql_bulkcopy_convert_error" xml:space="preserve">
+    <value>Data Convert failed for Bulk Insert</value>
+  </data>
+  <data name="sql_bulkcopy_error" xml:space="preserve">
+    <value>Error while performing Bulk Copy Operation in Target</value>
+  </data>
+  <data name="sql_bulkcopy_mysql" xml:space="preserve">
+    <value>MySQL Bulk Copy Started (</value>
+  </data>
+  <data name="sql_bulkcopy_mysqlcsv" xml:space="preserve">
+    <value>Writing data into temporary file : </value>
+  </data>
+  <data name="sql_bulkcopy_nocolumns" xml:space="preserve">
+    <value>Unable to Map Columns in order to perform a Bulk Copy</value>
+  </data>
+  <data name="sql_bulkcopy_oracle" xml:space="preserve">
+    <value>Oracle Bulk Copy Started (</value>
+  </data>
+  <data name="sql_bulkcopy_postgres" xml:space="preserve">
+    <value>Postgres Bulk Copy Started (</value>
+  </data>
+  <data name="sql_bulkcopy_rollbackerror" xml:space="preserve">
+    <value>Error while performing a Bulk Copy Rollback Operation in Target</value>
+  </data>
+  <data name="sql_bulkcopy_rows" xml:space="preserve">
+    <value> rows)</value>
+  </data>
+  <data name="sql_bulkcopy_sqlserver" xml:space="preserve">
+    <value>MSSQL Bulk Copy Started (</value>
+  </data>
+  <data name="sql_cantaddpk" xml:space="preserve">
+    <value>No Primary Key to Add In Target table</value>
+  </data>
+  <data name="sql_cantfindinipatternfor" xml:space="preserve">
+    <value>Can't find SQL pattern in INI file for </value>
+  </data>
+  <data name="sql_changetype_aborting" xml:space="preserve">
+    <value>Aborting Type Conversion (</value>
+  </data>
+  <data name="sql_changetype_cast" xml:space="preserve">
+    <value>. Trying to cast existing data...</value>
+  </data>
+  <data name="sql_changetype_cast_ko" xml:space="preserve">
+    <value>Can't Cast Target Data. Aborting Type Conversion (</value>
+  </data>
+  <data name="sql_changetype_info01" xml:space="preserve">
+    <value>Change Column Type (</value>
+  </data>
+  <data name="sql_changetype_info01_failed" xml:space="preserve">
+    <value>Change Column Type Failed (</value>
+  </data>
+  <data name="sql_changetype_info02" xml:space="preserve">
+    <value> &gt; From </value>
+  </data>
+  <data name="sql_changetype_info03" xml:space="preserve">
+    <value> To </value>
+  </data>
+  <data name="sql_changetype_info04" xml:space="preserve">
+    <value>) In Target Table : </value>
+  </data>
+  <data name="sql_changetype_risky" xml:space="preserve">
+    <value>Type Conversion is risky (</value>
+  </data>
+  <data name="sql_column_unknown_type" xml:space="preserve">
+    <value>Unknown Datatype. Using 'TEXT' instead</value>
+  </data>
+  <data name="sql_column_wrong_string_size" xml:space="preserve">
+    <value>Driver reported unexpected column max. size (0)</value>
+  </data>
+  <data name="sql_compmode_parsing01" xml:space="preserve">
+    <value>  - Parsing Data : </value>
+  </data>
+  <data name="sql_compmode_parsing02" xml:space="preserve">
+    <value> rows retrieved</value>
+  </data>
+  <data name="sql_compmode_writing" xml:space="preserve">
+    <value>Loading Data (using DataReader)</value>
+  </data>
+  <data name="sql_connect_cantchangedb" xml:space="preserve">
+    <value>Can't change database</value>
+  </data>
+  <data name="sql_connect_notconnected" xml:space="preserve">
+    <value>NOT_CONNECTED</value>
+  </data>
+  <data name="sql_connstatus" xml:space="preserve">
+    <value>Connection Status :</value>
+  </data>
+  <data name="sql_connstatus_cantgetdblist" xml:space="preserve">
+    <value>Can't get databases list : </value>
+  </data>
+  <data name="sql_createcolumn_info01" xml:space="preserve">
+    <value>Create Column (</value>
+  </data>
+  <data name="sql_createcolumn_info02" xml:space="preserve">
+    <value>) In Target Table : </value>
+  </data>
+  <data name="sql_createcolumn_ko" xml:space="preserve">
+    <value>Can't create column in Target Table : </value>
+  </data>
+  <data name="sql_createcolumn_tryingdroprecreate" xml:space="preserve">
+    <value>. Trying CREATE TABLE [...] AS SELECT [...] instead...</value>
+  </data>
+  <data name="sql_createdb_ko" xml:space="preserve">
+    <value>Can't create new Database (</value>
+  </data>
+  <data name="sql_createtable" xml:space="preserve">
+    <value>Creating new table : </value>
+  </data>
+  <data name="sql_dicreetdisconnect" xml:space="preserve">
+    <value>Disconnecting from Database is abnormally long and will be performed in background</value>
+  </data>
+  <data name="sql_getcolumns_ko" xml:space="preserve">
+    <value>No columns retrieved from target table. (</value>
+  </data>
+  <data name="sql_preparedata_anayzingschemas" xml:space="preserve">
+    <value>Analyzing Data Schemas (Source / Target)</value>
+  </data>
+  <data name="sql_preparedata_buildingheader" xml:space="preserve">
+    <value>Building Header by comparing Source &amp; Target columns</value>
+  </data>
+  <data name="sql_preparedata_creatingtable" xml:space="preserve">
+    <value>Creating Table : </value>
+  </data>
+  <data name="sql_preparedata_gettingcolumnsds" xml:space="preserve">
+    <value>Getting columns from Dataset</value>
+  </data>
+  <data name="sql_preparedata_gettingcolumnsfromtargettable" xml:space="preserve">
+    <value>Getting columns from Target table</value>
+  </data>
+  <data name="sql_preparedata_mergingfieldsfromcq" xml:space="preserve">
+    <value>Merging Fields from Cross-Queries</value>
+  </data>
+  <data name="sql_preparedata_noanalyzerforcolumn" xml:space="preserve">
+    <value>No data analysis for SQL column</value>
+  </data>
+  <data name="sql_preparedata_settingfieldsfromds" xml:space="preserve">
+    <value>Setting Query Fields from DataSet columns</value>
+  </data>
+  <data name="sql_preparedata_sourcecolumn" xml:space="preserve">
+    <value>Source column : </value>
+  </data>
+  <data name="sql_preparedata_targetcolumn" xml:space="preserve">
+    <value>Target column retrieved : </value>
+  </data>
+  <data name="sql_preparedata_targettablebehavior" xml:space="preserve">
+    <value>Performing Target Operations</value>
+  </data>
+  <data name="sql_query_bulkinsert" xml:space="preserve">
+    <value>Bulk Insert on </value>
+  </data>
+  <data name="sql_query_delete" xml:space="preserve">
+    <value>Delete data from dataset on </value>
+  </data>
+  <data name="sql_query_delete_nothing" xml:space="preserve">
+    <value>Nothing to delete on </value>
+  </data>
+  <data name="sql_query_insert" xml:space="preserve">
+    <value>Insert data from dataset on </value>
+  </data>
+  <data name="sql_query_insert_exception" xml:space="preserve">
+    <value>No Rows to Insert !</value>
+  </data>
+  <data name="sql_query_insert_nothing" xml:space="preserve">
+    <value>Nothing to insert on </value>
+  </data>
+  <data name="sql_query_nocolumn" xml:space="preserve">
+    <value>No field has been found in the Query</value>
+  </data>
+  <data name="sql_query_notable" xml:space="preserve">
+    <value>No Table/File/Collection has been found in the Query. Please check what you've entered before the 'FROM' keyword</value>
+  </data>
+  <data name="sql_query_returnvalue" xml:space="preserve">
+    <value>Query Return Value (</value>
+  </data>
+  <data name="sql_query_storedproc" xml:space="preserve">
+    <value>Stored Procedure</value>
+  </data>
+  <data name="sql_query_storedprocreturnvalue" xml:space="preserve">
+    <value>Stored Proc. Return Value (</value>
+  </data>
+  <data name="sql_query_unabletoanalyze" xml:space="preserve">
+    <value>Unable to Analyze Data or Create/Alter Schema !</value>
+  </data>
+  <data name="sql_query_unexistingtable" xml:space="preserve">
+    <value>Unable to Insert/Update/Delete Data in Target - SQL table does not exists : </value>
+  </data>
+  <data name="sql_query_update" xml:space="preserve">
+    <value>Update data from dataset on </value>
+  </data>
+  <data name="sql_query_update_nothing" xml:space="preserve">
+    <value>Nothing to update on </value>
+  </data>
+  <data name="sql_runquery_cancellingtransaction" xml:space="preserve">
+    <value>) -&gt; Cancelling SQL Transaction</value>
+  </data>
+  <data name="sql_runquery_toomanyerrors" xml:space="preserve">
+    <value>Too Many Errors (</value>
+  </data>
+  <data name="sql_shrink_info" xml:space="preserve">
+    <value>Shrink Operation on table : </value>
+  </data>
+  <data name="sql_switch_db_ko" xml:space="preserve">
+    <value>Can't Change Database. Default will be used instead.</value>
+  </data>
+  <data name="sql_synchro_addpktotarget" xml:space="preserve">
+    <value>Synchro. Mode : Adding Primary Key On Table (</value>
+  </data>
+  <data name="sql_synchro_cantcreatetargettable" xml:space="preserve">
+    <value>Can't create or fill Target Table. Check SQL Log for details.</value>
+  </data>
+  <data name="sql_synchro_errorsintargetquery" xml:space="preserve">
+    <value>Synchro.Mode : Error(s) In Target Query: Can't Go Further</value>
+  </data>
+  <data name="sql_synchro_loadsourcedata" xml:space="preserve">
+    <value>Now querying Target Database to prepare data comparison</value>
+  </data>
+  <data name="sql_synchro_loadsourcedata_query" xml:space="preserve">
+    <value>Target query is executed : </value>
+  </data>
+  <data name="sql_synchro_nopkintarget01" xml:space="preserve">
+    <value>Synchro. Mode : No Primary Key (</value>
+  </data>
+  <data name="sql_synchro_nopkintarget02" xml:space="preserve">
+    <value>) : Can't Go Further</value>
+  </data>
+  <data name="sql_synchro_pkfromsourcedt" xml:space="preserve">
+    <value>Synchro. Mode : Get Primary Key From Source DataTable : </value>
+  </data>
+  <data name="sql_synchro_pkfromsourcedt_shs" xml:space="preserve">
+    <value>Synchro. Mode : Smart Primary Key Detection on Source DataTable  (</value>
+  </data>
+  <data name="sql_synchro_pkfromtargetdt_shs" xml:space="preserve">
+    <value>Synchro. Mode : No Primary Key in Target Table : Smart Detection (</value>
+  </data>
+  <data name="sql_synchro_pkmismatchautodetect" xml:space="preserve">
+    <value>). Trying Autodetection.</value>
+  </data>
+  <data name="sql_synchro_pkmismatchsourcetarget" xml:space="preserve">
+    <value>Synchro. Mode : Primary Key Columns Mismatch Between Source &amp; Target  (Found : </value>
+  </data>
+  <data name="sql_synchro_pktarget" xml:space="preserve">
+    <value>Synchro. Mode : Get Primary Key From Target Table : </value>
+  </data>
+  <data name="sql_synchro_pkuniquekeyfound" xml:space="preserve">
+    <value>Synchro. Mode : Unique Key Columns Found in Source &amp; Target  (Found : </value>
+  </data>
+  <data name="sql_synchro_sourcerows" xml:space="preserve">
+    <value>Synchro. Mode : Rows SOURCE  (</value>
+  </data>
+  <data name="sql_synchro_store01" xml:space="preserve">
+    <value>Synchro. Mode : Store (</value>
+  </data>
+  <data name="sql_synchro_store02" xml:space="preserve">
+    <value> row(s)) in table : </value>
+  </data>
+  <data name="sql_synchro_store03" xml:space="preserve">
+    <value>Creating backup table : </value>
+  </data>
+  <data name="sql_synchro_store_noquery" xml:space="preserve">
+    <value>No query found to create backup table</value>
+  </data>
+  <data name="sql_synchro_targetrows" xml:space="preserve">
+    <value>Synchro. Mode : Rows TARGET  (</value>
+  </data>
+  <data name="sql_synchro_todelete" xml:space="preserve">
+    <value>Synchro. Mode : Rows To DELETE (</value>
+  </data>
+  <data name="sql_synchro_todelete_tag" xml:space="preserve">
+    <value>Synchro. Mode : No Delete will be Performed. Tagging Rows Instead (</value>
+  </data>
+  <data name="sql_synchro_toinsert" xml:space="preserve">
+    <value>Synchro. Mode : Rows To INSERT (</value>
+  </data>
+  <data name="sql_synchro_toupdate" xml:space="preserve">
+    <value>Synchro. Mode : Rows To UPDATE (</value>
+  </data>
+  <data name="sql_wrongcolumnschema" xml:space="preserve">
+    <value>Error in Driver Column Schema : </value>
+  </data>
+  <data name="ws_answerdeserialize_ko" xml:space="preserve">
+    <value>Query (</value>
+  </data>
+  <data name="ws_answerdeserialize_kojson" xml:space="preserve">
+    <value> can't be deserialized (JSON) !</value>
+  </data>
+  <data name="ws_answerdeserialize_kostring" xml:space="preserve">
+    <value> can't be deserialized !</value>
+  </data>
+  <data name="ws_answerdeserialize_koxml" xml:space="preserve">
+    <value> can't be deserialized (XML) !</value>
+  </data>
+  <data name="ws_checksuccess01" xml:space="preserve">
+    <value>Query </value>
+  </data>
+  <data name="ws_checksuccess02" xml:space="preserve">
+    <value> Returned Success</value>
+  </data>
+  <data name="ws_checksuccessko" xml:space="preserve">
+    <value>Query Returned Failure </value>
+  </data>
+  <data name="ws_checksuccesskorow01" xml:space="preserve">
+    <value>Row Number</value>
+  </data>
+  <data name="ws_checksuccesskorow02" xml:space="preserve">
+    <value> -&gt; Query : </value>
+  </data>
+  <data name="ws_checksuccesskorow03" xml:space="preserve">
+    <value> -&gt; Answer : </value>
+  </data>
+  <data name="ws_createrestquery_offset01" xml:space="preserve">
+    <value>Offset parameter (</value>
+  </data>
+  <data name="ws_createrestquery_offset02" xml:space="preserve">
+    <value>) is equal or greater than colums count (</value>
+  </data>
+  <data name="ws_createrestquery_offset03" xml:space="preserve">
+    <value>) -&gt; Reinitialized to 0.</value>
+  </data>
+  <data name="ws_deserialize_foundgraphdownload" xml:space="preserve">
+    <value>Found Download Link in Graph API : </value>
+  </data>
+  <data name="ws_deserialize_graphapidownloadko" xml:space="preserve">
+    <value>Unable to download file : </value>
+  </data>
+  <data name="ws_deserialize_graphapinodownloadlink" xml:space="preserve">
+    <value>No download link was found ! Unable to get files from API</value>
+  </data>
+  <data name="ws_deserialize_graphapiurlfound" xml:space="preserve">
+    <value>Downloading File : </value>
+  </data>
+  <data name="ws_deserialize_graphapiurlnotfound" xml:space="preserve">
+    <value>Can't Download File (URL is empty) : </value>
+  </data>
+  <data name="ws_deserialize_kojson" xml:space="preserve">
+    <value>Can't Deserialize Data (JSON -&gt; Dataset). Aborting.</value>
+  </data>
+  <data name="ws_deserialize_koxml" xml:space="preserve">
+    <value>Can't Deserialize Data (XML -&gt; Dataset). Aborting.</value>
+  </data>
+  <data name="ws_deserialize_noparser" xml:space="preserve">
+    <value>Unable to parse Webservice file content</value>
+  </data>
+  <data name="ws_deserialize_switchcsv" xml:space="preserve">
+    <value>Downloading and Parsing CSV content</value>
+  </data>
+  <data name="ws_getdata_cantparsebody" xml:space="preserve">
+    <value>Can't parse FORM_DATA content. Expecting something like \"param=value;param2=value2...\". Unable to add body to the query.</value>
+  </data>
+  <data name="ws_getdata_jsonerror" xml:space="preserve">
+    <value>Can't parse JSON data. Unable to add body to the query.</value>
+  </data>
+  <data name="ws_getdata_ko" xml:space="preserve">
+    <value>Unable to retrieve API Data</value>
+  </data>
+  <data name="ws_getdata_koanswer" xml:space="preserve">
+    <value>Webservice Answer (Error Message, Status Code, URI) : </value>
+  </data>
+  <data name="ws_getdata_subquery" xml:space="preserve">
+    <value>Subquery Detected : Getting Data From : </value>
+  </data>
+  <data name="ws_getdata_xmlerror01" xml:space="preserve">
+    <value>Can't parse XML data (</value>
+  </data>
+  <data name="ws_getdata_xmlerror02" xml:space="preserve">
+    <value>). Unable to add body to the query.</value>
+  </data>
+  <data name="ws_gettoken_ko" xml:space="preserve">
+    <value>Unable to retrieve Token from URL (</value>
+  </data>
+  <data name="ws_gettoken_ok" xml:space="preserve">
+    <value>Webservice Token Retrieved From URL (</value>
+  </data>
+  <data name="ws_graphapi_onedrive_urlko" xml:space="preserve">
+    <value>API Connection String is not properly formatted for direct file read. Folder content will be read instead.</value>
+  </data>
+  <data name="ws_graphapi_onedrive_urlko2" xml:space="preserve">
+    <value>API Connection String must end with /items/{item_id} with no slash at the end. Can't execute API call.</value>
+  </data>
+  <data name="ws_senddata_cantsplitquery" xml:space="preserve">
+    <value>Can't split Query : </value>
+  </data>
+  <data name="ws_senddata_ko" xml:space="preserve">
+    <value>Unable to retrieve API Data</value>
+  </data>
+  <data name="ws_senddata_koanswer" xml:space="preserve">
+    <value>Webservice Answer (Server, Error, Status Code, Description, URI) : </value>
+  </data>
+  <data name="ws_senddata_sent" xml:space="preserve">
+    <value> - SENT </value>
+  </data>
+  <data name="ws_senddata_simuquery" xml:space="preserve">
+    <value>WEBSERVICE QUERY : </value>
+  </data>
+  <data name="ws_updateonedrivefield" xml:space="preserve">
+    <value>Mise à jour des informations du fichier : </value>
+  </data>
+  <data name="ws_updateonedrivefield1" xml:space="preserve">
+    <value>Updating File Info : </value>
+  </data>
+  <data name="ws_updateonedrivefield_ko" xml:space="preserve">
+    <value>File Info was not updated : </value>
+  </data>
+  <data name="ws_updateonedrivefield_nofields" xml:space="preserve">
+    <value>Unable to find corresponding Item ID in API Answer : </value>
+  </data>
+  <data name="ws_updateonedrivefield_ok" xml:space="preserve">
+    <value>File Info was successfully updated : </value>
+  </data>
+  <data name="ad_unabletoaddproperty" xml:space="preserve">
+    <value>Unable to fill/convert AD property</value>
+  </data>
+  <data name="ma_msg_planifcalendar_processing" xml:space="preserve">
+    <value>Processing calendar entry : </value>
+  </data>
+  <data name="sql_compmode_writing_noindextrusttarget" xml:space="preserve">
+    <value>Target column index was out of range using 'Trust Target Schema' setting</value>
+  </data>
+  <data name="sql_compmode_writing_noindex" xml:space="preserve">
+    <value>Source column index was not reacheable</value>
+  </data>
+  <data name="ma_msg_dynparams_loop_targetbehavior" xml:space="preserve">
+    <value>Job Loop -&gt; Target table behavior already processed. Bypassing : </value>
+  </data>
+  <data name="monitoring_heartbeat" xml:space="preserve">
+    <value>Heartbeat Info</value>
+  </data>
+  <data name="monitoring_heartbeat_runtime" xml:space="preserve">
+    <value>Job Run Time</value>
+  </data>
+  <data name="ad_addingproperty" xml:space="preserve">
+    <value>Adding AD Property : </value>
+  </data>
+  <data name="ad_addingpropertylist" xml:space="preserve">
+    <value>The following properties will be processed : </value>
+  </data>
+  <data name="ma_msg_stats_creationdate" xml:space="preserve">
+    <value>Creation Date : </value>
+  </data>
+  <data name="ma_msg_stats_modificationdate" xml:space="preserve">
+    <value>Last Modification : </value>
+  </data>
+  <data name="ma_msg_stats_lastlaunchdate" xml:space="preserve">
+    <value>Last Execution : </value>
+  </data>
+  <data name="ma_msg_stats_lastlaunchstatus" xml:space="preserve">
+    <value>Last Execution Status : </value>
+  </data>
+  <data name="ma_msg_stats_iterations" xml:space="preserve">
+    <value>Number of Executions : </value>
+  </data>
+  <data name="ma_msg_stats_avgduration" xml:space="preserve">
+    <value>Average Duration : </value>
+  </data>
+  <data name="ma_msg_stats_maxduration" xml:space="preserve">
+    <value>Maximum Execution Time : </value>
+  </data>
+  <data name="ma_msg_stats_minduration" xml:space="preserve">
+    <value>Shortest Running Time : </value>
+  </data>
+  <data name="ma_msg_stats_avgwarnings" xml:space="preserve">
+    <value>Average Warnings / Execution : </value>
+  </data>
+  <data name="ma_msg_stats_avgerrors" xml:space="preserve">
+    <value>Average Errors / Execution : </value>
+  </data>
+  <data name="ma_msg_stats_userexec" xml:space="preserve">
+    <value>Executions / User : </value>
+  </data>
+  <data name="ma_msg_stats_versionexec" xml:space="preserve">
+    <value>Detail / Version : </value>
+  </data>
+  <data name="ma_msg_stats_queries" xml:space="preserve">
+    <value>queries</value>
+  </data>
+  <data name="sql_dicreetdisconnect_fatal" xml:space="preserve">
+    <value>Connexion was not properly closed. Check your database.</value>
+  </data>
+</root>

@@ -1,0 +1,7 @@
+{
+  "profiles": {
+    "FuzibleClient": {
+      "commandName": "Project"
+    }
+  }
+}

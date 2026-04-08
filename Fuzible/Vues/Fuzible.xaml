@@ -1,0 +1,876 @@
+﻿<Window x:Name="Fuzible" x:Class="Fuzible.UI"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:resx="clr-namespace:Fuzible.Languages"
+        mc:Ignorable="d"
+        Closed="MainWindow_Closed"
+        Loaded="MainWindow_Loaded"
+        KeyDown="Fuzible_KeyDown"
+        Title="{x:Static resx:Languages.ma_app_title}" ResizeMode="CanResizeWithGrip" SizeToContent="Width" Background="White" WindowStartupLocation="Manual">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/FuzibleSkin.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Viewbox Stretch="Uniform">
+
+        <Grid x:Name="gdUI" Height="760" Width="840">
+
+            <DockPanel>
+
+                <Menu x:Name="mnuAll" VerticalAlignment="Top" HorizontalAlignment="Left" Background="White" Height="25">
+                    <MenuItem Header="{x:Static resx:Languages.ma_mnu_file}" Style="{StaticResource FlatMenuItem}">
+                        <MenuItem MouseMove="UIElement_MouseDown" Name="ChangeUserPassword" Header="{x:Static resx:Languages.ma_mnu_help_changepassword}" Style="{StaticResource FlatMenuItem}" Click="MnuFileMenuFile_Click" />
+                        <MenuItem MouseMove="UIElement_MouseDown" Name="MiSampleJob" Header="{x:Static resx:Languages.ma_mnu_help_createsamplejob}" Style="{StaticResource FlatMenuItem}" Click="MnuFileMenuFile_Click" />
+                        <MenuItem MouseMove="UIElement_MouseDown" Name="MiLang" Header="{x:Static resx:Languages.ma_mnu_file_langselection}" Style="{StaticResource FlatMenuItem}">
+                            <MenuItem x:Name="MiLangEN" Header="{x:Static resx:Languages.ma_mnu_file_langselection_en}" Style="{StaticResource FlatMenuItem}" Click="MnuFileMenuFile_Click"/>
+                            <MenuItem x:Name="MiLangFR" Header="{x:Static resx:Languages.ma_mnu_file_langselection_fr}" Style="{StaticResource FlatMenuItem}" Click="MnuFileMenuFile_Click"/>
+                        </MenuItem>
+                        <MenuItem MouseMove="UIElement_MouseDown" Name="MiShowConsole" Header="{x:Static resx:Languages.ma_mnu_file_debugtask}" Style="{StaticResource FlatMenuItem}" Click="MnuFileMenuFile_Click" />
+                        <MenuItem MouseMove="UIElement_MouseDown" Name="MiDebugTask" Header="Dev. Debug Task" Style="{StaticResource FlatMenuItem}" Click="MnuFileMenuFile_Click" />
+                        <MenuItem MouseMove="UIElement_MouseDown" Name="MiBenchmarking"  Header="{x:Static resx:Languages.ma_mnu_file_benchmark}" Style="{StaticResource FlatMenuItem}" Click="MnuFileMenuFile_Click" />
+                        <MenuItem MouseMove="UIElement_MouseDown" Name="MiExit" Header="{x:Static resx:Languages.ma_mnu_file_exit}" Style="{StaticResource FlatMenuItem}" Click="MnuFileMenuFile_Click"/>
+                    </MenuItem>
+                    <MenuItem Header="{x:Static resx:Languages.ma_mnu_configuration}" Style="{StaticResource FlatMenuItem}">
+                        <MenuItem Name="MiConnections" Header="{x:Static resx:Languages.ma_mnu_configuration_connections}" Style="{StaticResource FlatMenuItem}" Click="MnuFileMenuConfig_Click" />
+                        <MenuItem Name="MiLog" Header="{x:Static resx:Languages.ma_mnu_configuration_log}" Style="{StaticResource FlatMenuItem}" Click="MnuFileMenuConfig_Click" />
+                        <Separator />
+                        <MenuItem Name="MiSql" Header="{x:Static resx:Languages.ma_mnu_configuration_sql}" Style="{StaticResource FlatMenuItem}" Click="MnuFileMenuConfig_Click" />
+                        <MenuItem Name="MiFile" Header="{x:Static resx:Languages.ma_mnu_configuration_file}" Style="{StaticResource FlatMenuItem}" Click="MnuFileMenuConfig_Click" />
+                        <MenuItem Name="MiWs" Header="{x:Static resx:Languages.ma_mnu_configuration_ws}" Style="{StaticResource FlatMenuItem}" Click="MnuFileMenuConfig_Click" />
+                        <MenuItem Name="MiMail" Header="{x:Static resx:Languages.ma_mnu_configuration_mail}" Style="{StaticResource FlatMenuItem}" Click="MnuFileMenuConfig_Click" />
+                        <MenuItem Name="MiDataAnalyzer" Header="{x:Static resx:Languages.ma_mnu_configuration_shs}" Style="{StaticResource FlatMenuItem}" Click="MnuFileMenuConfig_Click" />
+                        <Separator />
+                        <MenuItem Name="MiServiceApp" Header="{x:Static resx:Languages.ma_mnu_configuration_serviceclient}" Style="{StaticResource FlatMenuItem}" Click="MnuFileMenuConfig_Click" />
+                    </MenuItem>
+                    <MenuItem Header="{x:Static resx:Languages.ma_mnu_tools}" Style="{StaticResource FlatMenuItem}">
+                        <MenuItem MouseMove="UIElement_MouseDown" Name="MiExportXML" Header="{x:Static resx:Languages.ma_mnu_tools_exportxml}" Style="{StaticResource FlatMenuItem}" Click="MnuFileMenuTools_Click" />
+                        <MenuItem MouseMove="UIElement_MouseDown" Name="MiImportXML" Header="{x:Static resx:Languages.ma_mnu_tools_importxml}" Style="{StaticResource FlatMenuItem}" Click="MnuFileMenuTools_Click" />
+                        <Separator />
+                        <MenuItem MouseMove="UIElement_MouseDown" Name="MiReorganize" Header="{x:Static resx:Languages.ma_mnu_tools_reorganize}" Style="{StaticResource FlatMenuItem}" Click="MnuFileMenuTools_Click" />
+                        <Separator />
+                        <MenuItem MouseMove="UIElement_MouseDown" Name="MiImport" Header="{x:Static resx:Languages.ma_mnu_tools_importjob}" Style="{StaticResource FlatMenuItem}" Click="MnuFileMenuTools_Click" />
+                        <MenuItem MouseMove="UIElement_MouseDown" Name="MiLoadUserspace" Header="{x:Static resx:Languages.ma_mnu_tools_loaduserspace}" Style="{StaticResource FlatMenuItem}" Click="MnuFileMenuTools_Click" />
+                        <MenuItem MouseMove="UIElement_MouseDown" Name="MiPlanif" Header="{x:Static resx:Languages.ma_mnu_tools_planification}" Style="{StaticResource FlatMenuItem}" Click="MnuFileMenuTools_Click" />
+                    </MenuItem>
+                    <MenuItem Header="{x:Static resx:Languages.ma_mnu_help}" Style="{StaticResource FlatMenuItem}">
+                        <MenuItem MouseMove="UIElement_MouseDown" Name="MiLiveHelp" Header="{x:Static resx:Languages.ma_mnu_help_live}" Style="{StaticResource FlatMenuItem}" Click="MnuFileMenuHelp_Click" />
+                        <CheckBox MouseMove="UIElement_MouseDown" Name="MiShowLiveHelpStart" HorizontalAlignment="Left" HorizontalContentAlignment="Left" Content="{x:Static resx:Languages.ma_mnu_file_showlivehelpstart}" Click="MnuFileMenuHelp_Click" />
+                        <MenuItem x:Name="miTutorial" MouseMove="UIElement_MouseDown" Header="{x:Static resx:Languages.ma_mnu_file_tutorials}" Style="{StaticResource FlatMenuItem}">
+                            <MenuItem x:Name="miReplicationFileToSQL" Header="{x:Static resx:Languages.ma_mnu_file_tutorials_demo1}" Style="{StaticResource FlatMenuItem}" Click="MnuFileMenuTutorial_Click"/>
+                            <MenuItem x:Name="miReplicationSQLToFile" Header="{x:Static resx:Languages.ma_mnu_file_tutorials_demo2}" Style="{StaticResource FlatMenuItem}" Click="MnuFileMenuTutorial_Click"/>
+                            <MenuItem x:Name="miSynchroFileToSQL" Header="{x:Static resx:Languages.ma_mnu_file_tutorials_demo3}" Style="{StaticResource FlatMenuItem}" Click="MnuFileMenuTutorial_Click"/>
+                        </MenuItem>
+                        <MenuItem Name="MiAboutUs" Header="{x:Static resx:Languages.ma_mnu_help_about}" Style="{StaticResource FlatMenuItem}" Click="MnuFileMenuHelp_Click" />
+                        <MenuItem Name="MiVisitUs" Header="{x:Static resx:Languages.ma_mnu_help_website}" Style="{StaticResource FlatMenuItem}" Click="MnuFileMenuHelp_Click" />
+                        <MenuItem Name="MiDBBrowser" Header="{x:Static resx:Languages.ma_mnu_help_dbbrowser}" Style="{StaticResource FlatMenuItem}" Click="MnuFileMenuHelp_Click" />
+                        <MenuItem Name="MiContactUs" Header="{x:Static resx:Languages.ma_mnu_help_contactus}" Style="{StaticResource FlatMenuItem}" Click="MnuFileMenuHelp_Click" />
+                    </MenuItem>
+                </Menu>
+            </DockPanel>
+
+            <Canvas x:Name="cvUIButtons" Grid.ColumnSpan="2">
+                <Label x:Name="lbPendingTask" BorderThickness="1" BorderBrush="LightGray" Content="" Foreground="DarkBlue" HorizontalContentAlignment="Right" Height="25" Width="665" Canvas.Left="10" Canvas.Top="730" FontSize="10" FontStyle="Italic" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <Button x:Name="btnStopTask" Width="115" Height="30" FontSize="14" Click="BtnStopTask_Click" Canvas.Left="330" Canvas.Top="695" Background="{x:Null}">
+                    <Button.Content>
+                        <DockPanel>
+                            <Image Source="pack://application:,,,/Resources/btn_stop.png" Height="20" />
+                            <TextBlock Text="{x:Static resx:Languages.ma_jobconf_btn_stopjob}" VerticalAlignment="Center" Padding="3"/>
+                        </DockPanel>
+                    </Button.Content>
+                </Button>
+                <Button x:Name="btnExecuteTask" Width="140" Click="BtnExecuteTask_Click" Height="30" FontSize="14" IsEnabled="True" Canvas.Left="690" Canvas.Top="695" Background="{x:Null}">
+                    <Button.Content>
+                        <DockPanel>
+                            <Image Source="pack://application:,,,/Resources/btn_execute.png" Height="20" />
+                            <TextBlock Name="tbExecuteTask" Text="{x:Static resx:Languages.ma_jobconf_btn_startjob}" VerticalAlignment="Center" Padding="3"/>
+                        </DockPanel>
+                    </Button.Content>
+                </Button>
+                <Button x:Name="btnExecuteStepByStep" Width="180" Click="BtnExecuteStepByStep_Click" Height="30" FontSize="14" IsEnabled="True" Canvas.Left="495" Canvas.Top="695" Background="{x:Null}" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Button.Content>
+                        <DockPanel>
+                            <Image Source="pack://application:,,,/Resources/btn_stepbystep.png" Height="20" />
+                            <TextBlock x:Name="tbExecuteStepByStep" Text="{x:Static resx:Languages.ma_jobconf_btn_startjobstepbystep}" VerticalAlignment="Center" Padding="3"/>
+                        </DockPanel>
+                    </Button.Content>
+                </Button>
+                <Button x:Name="btnSaveINI" Width="115" Click="BtnSaveINI_Click" Height="30" Canvas.Left="10" Canvas.Top="695" Background="{x:Null}">
+                    <Button.Content>
+                        <DockPanel>
+                            <Image Source="pack://application:,,,/Resources/btn_save.png" Height="20" />
+                            <TextBlock Text="{x:Static resx:Languages.ma_jobconf_btn_savejob}" VerticalAlignment="Center" Padding="3"/>
+                        </DockPanel>
+                    </Button.Content>
+                </Button>
+                <CheckBox x:Name="ckSimulationMode" Style="{StaticResource FlatCheckBox}" Height="25" Content="{x:Static resx:Languages.ma_jobconf_ck_simulation}" Canvas.Left="690" Canvas.Top="730" IsChecked="False" Padding="2,0,0,0" Width="140" HorizontalAlignment="Left" VerticalAlignment="Center"  />
+            </Canvas>
+
+            <Canvas x:Name="cvTutorial">
+                <Border x:Name="bdTutorial" Visibility="Hidden" BorderBrush="Red" BorderThickness="2"></Border>
+                <TextBox x:Name="lbTutorial" TextWrapping="Wrap" IsReadOnly="True" Foreground="Red" Visibility="Hidden" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderThickness="2" BorderBrush="Red" Width="830" Height="80" Canvas.Top="15" Canvas.Left="5" Background="LightGray" VerticalScrollBarVisibility="Visible"/>
+            </Canvas>
+
+            <Canvas x:Name="cvUI" Grid.ColumnSpan="2">
+
+                <Canvas x:Name="cvJobSelection" Visibility="Visible" >
+                    <GroupBox x:Name="CanvasBorderC" Header="{x:Static resx:Languages.ma_jobconf_gb_jobselection}" Foreground="DarkOrange" BorderBrush="DarkOrange" Width="830" Height="70" BorderThickness="1" Canvas.Top="25" Canvas.Left="5"></GroupBox>
+                    <ComboBox x:Name="cbJobFamily" SelectedIndex="-1" Style="{StaticResource ComboBoxFlatStyle}" SelectedValuePath="Tag" PreviewMouseRightButtonDown="CbJobFamily_PreviewMouseRightButtonDown"  Width="130" SelectionChanged="CbJobFamily_SelectionChanged" Height="25" Canvas.Left="10" Canvas.Top="55" />
+                    <ComboBox x:Name="cbINISection" IsEditable="True" SelectedIndex="-1" PreviewKeyUp="CbINISection_PreviewKeyUp" DropDownOpened="CbINISection_DropDownOpened" Style="{StaticResource ComboBoxFlatStyle}" SelectedValuePath="Tag"  Width="380" SelectionChanged="CbINISection_SelectionChanged" Height="25" Canvas.Left="145" Canvas.Top="55" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                    <GroupBox x:Name="CanvasBorderC2" Header="{x:Static resx:Languages.ma_jobconf_gb_jobselection_ms}" Foreground="DarkOrange" BorderBrush="DarkOrange" Width="300" Height="55" BorderThickness="1" Canvas.Top="35" Canvas.Left="530"></GroupBox>
+                    <Button Name="TbPreviousStepJob" Style="{StaticResource FlatButton}" Content="{x:Static resx:Languages.ma_jobconf_btn_prevstep}"  HorizontalContentAlignment="Right" Canvas.Left="532" Canvas.Top="52" Width="70" Height="30" Click="TbPreviousStepJob_Click" />
+                    <Button Name="TbNextStepJob" Style="{StaticResource FlatButton}" Content="{x:Static resx:Languages.ma_jobconf_btn_nextstep}" HorizontalContentAlignment="Left" Canvas.Left="723" Canvas.Top="52" Width="105" Height="30" Click="TbNextStepJob_Click" />
+                    <ComboBox Name="LbJobStep" Style="{StaticResource ComboBoxFlatStyle}"   SelectedValuePath="Tag" Canvas.Left="602" Canvas.Top="55" Height="25" Width="120" FontSize="9" SelectionChanged="LbJobStep_SelectionChanged"/>
+                </Canvas>
+
+                <TabControl x:Name="tcMenu" Margin="0,100,0,-90"  Width="840" Height="590" SelectionChanged="TcMenu_SelectionChanged">
+                    <TabItem Width="150" x:Name="tcMenuJobConfiguration" Header="{x:Static resx:Languages.ma_mnu_job_jobconfiguration}" Style="{StaticResource FuzibleTabItemStyle}">
+                        <Canvas x:Name="cvJobConfiguration">
+                            <Label x:Name="lbJobVersion" Foreground="Red" FontWeight="Bold" Content="" Height="25" Width="300" Canvas.Left="15" Canvas.Top="35" FontSize="9" VerticalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+
+                            <GroupBox x:Name="CanvasBorderA" Header="{x:Static resx:Languages.ma_jobconf_gb_mainparams}" Foreground="DarkOrange" BorderBrush="DarkOrange" Width="825" Height="195" BorderThickness="1" Canvas.Top="110" Canvas.Left="5"></GroupBox>
+                            <GroupBox x:Name="CanvasBorderB" Header="{x:Static resx:Languages.ma_jobconf_gb_log}" Foreground="DarkOrange"  BorderBrush="DarkOrange" Width="825" Height="100" BorderThickness="1" Canvas.Top="315" Canvas.Left="5" HorizontalAlignment="Center" VerticalAlignment="Top"></GroupBox>
+                            <Label x:Name="lbJobDescription" Content="{x:Static resx:Languages.ma_jobconf_lbl_jobdescription}" Height="25" Width="137" Canvas.Left="15" Canvas.Top="10" HorizontalAlignment="Center" VerticalAlignment="Top">
+                            </Label>
+                            <TextBox x:Name="tbJobDescription" Style="{StaticResource TextBoxFlatStyle}" FontSize="10" Canvas.Left="150" Canvas.Top="10" Height="25" Width="670" MaxLines="1" MaxLength="300" HorizontalAlignment="Center" VerticalAlignment="Top" />
+                            <ComboBox x:Name="cbModeExtraction" Style="{StaticResource ComboBoxFlatStyle}"  SelectedValuePath="Tag"  Width="155" Height="25" SelectedIndex="0" Canvas.Left="160" Canvas.Top="135">
+                                <ComboBoxItem Content="{x:Static resx:Languages.ma_jobconf_cb_jobtype_replication}" Width="200" Tag="EXPORT_IMPORT"/>
+                                <ComboBoxItem Content="{x:Static resx:Languages.ma_jobconf_cb_jobtype_synchro}" Width="200" Tag="STREAMING"/>
+                            </ComboBox>
+                            <CheckBox x:Name="ckSynchroStoreChanges" Style="{StaticResource FlatCheckBox}" Height="25" Content="{x:Static resx:Languages.ma_jobconf_ck_histosynchro}" Canvas.Left="536" Canvas.Top="135" IsChecked="False" Padding="2,0,0,0" Width="285" />
+                            <ComboBox x:Name="cbSQLSynchroTargetBehavior" Style="{StaticResource ComboBoxFlatStyle}"  SelectedValuePath="Tag" Width="210" Height="25" SelectedIndex="0" Canvas.Left="320" Canvas.Top="135">
+                                <ComboBoxItem Content="{x:Static resx:Languages.ma_jobconf_cb_synchromode_dui}" HorizontalAlignment="Left" Width="300" Tag="DUI" />
+                                <ComboBoxItem Content="{x:Static resx:Languages.ma_jobconf_cb_synchromode_ui}" HorizontalAlignment="Left" Width="300" Tag="UI"/>
+                                <ComboBoxItem Content="{x:Static resx:Languages.ma_jobconf_cb_synchromode_u}" HorizontalAlignment="Left" Width="300" Tag="U"/>
+                                <ComboBoxItem Content="{x:Static resx:Languages.ma_jobconf_cb_synchromode_i}" HorizontalAlignment="Left" Width="300" Tag="I"/>
+                                <ComboBoxItem Content="{x:Static resx:Languages.ma_jobconf_cb_synchromode_d}" HorizontalAlignment="Left" Width="300" Tag="D"/>
+                                <ComboBoxItem Content="{x:Static resx:Languages.ma_jobconf_cb_synchromode_di}" HorizontalAlignment="Left" Width="300" Tag="DI"/>
+                                <ComboBoxItem Content="{x:Static resx:Languages.ma_jobconf_cb_synchromode_tag}" HorizontalAlignment="Left" Width="300" Tag="TAG"/>
+                            </ComboBox>
+
+                            <Button x:Name="btnRenameJob" Style="{StaticResource FlatButton}" Content="{x:Static resx:Languages.ma_jobconf_btn_renamejob}"  Width="86" Click="BtnRenameJob_Click" Height="25" Canvas.Left="290" Canvas.Top="65" HorizontalAlignment="Center" VerticalAlignment="Top" />
+
+                            <Label x:Name="lbModeExtraction" Content="{x:Static resx:Languages.ma_jobconf_lbl_jobtype}" Height="30" Width="137" Canvas.Left="10" Canvas.Top="137"/>
+                            <Button x:Name="btnDeleteJob" Style="{StaticResource FlatButton}" Content="{x:Static resx:Languages.ma_jobconf_btn_deletejob}"  Width="86" Click="BtnDeleteJob_Click" Height="25" Canvas.Left="380" Canvas.Top="65" HorizontalAlignment="Center" VerticalAlignment="Top" />
+                            <Button x:Name="btnChangePwd" Style="{StaticResource FlatButton}" Content="{x:Static resx:Languages.ma_jobconf_btn_changepwd}"  Width="150" Click="BtnChangePwd_Click" Height="25" Canvas.Left="470" Canvas.Top="65" HorizontalAlignment="Center" VerticalAlignment="Top"  />
+                            <Button x:Name="btnOrchestration" Style="{StaticResource FlatButton}" Content="{x:Static resx:Languages.ma_jobconf_btn_planification}" Width="85" Click="BtnOrchestration_Click" Height="25" Canvas.Left="20" Canvas.Top="65" HorizontalAlignment="Center" VerticalAlignment="Top" />
+                            <Button x:Name="btnJobFamily" Style="{StaticResource FlatButton}" Content="{x:Static resx:Languages.ma_jobconf_btn_jobfamily}" Width="85" Click="BtnJobFamily_Click" Height="25" Canvas.Left="110" Canvas.Top="65" HorizontalAlignment="Center" VerticalAlignment="Top" />
+                            <Button x:Name="btnJobStats" Style="{StaticResource FlatButton}" Content="{x:Static resx:Languages.ma_jobconf_btn_jobstats}" Width="86" Click="BtnJobStats_Click" Height="25" Canvas.Left="200" Canvas.Top="65" HorizontalAlignment="Center" VerticalAlignment="Top" />
+                            <Button x:Name="btnCreerNouveau" Style="{StaticResource FlatButton}" Content="{x:Static resx:Languages.ma_jobconf_btn_createnewjob}"  Width="130" Click="BtnCreerNouveau_Click" Height="25" Canvas.Left="695" Canvas.Top="65" Foreground="Red" HorizontalContentAlignment="Right" HorizontalAlignment="Center" VerticalAlignment="Top"></Button>
+
+                            <Label x:Name="lbJobID" Content="" Canvas.Left="455" Canvas.Top="125" Width="50" Visibility="Hidden"/>
+                            <Label x:Name="lbJobPassword" Content="" Canvas.Left="510" Canvas.Top="125" Width="180" Visibility="Hidden"/>
+
+                            <Button x:Name="btnVoirRequetes" Style="{StaticResource FlatButton}" Content="{x:Static resx:Languages.ma_jobconf_btn_viewjobwithdynparams}" Width="210" Click="BtnVoirRequetes_Click" Height="25" Canvas.Left="615" Canvas.Top="240" HorizontalContentAlignment="Right" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                            <Label x:Name="lbQueryVariableParameters" Content="{x:Static resx:Languages.ma_jobconf_lbl_dynparams}" Height="30" Width="138" Canvas.Top="190" Canvas.Left="10" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+
+                            <RichTextBox x:Name="tbQueryVariableParameters" Foreground="#FF052872" FontStyle="Italic" AcceptsReturn="False" AcceptsTab="False" Height="40" Width="645" VerticalContentAlignment="Center" Canvas.Left="150" Canvas.Top="190" KeyUp="TbQueryVariableParameters_KeyUp" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="11"/>
+                            <Label Content="{x:Static resx:Languages.ma_jobconf_lbl_helpdynparams}" Foreground="DarkOrange" FontSize="10" Height="40" Width="530" Canvas.Left="10" Canvas.Top="230" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                            <Button x:Name="btnHelpForDynamicQueryParameters" Background="White" BorderThickness="1" Content="{x:Static resx:Languages.ma_jobconf_btn_helpdynparams}" Width="25" Click="BtnHelp_Click" Height="25" Canvas.Left="800" Canvas.Top="197" FontWeight="Bold"  FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                            <ComboBox x:Name="cbListDynamicCommands" Style="{StaticResource ComboBoxFlatStyle}" SelectedValuePath="Tag" FontSize="10" Width="350" Height="25" SelectedIndex="0" Canvas.Left="470" Canvas.Top="270" HorizontalAlignment="Center" VerticalAlignment="Top" >
+                                <ComboBoxItem Content="" Width="380" Tag="0"/>
+                                <ComboBoxItem Content="{x:Static resx:Languages.ma_jobconf_cb_dyncommands_user}" Width="450" Tag="1"/>
+                                <ComboBoxItem Content="{x:Static resx:Languages.ma_jobconf_cb_dyncommands_targetname}" Width="450" Tag="2"/>
+                                <ComboBoxItem Content="{x:Static resx:Languages.ma_jobconf_cb_dyncommands_guid}" Width="450" Tag="22"/>
+                                <ComboBoxItem Content="{x:Static resx:Languages.ma_jobconf_cb_dyncommands_randomfixed}" Width="450" Tag="23"/>
+                                <ComboBoxItem Content="{x:Static resx:Languages.ma_jobconf_cb_dyncommands_randomvariable}" Width="450" Tag="24"/>
+                                <ComboBoxItem Content="{x:Static resx:Languages.ma_jobconf_cb_dyncommands_sc1}" Width="450" Tag="18"/>
+                                <ComboBoxItem Content="{x:Static resx:Languages.ma_jobconf_cb_dyncommands_tc1}" Width="450" Tag="19"/>
+                                <ComboBoxItem Content="{x:Static resx:Languages.ma_jobconf_cb_dyncommands_sccol}" Width="450" Tag="20"/>
+                                <ComboBoxItem Content="{x:Static resx:Languages.ma_jobconf_cb_dyncommands_tccol}" Width="450" Tag="21"/>
+                                <ComboBoxItem Content="{x:Static resx:Languages.ma_jobconf_cb_dyncommands_yyyy}" Width="450" Tag="3"/>
+                                <ComboBoxItem Content="{x:Static resx:Languages.ma_jobconf_cb_dyncommands_yy}" Width="450" Tag="4"/>
+                                <ComboBoxItem Content="{x:Static resx:Languages.ma_jobconf_cb_dyncommands_mm}" Width="450" Tag="5"/>
+                                <ComboBoxItem Content="{x:Static resx:Languages.ma_jobconf_cb_dyncommands_dd}" Width="450" Tag="6"/>
+                                <ComboBoxItem Content="{x:Static resx:Languages.ma_jobconf_cb_dyncommands_fd}" Width="450" Tag="24"/>
+                                <ComboBoxItem Content="{x:Static resx:Languages.ma_jobconf_cb_dyncommands_ld}" Width="450" Tag="25"/>
+                                <ComboBoxItem Content="{x:Static resx:Languages.ma_jobconf_cb_dyncommands_hh}" Width="450" Tag="7"/>
+                                <ComboBoxItem Content="{x:Static resx:Languages.ma_jobconf_cb_dyncommands_mmm}" Width="450" Tag="8"/>
+                                <ComboBoxItem Content="{x:Static resx:Languages.ma_jobconf_cb_dyncommands_ss}" Width="450" Tag="9"/>
+                                <ComboBoxItem Content="{x:Static resx:Languages.ma_jobconf_cb_dyncommands_ww}" Width="450" Tag="18"/>
+                                <ComboBoxItem Content="{x:Static resx:Languages.ma_jobconf_cb_dyncommands_dtts}" Width="450" Tag="10"/>
+                                <ComboBoxItem Content="{x:Static resx:Languages.ma_jobconf_cb_dyncommands_dttsmilli}" Width="450" Tag="11"/>
+                                <ComboBoxItem Content="{x:Static resx:Languages.ma_jobconf_cb_dyncommands_lty}" Width="450" Tag="12"/>
+                                <ComboBoxItem Content="{x:Static resx:Languages.ma_jobconf_cb_dyncommands_ltm}" Width="450" Tag="13"/>
+                                <ComboBoxItem Content="{x:Static resx:Languages.ma_jobconf_cb_dyncommands_ltd}" Width="450" Tag="14"/>
+                                <ComboBoxItem Content="{x:Static resx:Languages.ma_jobconf_cb_dyncommands_ltw}" Width="450" Tag="20"/>
+                                <ComboBoxItem Content="{x:Static resx:Languages.ma_jobconf_cb_dyncommands_mty}" Width="450" Tag="15"/>
+                                <ComboBoxItem Content="{x:Static resx:Languages.ma_jobconf_cb_dyncommands_mtm}" Width="450" Tag="16"/>
+                                <ComboBoxItem Content="{x:Static resx:Languages.ma_jobconf_cb_dyncommands_mtd}" Width="450" Tag="17"/>
+                                <ComboBoxItem Content="{x:Static resx:Languages.ma_jobconf_cb_dyncommands_mtw}" Width="450" Tag="19"/>
+                            </ComboBox>
+
+                            <Label Content="{x:Static resx:Languages.ma_jobconf_lbl_sendmailfinished}"  Width="150" Height="30" Canvas.Left="10" Canvas.Top="364" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                            <TextBox x:Name="tbMailAdress" Style="{StaticResource TextBoxFlatStyle}" Height="25" Width="315" FontSize="10" Canvas.Left="160" Canvas.Top="365" MaxLength="300" MaxLines="1" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                            <Label x:Name="lbNiveauLog" Content="{x:Static resx:Languages.ma_jobconf_lbl_loglevel}"  Height="30" Width="140" Canvas.Left="10" Canvas.Top="337" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                            <Label Content="{x:Static resx:Languages.ma_jobconf_ck_nodatanoerror}" Height="25" Canvas.Left="465" Canvas.Top="335" Padding="2,0,0,0" Width="220" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Center" />
+
+                            <ComboBox x:Name="cbNoSourceDataNoError" Style="{StaticResource ComboBoxFlatStyle}"  SelectedValuePath="Tag"  Width="130" Height="25" SelectedIndex="1" Canvas.Left="690" Canvas.Top="335" HorizontalAlignment="Left" VerticalAlignment="Center">
+                                <ComboBoxItem Content="{x:Static resx:Languages.ma_jobconf_cb_nosourcenodata_01}" Width="130" Tag="0"/>
+                                <ComboBoxItem Content="{x:Static resx:Languages.ma_jobconf_cb_nosourcenodata_02}" Width="130" Tag="1"/>
+                                <ComboBoxItem Content="{x:Static resx:Languages.ma_jobconf_cb_nosourcenodata_03}" Width="130" Tag="2"/>
+                            </ComboBox>
+
+                            <ComboBox x:Name="cbNiveauLog" Style="{StaticResource ComboBoxFlatStyle}"  SelectedValuePath="Tag" Width="145" Height="25" SelectedIndex="1" Canvas.Left="160" Canvas.Top="335" HorizontalAlignment="Left" VerticalAlignment="Center">
+                                <ComboBoxItem Content="{x:Static resx:Languages.ma_jobconf_cb_loglevel_1}"  Width="180" Tag="ERRORS_ONLY"/>
+                                <ComboBoxItem Content="{x:Static resx:Languages.ma_jobconf_cb_loglevel_2}" Width="180" Tag="ERRORS_MESSAGES"/>
+                                <ComboBoxItem Content="{x:Static resx:Languages.ma_jobconf_cb_loglevel_3}" Width="180" Tag="ERRORS_MESSAGES_DETAIL"/>
+                            </ComboBox>
+                            <CheckBox x:Name="ckSqlLog" Style="{StaticResource FlatCheckBox}" Content="{x:Static resx:Languages.ma_jobconf_ck_logsql}"  Height="25" Width="125" Canvas.Left="310" Canvas.Top="335" Checked="CkSqlLog_Checked" Cursor="Hand" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                            <Button x:Name="btnOpenLogPath" Style="{StaticResource FlatButton}" Content="{x:Static resx:Languages.ma_jobconf_btn_openlogpath}" Width="160" Click="BtnOpenLogPath_Click" Height="25" Canvas.Left="665" Canvas.Top="390" HorizontalContentAlignment="Right" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+
+                            <Label Content="{x:Static resx:Languages.ma_jobconf_lbl_queryretry}"  Width="285" Height="30" Canvas.Left="485" Canvas.Top="364" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+
+                            <ComboBox x:Name="cbQueryRetry" Style="{StaticResource ComboBoxFlatStyle}"  SelectedValuePath="Tag"  Width="50" Height="25" SelectedIndex="0" Canvas.Left="770" Canvas.Top="365" HorizontalAlignment="Left" VerticalAlignment="Center">
+                                <ComboBoxItem Content="0" Width="50" Tag="0"/>
+                                <ComboBoxItem Content="1" Width="50" Tag="1"/>
+                                <ComboBoxItem Content="2" Width="50" Tag="2"/>
+                                <ComboBoxItem Content="3" Width="50" Tag="3"/>
+                                <ComboBoxItem Content="4" Width="50" Tag="4"/>
+                                <ComboBoxItem Content="5" Width="50" Tag="5"/>
+                            </ComboBox>
+
+                            <Label Content="{x:Static resx:Languages.ma_jobconf_lbl_email}" Foreground="DarkOrange"  Height="25" Width="305" FontSize="10" Canvas.Left="10" Canvas.Top="387" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                            <TextBlock x:Name="LbJobType" Canvas.Left="15" Canvas.Top="165" Width="660" Foreground="DarkOrange" Height="30" TextWrapping="Wrap" FontSize="10"/>
+
+                            <GroupBox x:Name="CanvasBorderO" Header="{x:Static resx:Languages.ma_jobconf_gb_misc}" Foreground="DarkOrange" BorderBrush="DarkOrange" Width="825" Height="120" BorderThickness="1" Canvas.Top="425" Canvas.Left="5" HorizontalAlignment="Center" VerticalAlignment="Top"></GroupBox>
+                            <CheckBox x:Name="ckJobVisibility" Style="{StaticResource FlatCheckBox}" Height="25" Content="{x:Static resx:Languages.ma_jobconf_ck_visibleclient}" Canvas.Left="15" Canvas.Top="445" IsChecked="False" Padding="2,0,0,0" Width="180" HorizontalAlignment="Center" VerticalAlignment="Top" />
+                            <CheckBox x:Name="ckSubJobAbortIfErrors" Style="{StaticResource FlatCheckBox}" Height="25" Content="{x:Static resx:Languages.ma_jobconf_ck_abortnextstep}" Canvas.Left="440" Canvas.Top="445" IsChecked="True" Padding="2,0,0,0" Width="380" Visibility="Hidden" Cursor="Hand" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                            <CheckBox x:Name="ckSubJobAbortIfNoData" Style="{StaticResource FlatCheckBox}" Height="25" Content="{x:Static resx:Languages.ma_jobconf_ck_abortnextstepnodata}" Canvas.Left="440" Canvas.Top="475" IsChecked="True" Padding="2,0,0,0" Width="380" Visibility="Hidden" Cursor="Hand" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                            <CheckBox x:Name="ckBypassPostJobOnErrors" Style="{StaticResource FlatCheckBox}" Height="25" Content="{x:Static resx:Languages.ma_jobconf_ck_bypassprepost}" Canvas.Left="15" Canvas.Top="475" IsChecked="True" Width="335" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                            <Label Content="{x:Static resx:Languages.ma_jobconf_lbl_commandline}" Height="30" Width="137" Canvas.Left="15" Canvas.Top="510" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                            <TextBox x:Name="tbJobParameterizedLaunch" Style="{StaticResource TextBoxFlatStyle}" Canvas.Left="160" Canvas.Top="509" Height="25" Width="635" MaxLines="1" MaxLength="100" IsReadOnly="True" MouseDoubleClick="TbJobParameterizedLaunch_DoubleClick" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                            <Button x:Name="btnHelpForCommandLine" Background="White" BorderThickness="1" Content="{x:Static resx:Languages.ma_jobconf_btn_helpdynparams}" Width="25" Click="BtnHelp_Click" Height="25" Canvas.Left="800" Canvas.Top="509" FontWeight="Bold"  FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                        </Canvas>
+                    </TabItem>
+
+                    <TabItem Width="150" x:Name="tbSource"  Header="{x:Static resx:Languages.ma_mnu_job_source}" Style="{StaticResource FuzibleTabItemStyle}">
+                        <Canvas x:Name="cvSource">
+
+                            <Label x:Name="lbExportDatabse" Content="{x:Static resx:Languages.ma_source_lbl_databases}" Height="30" Width="121" Canvas.Left="20" Canvas.Top="50" Visibility="Hidden" />
+
+                            <TextBox x:Name="tbDatabaseSource" Style="{StaticResource TextBoxFlatStyle}" Height="25" TextWrapping="Wrap" Text="" Width="150" MaxLength="30" Canvas.Left="310" Canvas.Top="50" Visibility="Hidden"/>
+                            <Label x:Name="lbSourcesList" Content="{x:Static resx:Languages.ma_source_lbl_choose}" Height="25" Width="128" Canvas.Left="15" Canvas.Top="15" />
+                            <ComboBox x:Name="cbConnSource" Style="{StaticResource ComboBoxFlatStyle}"  IsTextSearchEnabled="True" SelectionChanged="CbConnSource_SelectionChanged" SelectedValuePath="Tag" Width="310" Height="25" SelectedIndex="-1" Canvas.Left="150" Canvas.Top="15"></ComboBox>
+
+                            <Button x:Name="btnTestBDDExport" Style="{StaticResource FlatButton}" HorizontalContentAlignment="Left" Content="{x:Static resx:Languages.ma_source_btn_tryconnection}"  Width="360" Click="BtnTestBDDExport_Click" Height="25" Canvas.Left="465" Canvas.Top="50">
+                            </Button>
+                            <Button x:Name="btnEditBDDExport" Style="{StaticResource FlatButton}" HorizontalContentAlignment="Left" Content="{x:Static resx:Languages.ma_source_btn_editconnection}"  Width="110" Click="BtnEditBDDExport_Click" Height="25" Canvas.Left="465" Canvas.Top="15">
+                            </Button>
+                            <ComboBox x:Name="cbBDDExport" Style="{StaticResource ComboBoxFlatStyle}" SelectionChanged="CbBDDExport_SelectionChanged" SelectedValuePath="Tag" Width="155" Height="25" SelectedIndex="0" IsEditable="True" AutomationProperties.IsRowHeader="True" Canvas.Left="150" Canvas.Top="50" Visibility="Hidden"/>
+
+                            <GroupBox x:Name="CanvasBorderE" Header="{x:Static resx:Languages.ma_source_gb_shs}" Foreground="DarkOrange" BorderBrush="DarkOrange" Width="335" Height="105" BorderThickness="1" Canvas.Top="110" Canvas.Left="5"></GroupBox>
+                            <GroupBox x:Name="CanvasBorderL" Header="{x:Static resx:Languages.ma_source_gb_transform}" Foreground="DarkOrange" BorderBrush="DarkOrange" Width="460" Height="105" BorderThickness="1" Canvas.Top="110" Canvas.Left="370"></GroupBox>
+
+                            <Button x:Name="btnHelpForPivotTransform" Content="{x:Static resx:Languages.ma_source_btn_helptransform}" Click= "BtnHelp_Click" Background="White" BorderThickness="1" FontWeight="Bold"  FontSize="16" Canvas.Left="800" Canvas.Top="130" Width="25" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                            <Button x:Name="btnHelpForSHSAnalyzer" Content="{x:Static resx:Languages.ma_source_btn_helpshs}" Width="24" Click= "BtnHelp_Click" Height="25" Canvas.Left="310" Canvas.Top="155" Background="White" BorderThickness="1" FontWeight="Bold"  FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                            <ComboBox x:Name="cbFieldAnalyzerLevel" Style="{StaticResource ComboBoxFlatStyle}"  SelectedValuePath="Tag" Width="140" Height="25" SelectedIndex="0" Canvas.Left="157" Canvas.Top="155" FontSize="10">
+                                <ComboBoxItem Content="{x:Static resx:Languages.ma_source_cb_shs_01}" HorizontalAlignment="Left" Width="160" Tag="HIGH_PRECISION"/>
+                                <ComboBoxItem Content="{x:Static resx:Languages.ma_source_cb_shs_05}" HorizontalAlignment="Left" Width="160" Tag="NORMAL_PRECISION"/>
+                                <ComboBoxItem Content="{x:Static resx:Languages.ma_source_cb_shs_10}" HorizontalAlignment="Left" Width="160" Tag="LOW_PRECISION"/>
+                                <ComboBoxItem Content="{x:Static resx:Languages.ma_source_cb_shs_20}" HorizontalAlignment="Left" Width="160" Tag="VERY_LOW_PRECISION"/>
+                            </ComboBox>
+                            <CheckBox x:Name="ckFieldAnalyzer" Style="{StaticResource FlatCheckBox}" Content="{x:Static resx:Languages.ma_source_ck_shs}" Width="180" Height="25" IsChecked="True" Canvas.Left="15" Canvas.Top="130" />
+                            <CheckBox x:Name="ckConvertHTMLEntitis" Visibility="Hidden" Style="{StaticResource FlatCheckBox}" Content="Replace HTML entities with real symbol(s)" Width="320" Height="25" IsChecked="False" Canvas.Left="15" Canvas.Top="205" />
+                            <Label Content="{x:Static resx:Languages.ma_source_lbl_shs_scanninglevel}" Height="30" Width="127" Canvas.Left="25" Canvas.Top="155" FontStyle="Italic"/>
+                            <CheckBox x:Name="ckDontTransformCSVWithInvalidHeader" Style="{StaticResource FlatCheckBox}" Height="25" Content="{x:Static resx:Languages.ma_source_ck_transformavoid}" Canvas.Left="390" Canvas.Top="160" Width="340" Cursor="Hand"/>
+                            <CheckBox x:Name="ckTransformCrossQueries" Style="{StaticResource FlatCheckBox}" Height="25" Content="{x:Static resx:Languages.ma_source_ck_transformcrossqueries}" Canvas.Left="390" Canvas.Top="185" Width="300" Cursor="Hand" FontStyle="Italic"/>
+                            <ComboBox x:Name="cbDataPivotMethod" Style="{StaticResource ComboBoxFlatStyle}"  SelectedValuePath="Tag" Width="160" Height="25" SelectedIndex="0" Canvas.Left="380" Canvas.Top="130" FontSize="10">
+                                <ComboBoxItem Content="{x:Static resx:Languages.ma_source_cb_transform_00}" HorizontalAlignment="Left" Width="160" Tag="0"/>
+                                <ComboBoxItem Content="{x:Static resx:Languages.ma_source_cb_transform_01}" HorizontalAlignment="Left" Width="160" Tag="1"/>
+                                <ComboBoxItem Content="{x:Static resx:Languages.ma_source_cb_transform_02}" HorizontalAlignment="Left" Width="160" Tag="2"/>
+                                <ComboBoxItem Content="{x:Static resx:Languages.ma_source_cb_transform_03}" HorizontalAlignment="Left" Width="160" Tag="3"/>
+                            </ComboBox>
+                            <TextBox x:Name="tbHyperfileSeparator" Style="{StaticResource TextBoxFlatStyle}"  Height="25" TextWrapping="Wrap" Text="_" Width="100" MaxLength="30" Canvas.Left="545" Canvas.Top="130"/>
+                            <CheckBox x:Name="ckTransformAddLabelValues" Style="{StaticResource FlatCheckBox}" Content="{x:Static resx:Languages.ma_source_ck_transformaddlabel}"  Height="25" Width="260" Canvas.Left="565" Canvas.Top="160" />
+
+                            <GroupBox x:Name="CanvasBorderK" Header="{x:Static resx:Languages.ma_source_gb_driver}" Foreground="DarkOrange" BorderBrush="DarkOrange" Width="825" Height="55" BorderThickness="1" Canvas.Top="225" Canvas.Left="5"></GroupBox>
+                            <ComboBox x:Name="cbDriverSource" Style="{StaticResource ComboBoxFlatStyle}"  SelectedValuePath="Tag" Width="160" Height="25" Canvas.Left="15" Canvas.Top="245" Visibility="Visible">
+                                <ComboBoxItem Content="Databases" FontWeight="Bold" IsEnabled="False" HorizontalAlignment="Left" Width="160" Tag="DB"/>
+                                <ComboBoxItem Content="  ODBC Driver" HorizontalAlignment="Left" Width="160" Tag="DB_ODBC"/>
+                                <ComboBoxItem Content="  SQL Server" HorizontalAlignment="Left" Width="160" Tag="DB_SQLSERVER"/>
+                                <ComboBoxItem Content="  Oracle" HorizontalAlignment="Left" Width="160" Tag="DB_ORACLE"/>
+                                <ComboBoxItem Content="  MySQL/MariaDB" HorizontalAlignment="Left" Width="160" Tag="DB_MYSQL"/>
+                                <ComboBoxItem Content="  Postgres" HorizontalAlignment="Left" Width="160" Tag="DB_POSTGRE"/>
+                                <ComboBoxItem Content="  SQLite" HorizontalAlignment="Left" Width="160" Tag="DB_SQLITE"/>
+                                <ComboBoxItem Content="  MS Access" HorizontalAlignment="Left" Width="160" Tag="DB_ACCESS"/>
+                                <ComboBoxItem Content="  MongoDB" HorizontalAlignment="Left" Width="160" Tag="NS_MONGODB"/>
+                                <ComboBoxItem Content="Webservices" FontWeight="Bold" IsEnabled="False" HorizontalAlignment="Left" Width="160" Tag="WS"/>
+                                <ComboBoxItem Content="  Rest API" HorizontalAlignment="Left" Width="160" Tag="WS_REST"/>
+                                <ComboBoxItem Content="Files" FontWeight="Bold" IsEnabled="False" HorizontalAlignment="Left" Width="160" Tag="FI"/>
+                                <ComboBoxItem Content="  CSV File" HorizontalAlignment="Left" Width="160" Tag="FI_CSV"/>
+                                <ComboBoxItem Content="  XLS(X) File" HorizontalAlignment="Left" Width="160" Tag="FI_XLS"/>
+                                <ComboBoxItem Content="  XML File" HorizontalAlignment="Left" Width="160" Tag="FI_XML"/>
+                                <ComboBoxItem Content="  JSON File" HorizontalAlignment="Left" Width="160" Tag="FI_JSON"/>
+                                <ComboBoxItem Content="Misc." FontWeight="Bold" IsEnabled="False" HorizontalAlignment="Left" Width="160" Tag="MBAD"/>
+                                <ComboBoxItem Content="  Mailbox" HorizontalAlignment="Left" Width="160" Tag="MB_MAIL"/>
+                                <ComboBoxItem Content="  Active Directory" HorizontalAlignment="Left" Width="160" Tag="AD_ACTIVEDIRECTORY"/>
+                            </ComboBox>
+
+                            <Slider x:Name="tbQteThreadsExport" Height="25" Width="110" Canvas.Left="685" Canvas.Top="245" Maximum="8" Minimum="1" SmallChange="1" Value="1" AutoToolTipPlacement="TopLeft" TickPlacement="BottomRight" />
+                            <Button x:Name="btnHelpForParallelQueries" Content="?" Click= "BtnHelp_Click" Background="White" BorderThickness="1" FontWeight="Bold"  FontSize="16" Canvas.Left="800" Canvas.Top="244" Width="25" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+
+                            <Label Content="{x:Static resx:Languages.ma_source_lbl_parallelqueries}"  Height="25" Width="155" FontSize="10" Canvas.Left="530" Canvas.Top="245"/>
+
+                            <GroupBox x:Name="CanvasBorderSource" Header="{x:Static resx:Languages.ma_source_gb_driver_parameters}" Foreground="DarkOrange" BorderBrush="DarkOrange" Width="825" Height="190" BorderThickness="1" Canvas.Top="285" Canvas.Left="5" HorizontalAlignment="Center" VerticalAlignment="Top"></GroupBox>
+
+                            <Canvas x:Name="CanvasNOSQLSource" Width="810" Height="160" Canvas.Top="320" Canvas.Left="5" Visibility="Hidden">
+                                <CheckBox x:Name="ckRemoveIDFromMongoDBQuery" Style="{StaticResource FlatCheckBox}" Content="{x:Static resx:Languages.ma_source_ck_mongo_removeid}"  Height="25" Width="400" Canvas.Left="15" Canvas.Top="10" />
+                            </Canvas>
+
+                            <Canvas x:Name="CanvasADSource" Width="810" Height="160" Canvas.Top="310" Canvas.Left="5" Visibility="Hidden">
+                                <Label x:Name="lbADScope" Content="{x:Static resx:Languages.ma_source_lbl_ad_scope}" Width="135" Canvas.Left="5" Canvas.Top="10"/>
+                                <ComboBox x:Name="cbADSearchScope" SelectedValuePath="Tag" HorizontalAlignment="Left" VerticalAlignment="Top" Width="140" Height="25" SelectedIndex="0" Canvas.Left="150" Canvas.Top="10" FontSize="10">
+                                    <ComboBoxItem Content="{x:Static resx:Languages.ma_source_cb_ad_scope_01}" HorizontalAlignment="Left" Width="160" Tag="AD_BASE"/>
+                                    <ComboBoxItem Content="{x:Static resx:Languages.ma_source_cb_ad_scope_02}" HorizontalAlignment="Left" Width="160" Tag="AD_ONELEVEL"/>
+                                    <ComboBoxItem Content="{x:Static resx:Languages.ma_source_cb_ad_scope_03}" HorizontalAlignment="Left" Width="160" Tag="AD_SUBTREE"/>
+                                </ComboBox>
+                            </Canvas>
+
+                            <Canvas x:Name="CanvasFileSource" Width="820" Height="60" Canvas.Top="310" Canvas.Left="5" Visibility="Hidden">
+
+                                <ComboBox x:Name="cbCSVImport" SelectedValuePath="Tag" Width="95" Height="25" SelectedIndex="0" Canvas.Left="710" Canvas.Top="5">
+                                    <ComboBoxItem Content="{x:Static resx:Languages.ma_source_cb_file_postprocess_01}" HorizontalAlignment="Left" Width="120" Tag="RIEN"/>
+                                    <ComboBoxItem Content="{x:Static resx:Languages.ma_source_cb_file_postprocess_02}" HorizontalAlignment="Left" Width="120" Tag="SUPPRIMER"/>
+                                    <ComboBoxItem Content="{x:Static resx:Languages.ma_source_cb_file_postprocess_03}" HorizontalAlignment="Left" Width="120" Tag="ZIPPER"/>
+                                    <ComboBoxItem Content="{x:Static resx:Languages.ma_source_cb_file_postprocess_04}" HorizontalAlignment="Left" Width="120" Tag="DEPLACER"/>
+                                </ComboBox>
+                                <Label x:Name="lbCSVImport" Content="{x:Static resx:Languages.ma_source_lbl_file_postprocess}" Height="25" Width="170" Canvas.Left="540" Canvas.Top="5"/>
+                                <Label Content="{x:Static resx:Languages.ma_source_lbl_file_zippedin}" FontSize="10" Height="25" Width="295" Canvas.Left="10" Canvas.Top="5"/>
+                                <TextBox x:Name="tbFilesZippedIn" Style="{StaticResource TextBoxFlatStyle}" Height="25" TextWrapping="Wrap" Text="" Width="165" MaxLength="30" Canvas.Left="305" Canvas.Top="5"/>
+                                <Button x:Name="btnZipFileBrowser" Content="{x:Static resx:Languages.ma_source_btn_file_browse}" Width="55" Click= "BtnZipFileBrowser_Click" Height="25" Canvas.Left="470"  Style="{StaticResource FlatButton}" Canvas.Top="5" />
+                                <CheckBox x:Name="ckFileRawOutput" Style="{StaticResource FlatCheckBox}" Content="{x:Static resx:Languages.ma_source_ck_rest_rawoutput}" Height="25" Width="795" Canvas.Left="10" Canvas.Top="35" Cursor="Hand" />
+
+                                <Canvas x:Name="CanvasFileSourceCSV" Width="820" Height="110" Canvas.Top="60" Canvas.Left="0" Visibility="Hidden">
+                                    <Label Content="{x:Static resx:Languages.ma_source_lbl_file_csv_rowoffset}" Width="270" Height="25" Canvas.Left="35" Canvas.Top="20"/>
+                                    <TextBox x:Name="tbCSVRowOffset" Style="{StaticResource TextBoxFlatStyle}"  Height="25" TextWrapping="Wrap" Text="0" Width="30" MaxLength="1" Canvas.Left="305" Canvas.Top="20" />
+                                    <Label Content="{x:Static resx:Languages.ma_source_lbl_file_csv_readmultiple}" Height="25" Width="295" Canvas.Left="35" Canvas.Top="50"/>
+                                    <TextBox x:Name="tbCSVSplitPattern" Style="{StaticResource TextBoxFlatStyle}"  Height="25" TextWrapping="Wrap" Text="^" Width="55" MaxLength="6" Canvas.Left="330" Canvas.Top="50" />
+                                    <Button x:Name="btnHelpForMultipleFilesAtOnce" Content="{x:Static resx:Languages.ma_source_btn_file_helpreadmultiple}" Width="24" Click= "BtnHelp_Click" Height="25" Canvas.Left="385" Canvas.Top="50" Background="White" BorderThickness="1" FontWeight="Bold"  FontSize="16"/>
+                                </Canvas>
+
+                                <Canvas x:Name="CanvasFileSourceJSON" Width="820" Height="110" Canvas.Top="60" Canvas.Left="0" Visibility="Hidden">
+
+                                </Canvas>
+
+                                <Canvas x:Name="CanvasFileSourceXLS" Width="820" Height="110" Canvas.Top="60" Canvas.Left="0" Visibility="Hidden">
+                                    <TextBox x:Name="tbXLSRowOffset" Style="{StaticResource TextBoxFlatStyle}"  Height="25" TextWrapping="Wrap" Text="0" Width="30" MaxLength="1" Canvas.Left="270" Canvas.Top="45" />
+                                    <Label x:Name="lbXSLSheetToRead" Content="{x:Static resx:Languages.ma_source_lbl_file_xls_sheetretoread}" Width="220" Height="25" Canvas.Left="35" Canvas.Top="15"/>
+                                    <TextBox x:Name="tbXSLSheetToRead" TextChanged="TbXSLSheetToRead_TextChanged" Style="{StaticResource TextBoxFlatStyle}"  Height="25" TextWrapping="Wrap" Text="1" Width="30" MaxLength="1" Canvas.Left="270" Canvas.Top="15" />
+                                    <Label x:Name="lbXLSRowOffset" Content="{x:Static resx:Languages.ma_source_lbl_file_xls_rowoffset}" Width="235" Height="25" Canvas.Left="35" Canvas.Top="45"/>
+                                    <TextBox x:Name="tbXLSPasswordSource" Style="{StaticResource TextBoxFlatStyle}"  Height="25" TextWrapping="Wrap" Text="" Width="170" MaxLength="20" Canvas.Left="130" Canvas.Top="75" />
+                                    <Label x:Name="lbXLSPasswordSource" Content="{x:Static resx:Languages.ma_source_lbl_file_xls_password}" Width="95" Height="25" Canvas.Left="35" Canvas.Top="75"/>
+                                </Canvas>
+
+                                <Canvas x:Name="CanvasFileSourceXML" Width="820" Height="110" Canvas.Top="60" Canvas.Left="0" Visibility="Hidden">
+                                </Canvas>
+
+                            </Canvas>
+
+                            <Canvas x:Name="CanvasSQLSource" Width="810" Height="160" Canvas.Top="310" Canvas.Left="5" Visibility="Hidden">
+                                <CheckBox x:Name="ckDataReader" IsChecked="True" Style="{StaticResource FlatCheckBox}" Content="{x:Static resx:Languages.ma_source_ck_sql_compatibility}"  Height="25" Width="760" Canvas.Left="5" Canvas.Top="5" Cursor="Hand" />
+                                <CheckBox x:Name="ckSQLDirectStream" Style="{StaticResource FlatCheckBox}" Content="{x:Static resx:Languages.ma_source_ck_sql_directstream}" Height="25" Width="564" Canvas.Left="30" Canvas.Top="35" Cursor="Hand" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                                <CheckBox x:Name="ckSQLTrustTargetColumns" Style="{StaticResource FlatCheckBox}" Content="{x:Static resx:Languages.ma_source_ck_sql_trusttargetcolumns}" Height="25" Width="742" Canvas.Left="30" Canvas.Top="65" Cursor="Hand" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                                <ComboBox x:Name="cbSQLDirectStreamPriority" Style="{StaticResource ComboBoxFlatStyle}"  SelectedValuePath="Tag" Width="140" Height="25" SelectedIndex="0" Canvas.Left="594" Canvas.Top="35" FontSize="10" HorizontalAlignment="Left" VerticalAlignment="Center">
+                                    <ComboBoxItem Content="{x:Static resx:Languages.ma_source_cb_direcstream_priority_01}" HorizontalAlignment="Left" Width="160" Tag="0"/>
+                                    <ComboBoxItem Content="{x:Static resx:Languages.ma_source_cb_direcstream_priority_02}" HorizontalAlignment="Left" Width="160" Tag="1"/>
+                                    <ComboBoxItem Content="{x:Static resx:Languages.ma_source_cb_direcstream_priority_03}" HorizontalAlignment="Left" Width="160" Tag="2"/>
+                                </ComboBox>
+                                <CheckBox x:Name="ckDeleteSourceSQLAfterInser" Style="{StaticResource FlatCheckBox}" Content="{x:Static resx:Languages.ma_source_ck_sql_deleteafterinsert}" Height="25" Width="600" Canvas.Left="5" Canvas.Top="95" HorizontalAlignment="Center" VerticalAlignment="Top" />
+                                <Label Content="{x:Static resx:Languages.ma_source_lbl_sql_deleteafterinsert}" Foreground="DarkOrange"  Height="25" Width="770" FontSize="10" Canvas.Left="30" Canvas.Top="120" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                            </Canvas>
+
+                            <Canvas x:Name="CanvasWebserviceSource" Width="810" Height="160" Canvas.Top="310" Canvas.Left="5" Visibility="Hidden">
+                                <Label Name="lbWSSQLLanguage" Content="{x:Static resx:Languages.ma_source_lbl_rest_sqlmethod}" Height="25" Width="130" Canvas.Left="30" Canvas.Top="40" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                                <ComboBox x:Name="cbWSSQLLanguage" SelectedValuePath="Tag" Width="140" Height="25" SelectedIndex="0" Canvas.Left="160" Canvas.Top="40" SelectionChanged="CbWSSQLLanguage_SelectionChanged" HorizontalAlignment="Center" VerticalAlignment="Top">
+                                    <ComboBoxItem Content="Fuzible SQL" HorizontalAlignment="Left" Width="140" Tag="FUZIBLE_SQL"/>
+                                    <ComboBoxItem Content="SoQL (Salesforce)" HorizontalAlignment="Left" Width="140" Tag="SOQL"/>
+                                    <ComboBoxItem Content="NxQL (Nuxeo)" HorizontalAlignment="Left" Width="140" Tag="NXQL"/>
+                                    <ComboBoxItem Content="GraphQL" HorizontalAlignment="Left" Width="140" Tag="GRAPHQL"/>
+                                    <ComboBoxItem Content="iTop OQL" HorizontalAlignment="Left" Width="140" Tag="OQL"/>
+                                </ComboBox>
+
+                                <ComboBox x:Name="cbWSCallMethod" SelectedValuePath="Tag" Width="100" Height="25" SelectedIndex="1" Canvas.Left="160" Canvas.Top="70" HorizontalAlignment="Center" VerticalAlignment="Top" >
+                                    <ComboBoxItem Content="{x:Static resx:Languages.ma_source_cb_rest_query_01}" HorizontalAlignment="Left" Width="100" Tag="POST"/>
+                                    <ComboBoxItem Content="{x:Static resx:Languages.ma_source_cb_rest_query_02}" HorizontalAlignment="Left" Width="100" Tag="GET"/>
+                                </ComboBox>
+                                <Label Name="lbWSCallMethod" Content="{x:Static resx:Languages.ma_source_lbl_rest_querymethod}" Height="25" Width="130" Canvas.Left="30" Canvas.Top="70" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                                <Label Name ="lbWSCallBodyType" Content="{x:Static resx:Languages.ma_source_lbl_rest_bodysentas}" Height="25" Width="130" Canvas.Left="30" Canvas.Top="100" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                                <ComboBox x:Name="cbWSCallBodyType" SelectedValuePath="Tag" Width="100" Height="25" SelectedIndex="0" Canvas.Left="160" Canvas.Top="100" HorizontalAlignment="Center" VerticalAlignment="Top" >
+                                    <ComboBoxItem Content="{x:Static resx:Languages.ma_source_cb_rest_body_01}" HorizontalAlignment="Left" Width="100" Tag="RAW_JSON"/>
+                                    <ComboBoxItem Content="{x:Static resx:Languages.ma_source_cb_rest_body_02}" HorizontalAlignment="Left" Width="100" Tag="RAW_XML"/>
+                                    <ComboBoxItem Content="{x:Static resx:Languages.ma_source_cb_rest_body_03}" HorizontalAlignment="Left" Width="100" Tag="FORM_DATA"/>
+                                </ComboBox>
+                                <Label x:Name="lbWSTypeData" Content="{x:Static resx:Languages.ma_source_lbl_rest_behavior}" Height="25" Width="130" Canvas.Left="30" Canvas.Top="130" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                                <ComboBox x:Name="cbWSTypeData" SelectedValuePath="Tag" Width="290" Height="25" SelectedIndex="0" Canvas.Left="160" Canvas.Top="130" HorizontalAlignment="Left" VerticalAlignment="Center" >
+                                    <ComboBoxItem Content="{x:Static resx:Languages.ma_source_cb_typedata_standard}" HorizontalAlignment="Left" Width="290" Tag="NOTHING"/>
+                                    <ComboBoxItem Content="{x:Static resx:Languages.ma_source_cb_typedata_locked}" HorizontalAlignment="Left" Width="290" Tag="LOCKED_BY_TEMPLATE"/>
+                                    <ComboBoxItem Content="{x:Static resx:Languages.ma_source_cb_typedata_graphdrivefile}" HorizontalAlignment="Left" Width="290" Tag="GRAPH_DOWNLOAD_FILE_DRIVE"/>
+                                </ComboBox>
+                                <Button x:Name="btnHelpForAPIDataToRetrieve" Background="White" BorderThickness="1" Content="{x:Static resx:Languages.ma_jobconf_btn_helpdynparams}" Width="25" Click="BtnHelp_Click" Height="25" Canvas.Left="460" Canvas.Top="128" FontWeight="Bold"  FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+
+                                <CheckBox x:Name="ckWebserviceRawOutput" Style="{StaticResource FlatCheckBox}" Content="{x:Static resx:Languages.ma_source_ck_rest_rawoutput}" Height="25" Width="795" Canvas.Left="5" Canvas.Top="5" />
+
+                                <Canvas x:Name="CanvasWebserviceRESTSource" Width="810" Height="95" Canvas.Top="65" Canvas.Left="0" Visibility="Hidden">
+                                </Canvas>
+
+                                <Canvas x:Name="CanvasWebserviceNUXEOSource" Width="800" Height="25" Canvas.Top="135" Canvas.Left="5" Visibility="Hidden">
+                                    <Label Content="{x:Static resx:Languages.ma_source_lbl_nuxeo_endpoint}" Width="165" Height="25" Canvas.Left="25" Canvas.Top="0"/>
+                                    <TextBox x:Name="tbWSNuxeoEndPoint" Style="{StaticResource TextBoxFlatStyle}"  Height="25" TextWrapping="Wrap" Text="" Width="200" MaxLength="20" Canvas.Left="215" Canvas.Top="0" />
+                                </Canvas>
+
+                            </Canvas>
+
+                            <Canvas x:Name="CanvasMailSource" Width="810" Height="160" Canvas.Top="310" Canvas.Left="5" Visibility="Hidden">
+                                <CheckBox x:Name="ckMailGetUnreadOnly" Style="{StaticResource FlatCheckBox}" Content="{x:Static resx:Languages.ma_source_ck_mail_getunreadonly}"  Height="25" Width="304" Canvas.Left="5" Canvas.Top="0" />
+                                <Label Content="{x:Static resx:Languages.ma_source_lbl_mail_postprocess}"  Height="25" Width="135" Canvas.Left="30" Canvas.Top="30"/>
+                                <ComboBox x:Name="cbMailPostWork" Style="{StaticResource ComboBoxFlatStyle}"  SelectedValuePath="Tag" HorizontalAlignment="Left" VerticalAlignment="Top" Width="140" Height="25" SelectedIndex="0" Canvas.Left="170" Canvas.Top="30" FontSize="10">
+                                    <ComboBoxItem Content="{x:Static resx:Languages.ma_source_cb_mail_postprocess_01}" HorizontalAlignment="Left" Width="160" Tag="0"/>
+                                    <ComboBoxItem Content="{x:Static resx:Languages.ma_source_cb_mail_postprocess_02}" HorizontalAlignment="Left" Width="160" Tag="1"/>
+                                    <ComboBoxItem Content="{x:Static resx:Languages.ma_source_cb_mail_postprocess_03}" HorizontalAlignment="Left" Width="160" Tag="2"/>
+                                    <ComboBoxItem Content="{x:Static resx:Languages.ma_source_cb_mail_postprocess_04}" HorizontalAlignment="Left" Width="160" Tag="3"/>
+                                </ComboBox>
+                                <TextBox x:Name="tbMailMaxToRead" Style="{StaticResource TextBoxFlatStyle}" Height="25" TextWrapping="Wrap" Text="100"  Width="45" MaxLength="4" Canvas.Left="170" Canvas.Top="60" />
+                                <Label Content="{x:Static resx:Languages.ma_source_lbl_mail_limit}"  Height="25" Width="135" Canvas.Left="30" Canvas.Top="60"/>
+                            </Canvas>
+
+                            <GroupBox x:Name="CanvasBorderN" Header="{x:Static resx:Languages.ma_source_gb_prepostcmd}" Foreground="DarkOrange" BorderBrush="DarkOrange" Width="825" Height="75" BorderThickness="1" Canvas.Top="480" Canvas.Left="5" HorizontalAlignment="Center" VerticalAlignment="Top"></GroupBox>
+
+                            <Label Content="{x:Static resx:Languages.ma_jobconf_lbl_useothercon}" Height="25" Width="90" FontSize="10" Canvas.Left="10" Canvas.Top="503" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            <ComboBox x:Name="cbConnSourcePrePostCommand" FontSize="9" Style="{StaticResource ComboBoxFlatStyle}"  IsTextSearchEnabled="True" SelectedValuePath="Tag" Width="105" Height="20" SelectedIndex="-1" Canvas.Left="100" Canvas.Top="505" HorizontalAlignment="Left" VerticalAlignment="Center"></ComboBox>
+
+                            <Canvas x:Name="CanvasWebservicePrePostOperation" Visibility="Hidden" Canvas.Left="10" Canvas.Top="525" Width="190" Height="25">
+                                <Label x:Name="lbWSSourcePostWork" Content="{x:Static resx:Languages.ma_source_lbl_rest_postwork}" Height="25" Width="110" Canvas.Left="0" Canvas.Top="0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                                <ComboBox x:Name="cbWSSourcePostWork" SelectedValuePath="Tag" Width="140" Height="25" SelectedIndex="0" Canvas.Left="120" Canvas.Top="0" HorizontalAlignment="Left" VerticalAlignment="Center">
+                                    <ComboBoxItem Content="{x:Static resx:Languages.ma_source_ws_postprocess_01}" HorizontalAlignment="Left" Width="200" Tag="NOTHING"/>
+                                </ComboBox>
+                            </Canvas>
+
+                            <ComboBox x:Name="cbPrePostJobCommands_Source" Visibility="Hidden" Style="{StaticResource ComboBoxFlatStyle}" VerticalContentAlignment="Center" SelectedValuePath="Tag" SelectedIndex="1" Canvas.Left="15" Canvas.Top="528" Width="190" RenderTransformOrigin="0.5,0.5" Height="20" HorizontalAlignment="Center" VerticalAlignment="Top">
+                                <ComboBoxItem Content="{x:Static resx:Languages.ma_source_cb_prepost_pre}" HorizontalAlignment="Left" Width="190" Tag="PRE_JOB_COMMANDS"/>
+                                <ComboBoxItem Content="{x:Static resx:Languages.ma_source_cb_prepost_post}" HorizontalAlignment="Left" Width="190" Tag="POST_JOB_COMMANDS"/>
+                            </ComboBox>
+                            <RichTextBox x:Name="tbPostJobCommandSource" Margin="0" Visibility="Hidden" Height="44" Width="450" Canvas.Left="210" Canvas.Top="505" AcceptsReturn="True" FontSize="9" HorizontalAlignment="Center" VerticalAlignment="Top" />
+                            <Button x:Name="btnHelpForPrePostCommandsSource" Visibility="Hidden" Content="{x:Static resx:Languages.ma_source_btn_helpprepostcmd}" Click= "BtnHelp_Click" Background="White" BorderThickness="1" FontWeight="Bold"  FontSize="16" Canvas.Left="800" Canvas.Top="509" Width="25" Height="30" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                            <CheckBox x:Name="ckPreJobCommandSource_LoopThroughResult" IsChecked="False" Style="{StaticResource FlatCheckBox}" Height="30" Content="{x:Static resx:Languages.ma_prepost_loopthroughresults}" Visibility="Hidden" Canvas.Left="665" Canvas.Top="513" Width="135" Cursor="Hand" FontSize="11" Click="CkPreJobCommandSource_LoopThroughResult_Click" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+
+                        </Canvas>
+                    </TabItem>
+                    <TabItem Width="150" x:Name="tbTarget" Header="{x:Static resx:Languages.ma_mnu_job_target}" Style="{StaticResource FuzibleTabItemStyle}">
+                        <Canvas x:Name="cvTarget">
+
+                            <TextBox x:Name="tbDatabaseTarget" Style="{StaticResource TextBoxFlatStyle}" Height="25" TextWrapping="Wrap" Text="" Width="150" MaxLength="30"  Canvas.Left="310" Canvas.Top="50" Visibility="Hidden"/>
+                            <Label x:Name="lbTargetList" Content="{x:Static resx:Languages.ma_target_lbl_choose}" Height="25" Width="128" Canvas.Left="15" Canvas.Top="15" />
+
+                            <ComboBox x:Name="cbConnTarget" Style="{StaticResource ComboBoxFlatStyle}"  IsTextSearchEnabled="True" SelectionChanged="CbConnTarget_SelectionChanged" SelectedValuePath="Tag" Width="310" Height="25" SelectedIndex="-1" Canvas.Left="150" Canvas.Top="15"></ComboBox>
+
+                            <ComboBox x:Name="cbBDDImport" Style="{StaticResource ComboBoxFlatStyle}"  SelectionChanged="CbBDDImport_SelectionChanged" SelectedValuePath="Tag" Width="155" Height="25" IsEditable="True" SelectedIndex="0" Canvas.Left="150" Canvas.Top="50" Visibility="Hidden"/>
+                            <Label x:Name="lbImportDatabse" Content="{x:Static resx:Languages.ma_target_lbl_databases}"  Height="30" Width="125" Canvas.Left="20" Canvas.Top="50" Visibility="Hidden" />
+                            <Button x:Name="btnTestBDDImport" Style="{StaticResource FlatButton}" HorizontalContentAlignment="Left" Content="{x:Static resx:Languages.ma_target_btn_tryconnection}"  Width="365" Click="BtnTestBDDImport_Click" Height="25" Canvas.Left="465" Canvas.Top="50" >
+                            </Button>
+                            <Button x:Name="btnEditBDDImport" Style="{StaticResource FlatButton}" HorizontalContentAlignment="Left" Content="{x:Static resx:Languages.ma_target_btn_editconnection}"  Width="110" Click="BtnEditBDDImport_Click" Height="25" Canvas.Left="465" Canvas.Top="15" >
+                            </Button>
+                            <GroupBox x:Name="CanvasBorderH" Header="{x:Static resx:Languages.ma_target_gb_driver}" Foreground="DarkOrange" BorderBrush="DarkOrange" Width="825" Height="55" BorderThickness="1" Canvas.Top="225" Canvas.Left="5"></GroupBox>
+                            <ComboBox x:Name="cbDriverTarget" Style="{StaticResource ComboBoxFlatStyle}"  SelectedValuePath="Tag" Width="160" Height="25" Canvas.Left="15" Canvas.Top="245" Visibility="Visible">
+                                <ComboBoxItem Content="Databases" FontWeight="Bold" IsEnabled="False" HorizontalAlignment="Left" Width="160" Tag="DB"/>
+                                <ComboBoxItem Content="  ODBC Driver" HorizontalAlignment="Left" Width="160" Tag="DB_ODBC"/>
+                                <ComboBoxItem Content="  SQL Server" HorizontalAlignment="Left" Width="160" Tag="DB_SQLSERVER"/>
+                                <ComboBoxItem Content="  Oracle" HorizontalAlignment="Left" Width="160" Tag="DB_ORACLE"/>
+                                <ComboBoxItem Content="  MySQL/MariaDB" HorizontalAlignment="Left" Width="160" Tag="DB_MYSQL"/>
+                                <ComboBoxItem Content="  Postgres" HorizontalAlignment="Left" Width="160" Tag="DB_POSTGRE"/>
+                                <ComboBoxItem Content="  SQLite" HorizontalAlignment="Left" Width="160" Tag="DB_SQLITE"/>
+                                <ComboBoxItem Content="  MS Access" HorizontalAlignment="Left" Width="160" Tag="DB_ACCESS"/>
+                                <ComboBoxItem Content="  MongoDB" HorizontalAlignment="Left" Width="160" Tag="NS_MONGODB"/>
+                                <ComboBoxItem Content="Webservices" FontWeight="Bold" IsEnabled="False" HorizontalAlignment="Left" Width="160" Tag="WS"/>
+                                <ComboBoxItem Content="  Rest API" HorizontalAlignment="Left" Width="160" Tag="WS_REST"/>
+                                <ComboBoxItem Content="Files" FontWeight="Bold" IsEnabled="False" HorizontalAlignment="Left" Width="160" Tag="FI"/>
+                                <ComboBoxItem Content="  CSV File" HorizontalAlignment="Left" Width="160" Tag="FI_CSV"/>
+                                <ComboBoxItem Content="  XLS(X) File" HorizontalAlignment="Left" Width="160" Tag="FI_XLS"/>
+                                <ComboBoxItem Content="  XML File" HorizontalAlignment="Left" Width="160" Tag="FI_XML"/>
+                                <ComboBoxItem Content="  JSON File" HorizontalAlignment="Left" Width="160" Tag="FI_JSON"/>
+                                <ComboBoxItem Content="Misc." FontWeight="Bold" IsEnabled="False" HorizontalAlignment="Left" Width="160" Tag="MBAD"/>
+                                <ComboBoxItem Content="  Mailbox" HorizontalAlignment="Left" Width="160" Tag="MB_MAIL"/>
+                                <ComboBoxItem Content="  Active Directory" HorizontalAlignment="Left" Width="160" Tag="AD_ACTIVEDIRECTORY"/>
+                            </ComboBox>
+                            <CheckBox x:Name="ckTrimData" Style="{StaticResource FlatCheckBox}" Content="{x:Static resx:Languages.ma_target_ck_trimdata}" Width="245" Height="25" Canvas.Left="190" Canvas.Top="245" IsChecked="True" Cursor="Hand" />
+                            <Label x:Name="LbParallelInsertion" Content="{x:Static resx:Languages.ma_target_lbl_parallelinsert}"  Height="25" Width="100" FontSize="10" Canvas.Left="585" Canvas.Top="245"/>
+                            <Button x:Name="btnHelpForParallelInsert" Content="?" Click= "BtnHelp_Click" Background="White" BorderThickness="1" FontWeight="Bold"  FontSize="16" Canvas.Left="800" Canvas.Top="243" Width="25"/>
+                            <Slider x:Name="tbQteThreadsImport" Height="25" Width="110" Canvas.Left="685" Canvas.Top="245" Maximum="8" Minimum="1" SmallChange="1" Value="1" AutoToolTipPlacement="TopLeft" TickPlacement="BottomRight" />
+
+                            <Canvas x:Name="CanvasOptionalColumnsTarget" Width="825" Height="100" Canvas.Top="120" Canvas.Left="5" Visibility="Visible">
+                                <GroupBox x:Name="CanvasBorderD" Header="{x:Static resx:Languages.ma_target_gb_additionalcolumns}" Foreground="DarkOrange" BorderBrush="DarkOrange" Width="825" Height="100" BorderThickness="1" Canvas.Left="0" Canvas.Top="-10"/>
+                                <CheckBox x:Name="ckAddSqlRowsColumn" Style="{StaticResource FlatCheckBox}" Content="{x:Static resx:Languages.ma_target_ck_addrownum}"  Height="25" Width="270" Canvas.Left="10" Canvas.Top="10" Cursor="Hand"/>
+                                <TextBox x:Name="tbTargetAddRownum" Style="{StaticResource TextBoxFlatStyle}" FontSize="10"  Height="25" TextWrapping="Wrap" Text="ROWNUM"  Width="60" MaxLength="10" Canvas.Left="280" Canvas.Top="10" />
+
+                                <CheckBox x:Name="ckAddSqlDBNameColumn" Style="{StaticResource FlatCheckBox}" Content="{x:Static resx:Languages.ma_target_ck_adddbname}"  Height="25" Width="280" Canvas.Left="350" Canvas.Top="10" Cursor="Hand"/>
+                                <TextBox x:Name="tbTargetAddDbName" Style="{StaticResource TextBoxFlatStyle}" FontSize="10"  Height="25" TextWrapping="Wrap" Text="DBNAME"  Width="60" MaxLength="10" Canvas.Left="630" Canvas.Top="10" />
+
+                                <CheckBox x:Name="ckAddSqlTimestampColumn" Style="{StaticResource FlatCheckBox}" Content="{x:Static resx:Languages.ma_target_ck_adddtload}"  Height="25" Width="270" Canvas.Left="10" Canvas.Top="40"/>
+                                <TextBox x:Name="tbTargetAddDtLoad" Style="{StaticResource TextBoxFlatStyle}" FontSize="10"  Height="25" TextWrapping="Wrap" Text="DTLOAD"  Width="60" MaxLength="10" Canvas.Left="280" Canvas.Top="40" />
+
+                                <Label x:Name="lbDynamicParamToAddInTable" Content="{x:Static resx:Languages.ma_target_ck_addcustomcol}" FontSize="10" Width="210" Height="50" Canvas.Left="350" Canvas.Top="35" HorizontalContentAlignment="Right"/>
+                                <TextBox x:Name="tbDynamicParamToAddInTable" Style="{StaticResource TextBoxFlatStyle}" Height="45" TextWrapping="Wrap" Text="" Width="260" MaxLength="30" Canvas.Left="560" Canvas.Top="40"/>
+                            </Canvas>
+
+                            <GroupBox x:Name="CanvasBorderTarget" Header="{x:Static resx:Languages.ma_target_gb_driver_parameters}" Foreground="DarkOrange" BorderBrush="DarkOrange" Width="825" Height="190" BorderThickness="1" Canvas.Top="285" Canvas.Left="5" HorizontalAlignment="Center" VerticalAlignment="Top"></GroupBox>
+
+                            <Label x:Name="lbRawOutput" Content="{x:Static resx:Languages.ma_target_lbl_rawfile}" Height="125" Width="795" Canvas.Left="20" Canvas.Top="330" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="16" Visibility="Hidden" />
+
+                            <Canvas x:Name="CanvasADTarget" Width="805" Height="160" Canvas.Top="310" Canvas.Left="10" Visibility="Hidden">
+                                <Label x:Name="lbADTargetProperty" Content="{x:Static resx:Languages.ma_target_lbl_ad_target_property}" Width="150" Height="30" Canvas.Left="15" Canvas.Top="5"/>
+                                <TextBox x:Name="tbADTargetProperty" Style="{StaticResource TextBoxFlatStyle}"  Height="25" TextWrapping="Wrap" Text="name" Width="100" MaxLength="20" Canvas.Left="165" Canvas.Top="5" />
+                                <Label x:Name="lbADTargetBehavior" Content="{x:Static resx:Languages.ma_target_lbl_ad_target_behavior}" Width="155" Height="30" Canvas.Left="15" Canvas.Top="40"/>
+                                <ComboBox x:Name="cbADTargetBehavior" SelectedValuePath="Tag" Width="100" Height="25" SelectedIndex="1" Canvas.Left="165" Canvas.Top="40">
+                                    <ComboBoxItem Content="{x:Static resx:Languages.ma_target_cb_ad_target_behavior_01}" HorizontalAlignment="Left" Width="100" Tag="0"/>
+                                    <ComboBoxItem Content="{x:Static resx:Languages.ma_target_cb_ad_target_behavior_02}" HorizontalAlignment="Left" Width="100" Tag="1"/>
+                                </ComboBox>
+                                <CheckBox x:Name="ckADActivateNewEntries" Style="{StaticResource FlatCheckBox}" Height="25" Content="{x:Static resx:Languages.ma_target_ck_ad_activate_entries}" Canvas.Left="15" Canvas.Top="75" IsChecked="False" Width="235" />
+                            </Canvas>
+
+                            <Canvas x:Name="CanvasFileTarget" Width="810" Height="60" Canvas.Top="310" Canvas.Left="15" Visibility="Hidden">
+
+                                <GroupBox x:Name="CanvasBorderG" Header="{x:Static resx:Languages.ma_target_gb_driver_parameters_file_behavior}" Foreground="DarkOrange" BorderBrush="DarkOrange" Width="815" Height="55" BorderThickness="1" Canvas.Top="-5" Canvas.Left="-5"></GroupBox>
+
+                                <Label x:Name="lbCSVRowsPerFile" Content="{x:Static resx:Languages.ma_target_lbl_file_rowperfile}" Width="180" Height="30" Canvas.Top="20"/>
+                                <TextBox x:Name="tbCSVRowsPerFile" Style="{StaticResource TextBoxFlatStyle}"  Height="25" TextWrapping="Wrap" Text="1000000" Width="60" MaxLength="8" Canvas.Left="183" Canvas.Top="20" />
+                                <Label Content="{x:Static resx:Languages.ma_target_lbl_file_helpscriptingoutput}" Width="255" Height="30" Canvas.Left="245" Canvas.Top="20"/>
+                                <Button x:Name="btnHelpForMultipleFilesTargetPattern" Content="{x:Static resx:Languages.ma_target_btn_file_helpscriptingoutput}" Width="25" Click="BtnHelp_Click" Height="25" Canvas.Left="502" Canvas.Top="19" Background="White" BorderThickness="1" FontWeight="Bold"  FontSize="16"/>
+                                <CheckBox x:Name="ckAppendFileCreation" Style="{StaticResource FlatCheckBox}" Height="25" Content="{x:Static resx:Languages.ma_target_ck_file_append}" Canvas.Left="544" Canvas.Top="20" IsChecked="False" Width="260" Cursor="Hand" />
+
+                                <Canvas x:Name="CanvasFileTargetCSV" Width="810" Height="100" Canvas.Top="60" Canvas.Left="0" Visibility="Hidden">
+                                    <TextBox x:Name="tbCSVSeparator" Style="{StaticResource TextBoxFlatStyle}"  Height="25" TextWrapping="Wrap" Text=";" Width="30" MaxLength="2" Canvas.Left="180" Canvas.Top="10" />
+                                    <Label x:Name="lbCSVSeparator" Content="{x:Static resx:Languages.ma_target_lbl_file_csv_separator}" Width="140" Height="25" Canvas.Left="25" Canvas.Top="10"/>
+                                    <Label x:Name="lbCSVEncoding" Content="{x:Static resx:Languages.ma_target_lbl_file_csv_encoding}" Width="140" Height="25" Canvas.Left="250" Canvas.Top="10"/>
+                                    <ComboBox x:Name="cbCSVEncoding" Style="{StaticResource ComboBoxFlatStyle}" SelectedIndex="0" SelectedValuePath="Tag" Width="100" Height="25" Canvas.Left="390" Canvas.Top="10" Visibility="Visible">
+                                        <ComboBoxItem Content="UTF-8" HorizontalAlignment="Left" Width="100" Tag="UTF8"/>
+                                        <ComboBoxItem Content="ANSI" HorizontalAlignment="Left" Width="100" Tag="ANSI"/>
+                                    </ComboBox>
+                                    <CheckBox x:Name="ckAddHeaderCSV" Style="{StaticResource FlatCheckBox}" Height="25" Content="{x:Static resx:Languages.ma_target_ck_file_csv_addheaderrow}" Canvas.Left="25" Canvas.Top="40" Width="541" IsChecked="True" />
+                                    <CheckBox x:Name="ckAddQuotesCSV" Style="{StaticResource FlatCheckBox}" Height="25" Content="{x:Static resx:Languages.ma_target_ck_file_csv_addquotes}" Canvas.Left="25" Canvas.Top="70" Width="460" IsChecked="False" />
+                                </Canvas>
+
+                                <Canvas x:Name="CanvasFileTargetXLS" Width="810" Height="110" Canvas.Top="55" Canvas.Left="0" Visibility="Hidden">
+                                    <TextBox x:Name="tbXLSPasswordTarget" Style="{StaticResource TextBoxFlatStyle}"  Height="25" TextWrapping="Wrap" Text="" Width="160" MaxLength="20" Canvas.Left="645"/>
+                                    <Label Content="{x:Static resx:Languages.ma_target_lbl_file_xls_writeoffset}" Width="175" Height="25" Canvas.Top="0"/>
+                                    <Label x:Name="lbXLSAppendDetail" Content="{x:Static resx:Languages.ma_target_lbl_file_xls_writeoffset_append}" Width="550" Height="65" Canvas.Top="20" FontStyle="Italic" FontSize="10"/>
+                                    <TextBox x:Name="tbXLSRowWriteOffset" Style="{StaticResource TextBoxFlatStyle}" Height="25" TextWrapping="Wrap" Text="0" Width="50" MaxLength="4" Canvas.Left="183" Canvas.Top="0"/>
+                                    <Label Content="{x:Static resx:Languages.ma_target_lbl_file_xls_password}" Width="135" Height="25" Canvas.Left="505" HorizontalContentAlignment="Right"/>
+                                    <CheckBox x:Name="ckAddHeaderXLS" Style="{StaticResource FlatCheckBox}" Height="25" Content="{x:Static resx:Languages.ma_target_ck_file_xls_addheaderrow}" Canvas.Top="84" Width="490" IsChecked="True" Cursor="Hand" FontSize="11" HorizontalAlignment="Center" VerticalAlignment="Top" />
+                                    <CheckBox x:Name="ckInterpretFormulaXLS" Style="{StaticResource FlatCheckBox}" Height="25" Content="{x:Static resx:Languages.ma_target_ck_file_xls_interpretformula}" Canvas.Left="501" Canvas.Top="57" Width="309" IsChecked="False" FontSize="10" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                                    <CheckBox x:Name="ckAddTitleXLS" Style="{StaticResource FlatCheckBox}" Height="25" Content="{x:Static resx:Languages.ma_target_ck_file_xls_addtitle}" Canvas.Left="501" Canvas.Top="84" Width="309" IsChecked="False" FontSize="10" HorizontalAlignment="Center" VerticalAlignment="Top" />
+                                    <Label Content="{x:Static resx:Languages.ma_target_lbl_file_xls_style}" Width="80" Height="30" Canvas.Left="560" Canvas.Top="28" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                                    <ComboBox x:Name="cbXLSStyle" SelectedValuePath="Tag" Width="100" Height="25" SelectedIndex="0" Canvas.Left="645" Canvas.Top="28" HorizontalAlignment="Center" VerticalAlignment="Top">
+                                        <ComboBoxItem Content="None" HorizontalAlignment="Left" Width="100" Tag="None"/>
+                                        <ComboBoxItem Content="Custom" HorizontalAlignment="Left" Width="100" Tag="Custom"/>
+                                        <ComboBoxItem Content="Light1" HorizontalAlignment="Left" Width="100" Tag="Light1"/>
+                                        <ComboBoxItem Content="Light2" HorizontalAlignment="Left" Width="100" Tag="Light2"/>
+                                        <ComboBoxItem Content="Light3" HorizontalAlignment="Left" Width="100" Tag="Light3"/>
+                                        <ComboBoxItem Content="Light4" HorizontalAlignment="Left" Width="100" Tag="Light4"/>
+                                        <ComboBoxItem Content="Light5" HorizontalAlignment="Left" Width="100" Tag="Light5"/>
+                                        <ComboBoxItem Content="Light6" HorizontalAlignment="Left" Width="100" Tag="Light6"/>
+                                        <ComboBoxItem Content="Light7" HorizontalAlignment="Left" Width="100" Tag="Light7"/>
+                                        <ComboBoxItem Content="Light8" HorizontalAlignment="Left" Width="100" Tag="Light8"/>
+                                        <ComboBoxItem Content="Light9" HorizontalAlignment="Left" Width="100" Tag="Light9"/>
+                                        <ComboBoxItem Content="Light10" HorizontalAlignment="Left" Width="100" Tag="Light10"/>
+                                        <ComboBoxItem Content="Light11" HorizontalAlignment="Left" Width="100" Tag="Light11"/>
+                                        <ComboBoxItem Content="Light12" HorizontalAlignment="Left" Width="100" Tag="Light12"/>
+                                        <ComboBoxItem Content="Light13" HorizontalAlignment="Left" Width="100" Tag="Light13"/>
+                                        <ComboBoxItem Content="Light14" HorizontalAlignment="Left" Width="100" Tag="Light14"/>
+                                        <ComboBoxItem Content="Light15" HorizontalAlignment="Left" Width="100" Tag="Light15"/>
+                                        <ComboBoxItem Content="Light16" HorizontalAlignment="Left" Width="100" Tag="Light16"/>
+                                        <ComboBoxItem Content="Light17" HorizontalAlignment="Left" Width="100" Tag="Light17"/>
+                                        <ComboBoxItem Content="Light18" HorizontalAlignment="Left" Width="100" Tag="Light18"/>
+                                        <ComboBoxItem Content="Light19" HorizontalAlignment="Left" Width="100" Tag="Light19"/>
+                                        <ComboBoxItem Content="Light20" HorizontalAlignment="Left" Width="100" Tag="Light20"/>
+                                        <ComboBoxItem Content="Light21" HorizontalAlignment="Left" Width="100" Tag="Light21"/>
+                                        <ComboBoxItem Content="Medium1" HorizontalAlignment="Left" Width="100" Tag="Medium1"/>
+                                        <ComboBoxItem Content="Medium2" HorizontalAlignment="Left" Width="100" Tag="Medium2"/>
+                                        <ComboBoxItem Content="Medium3" HorizontalAlignment="Left" Width="100" Tag="Medium3"/>
+                                        <ComboBoxItem Content="Medium4" HorizontalAlignment="Left" Width="100" Tag="Medium4"/>
+                                        <ComboBoxItem Content="Medium5" HorizontalAlignment="Left" Width="100" Tag="Medium5"/>
+                                        <ComboBoxItem Content="Medium6" HorizontalAlignment="Left" Width="100" Tag="Medium6"/>
+                                        <ComboBoxItem Content="Medium7" HorizontalAlignment="Left" Width="100" Tag="Medium7"/>
+                                        <ComboBoxItem Content="Medium8" HorizontalAlignment="Left" Width="100" Tag="Medium8"/>
+                                        <ComboBoxItem Content="Medium9" HorizontalAlignment="Left" Width="100" Tag="Medium9"/>
+                                        <ComboBoxItem Content="Medium10" HorizontalAlignment="Left" Width="100" Tag="Medium10"/>
+                                        <ComboBoxItem Content="Medium11" HorizontalAlignment="Left" Width="100" Tag="Medium11"/>
+                                        <ComboBoxItem Content="Medium12" HorizontalAlignment="Left" Width="100" Tag="Medium12"/>
+                                        <ComboBoxItem Content="Medium13" HorizontalAlignment="Left" Width="100" Tag="Medium13"/>
+                                        <ComboBoxItem Content="Medium14" HorizontalAlignment="Left" Width="100" Tag="Medium14"/>
+                                        <ComboBoxItem Content="Medium15" HorizontalAlignment="Left" Width="100" Tag="Medium15"/>
+                                        <ComboBoxItem Content="Medium16" HorizontalAlignment="Left" Width="100" Tag="Medium16"/>
+                                        <ComboBoxItem Content="Medium17" HorizontalAlignment="Left" Width="100" Tag="Medium17"/>
+                                        <ComboBoxItem Content="Medium18" HorizontalAlignment="Left" Width="100" Tag="Medium18"/>
+                                        <ComboBoxItem Content="Medium19" HorizontalAlignment="Left" Width="100" Tag="Medium19"/>
+                                        <ComboBoxItem Content="Medium20" HorizontalAlignment="Left" Width="100" Tag="Medium20"/>
+                                        <ComboBoxItem Content="Medium21" HorizontalAlignment="Left" Width="100" Tag="Medium21"/>
+                                        <ComboBoxItem Content="Medium22" HorizontalAlignment="Left" Width="100" Tag="Medium22"/>
+                                        <ComboBoxItem Content="Medium23" HorizontalAlignment="Left" Width="100" Tag="Medium23"/>
+                                        <ComboBoxItem Content="Medium24" HorizontalAlignment="Left" Width="100" Tag="Medium24"/>
+                                        <ComboBoxItem Content="Medium25" HorizontalAlignment="Left" Width="100" Tag="Medium25"/>
+                                        <ComboBoxItem Content="Medium26" HorizontalAlignment="Left" Width="100" Tag="Medium26"/>
+                                        <ComboBoxItem Content="Medium27" HorizontalAlignment="Left" Width="100" Tag="Medium27"/>
+                                        <ComboBoxItem Content="Medium28" HorizontalAlignment="Left" Width="100" Tag="Medium28"/>
+                                        <ComboBoxItem Content="Dark1" HorizontalAlignment="Left" Width="100" Tag="Dark1"/>
+                                        <ComboBoxItem Content="Dark2" HorizontalAlignment="Left" Width="100" Tag="Dark2"/>
+                                        <ComboBoxItem Content="Dark3" HorizontalAlignment="Left" Width="100" Tag="Dark3"/>
+                                        <ComboBoxItem Content="Dark4" HorizontalAlignment="Left" Width="100" Tag="Dark4"/>
+                                        <ComboBoxItem Content="Dark5" HorizontalAlignment="Left" Width="100" Tag="Dark5"/>
+                                        <ComboBoxItem Content="Dark6" HorizontalAlignment="Left" Width="100" Tag="Dark6"/>
+                                        <ComboBoxItem Content="Dark7" HorizontalAlignment="Left" Width="100" Tag="Dark7"/>
+                                        <ComboBoxItem Content="Dark8" HorizontalAlignment="Left" Width="100" Tag="Dark8"/>
+                                        <ComboBoxItem Content="Dark9" HorizontalAlignment="Left" Width="100" Tag="Dark9"/>
+                                        <ComboBoxItem Content="Dark10" HorizontalAlignment="Left" Width="100" Tag="Dark10"/>
+                                        <ComboBoxItem Content="Dark11" HorizontalAlignment="Left" Width="100" Tag="Dark11"/>
+                                    </ComboBox>
+                                </Canvas>
+
+                                <Canvas x:Name="CanvasFileTargetXML" Width="810" Height="100" Canvas.Top="60" Canvas.Left="0" Visibility="Hidden">
+                                    <Label Content="{x:Static resx:Languages.ma_target_lbl_file_xml_header}" Width="85" Height="30" Canvas.Left="12" Canvas.Top="5"/>
+                                    <TextBox x:Name="tbXMLHeader" Style="{StaticResource TextBoxFlatStyle}"  Height="25" TextWrapping="Wrap" Text="xml version='1.0'" Width="170" MaxLength="30" Canvas.Left="100" Canvas.Top="5" />
+                                    <Label Content="{x:Static resx:Languages.ma_target_lbl_file_xml_rowbuilder}" Width="190" Height="30" Canvas.Left="289" Canvas.Top="5"/>
+                                    <TextBox x:Name="tbXMLRowBuilder" Style="{StaticResource TextBoxFlatStyle}"  Height="25" TextWrapping="Wrap" Text="Row" Width="315" MaxLength="100" Canvas.Left="475" Canvas.Top="5" />
+                                    <Button x:Name="btnHelpForXMlRowBuilder" Content="{x:Static resx:Languages.ma_target_btn_file_xml_helprowscripter}" Click= "BtnHelp_Click" Background="White" BorderThickness="1" FontWeight="Bold"  FontSize="16" Canvas.Left="790" Width="25" Height="30"/>
+                                    <Label Content="{x:Static resx:Languages.ma_target_lbl_file_xml_writemode}" Width="140" Height="30" Canvas.Left="11" Canvas.Top="43"/>
+                                    <ComboBox x:Name="cbXMLWriteMode" SelectedValuePath="Tag" Width="430" Height="25" SelectedIndex="0" Canvas.Left="156" Canvas.Top="43">
+                                        <ComboBoxItem Content="{x:Static resx:Languages.ma_target_cb_xml_mode_01}" HorizontalAlignment="Left" Width="450" Tag="1"/>
+                                        <ComboBoxItem Content="{x:Static resx:Languages.ma_target_cb_xml_mode_02}" HorizontalAlignment="Left" Width="450" Tag="2"/>
+                                    </ComboBox>
+                                    <CheckBox x:Name="ckAddCDataXML" Style="{StaticResource FlatCheckBox}" Height="25" Content="{x:Static resx:Languages.ma_target_ck_file_xml_addcdata}" Canvas.Left="311" Canvas.Top="75" Width="510" Cursor="Hand" />
+                                    <CheckBox x:Name="ckXMLRemoveTagForEmptyValues" Style="{StaticResource FlatCheckBox}" Height="25" Content="{x:Static resx:Languages.ma_target_ck_file_xml_dontcreatetagforemptyvalues}" Canvas.Left="10" Canvas.Top="75" Width="280" />
+                                </Canvas>
+
+                                <Canvas x:Name="CanvasFileTargetJSON" Width="810" Height="100" Canvas.Top="60" Canvas.Left="0" Visibility="Hidden">
+                                    <Label Content="{x:Static resx:Languages.ma_target_lbl_file_json_header}" Width="290" Height="30" Canvas.Left="10" Canvas.Top="5"/>
+                                    <TextBox x:Name="tbJSONHeader" Style="{StaticResource TextBoxFlatStyle}"  Height="25" TextWrapping="Wrap" Text="" Width="500" MaxLength="300" Canvas.Left="300" Canvas.Top="5" />
+                                    <Label Content="{x:Static resx:Languages.ma_target_lbl_file_json_rowbuilder}" Width="150" Height="30" Canvas.Left="10" Canvas.Top="40"/>
+                                    <TextBox x:Name="tbJSONRowBuilder" Style="{StaticResource TextBoxFlatStyle}"  Height="25" TextWrapping="Wrap" Text="[JOBNAME]" Width="345" MaxLength="100" Canvas.Left="165" Canvas.Top="40" />
+                                    <Button x:Name="btnHelpForJSONRowBuilder" Content="{x:Static resx:Languages.ma_target_btn_file_json_helprowscripter}" Click= "BtnHelp_Click" Background="White" BorderThickness="1" FontWeight="Bold"  FontSize="16" Canvas.Left="510" Canvas.Top="35" Width="25" Height="30"/>
+                                </Canvas>
+
+                            </Canvas>
+
+                            <Canvas x:Name="CanvasSQLTarget" Width="815" Height="160" Canvas.Top="310" Canvas.Left="10" Visibility="Hidden">
+                                <CheckBox x:Name="ckSQLBulkCopyTarget" Style="{StaticResource FlatCheckBox}" Content="{x:Static resx:Languages.ma_target_ck_sql_bulkinsert}" Width="800" Height="25" IsChecked="False" Canvas.Left="10" Canvas.Top="35" Cursor="Hand" />
+                                <CheckBox x:Name="ckAutoTableCreation" Style="{StaticResource FlatCheckBox}" Content="{x:Static resx:Languages.ma_target_ck_sql_autotablecreation}" Width="305" Height="25" IsChecked="True" Canvas.Left="510" Canvas.Top="2" Cursor="Hand" />
+                                <CheckBox x:Name="ckBlankNull" Style="{StaticResource FlatCheckBox}" Content="{x:Static resx:Languages.ma_target_ck_sql_setnull}" Width="400" Height="25" IsChecked="True" Canvas.Left="10" Canvas.Top="135" />
+                                <ComboBox x:Name="cbDropImport" SelectedValuePath="Tag" Width="310" Height="25" SelectedIndex="1" Canvas.Left="190">
+                                    <ComboBoxItem Content="{x:Static resx:Languages.ma_target_cb_sql_behavior_01}" HorizontalAlignment="Left" Width="400" Tag="DROP"/>
+                                    <ComboBoxItem Content="{x:Static resx:Languages.ma_target_cb_sql_behavior_02}" HorizontalAlignment="Left" Width="400" Tag="TRUNCATE"/>
+                                    <ComboBoxItem Content="{x:Static resx:Languages.ma_target_cb_sql_behavior_03}" HorizontalAlignment="Left" Width="400" Tag="FULL_DELETE"/>
+                                    <ComboBoxItem Content="{x:Static resx:Languages.ma_target_cb_sql_behavior_04}" HorizontalAlignment="Left" Width="400" Tag="PARTIAL_DELETE"/>
+                                    <ComboBoxItem Content="{x:Static resx:Languages.ma_target_cb_sql_behavior_05}" HorizontalAlignment="Left" Width="400" Tag="PARTIAL_DELETE_COL_DYNPARAM"/>
+                                    <ComboBoxItem Content="{x:Static resx:Languages.ma_target_cb_sql_behavior_07}" HorizontalAlignment="Left" Width="400" Tag="PARTIAL_DELETE_COL_DBNAME"/>
+                                    <ComboBoxItem Content="{x:Static resx:Languages.ma_target_cb_sql_behavior_06}" HorizontalAlignment="Left" Width="400" Tag="NOTHING"/>
+                                </ComboBox>
+                                <Label x:Name="lbDropImport" Content="{x:Static resx:Languages.ma_target_lbl_sql_behavior}" Height="25" Width="180" Canvas.Left="10"/>
+                                <CheckBox x:Name="ckAddPkAfterCreateTable" Click="CkAddPkAfterCreateTable_Click" Style="{StaticResource FlatCheckBox}" Content="{x:Static resx:Languages.ma_target_ck_sql_createprimarykey}" Width="800" Height="25" Canvas.Left="10" Canvas.Top="60" />
+                                <CheckBox x:Name="ckAllowSchemaAlterationTarget" Click="CkAllowSchemaAlterationTarget_Click" Style="{StaticResource FlatCheckBox}" Content="{x:Static resx:Languages.ma_target_ck_sql_allowalterschema}" Width="432" Height="25" Canvas.Left="10" Canvas.Top="85" Cursor="Hand" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                                <CheckBox x:Name="ckDisableConstraintsTarget" Style="{StaticResource FlatCheckBox}" Content="{x:Static resx:Languages.ma_target_ck_sql_disableconstraints}" Width="801" Height="25" Canvas.Left="10" Canvas.Top="110" Cursor="Hand" />
+                                <ComboBox x:Name="cbSqlAlterOptions" SelectedValuePath="Tag" Width="280" Height="25" SelectedIndex="0" Canvas.Left="435" HorizontalAlignment="Left" Canvas.Top="85" VerticalAlignment="Center">
+                                    <ComboBoxItem Content="{x:Static resx:Languages.ma_target_cb_sql_alteroption_01}" HorizontalAlignment="Left" Width="400" Tag="1"/>
+                                    <ComboBoxItem Content="{x:Static resx:Languages.ma_target_cb_sql_alteroption_02}" HorizontalAlignment="Left" Width="400" Tag="2"/>
+                                    <ComboBoxItem Content="{x:Static resx:Languages.ma_target_cb_sql_alteroption_03}" HorizontalAlignment="Left" Width="400" Tag="3"/>
+                                    <ComboBoxItem Content="{x:Static resx:Languages.ma_target_cb_sql_alteroption_04}" HorizontalAlignment="Left" Width="400" Tag="4"/>
+                                    <ComboBoxItem Content="{x:Static resx:Languages.ma_target_cb_sql_alteroption_05}" HorizontalAlignment="Left" Width="400" Tag="5"/>
+                                </ComboBox>
+                            </Canvas>
+
+                            <Canvas x:Name="CanvasWebserviceTarget" Width="815" Height="175" Canvas.Top="300" Canvas.Left="10" Visibility="Hidden">
+                                <GroupBox x:Name="CanvasBorderF" Header="{x:Static resx:Languages.ma_target_gb_driver_parameters_rest_responses}" Foreground="DarkRed" BorderBrush="DarkRed" Width="795" Height="110" BorderThickness="1" Canvas.Left="10" Canvas.Top="1"/>
+                                <CheckBox x:Name="ckWSSaveResponseFile" Style="{StaticResource FlatCheckBox}" Height="25" Content="{x:Static resx:Languages.ma_target_ck_rest_saveresponses}" Canvas.Left="15" Canvas.Top="20" IsChecked="True"  Width="284" Cursor="Hand" />
+                                <Label x:Name="LbWSLogTable" Content="{x:Static resx:Languages.ma_target_lbl_ws_logtable}" Height="25" Width="255" Canvas.Left="300" Canvas.Top="20"/>
+                                <Label x:Name="LbWSLogTrackingColumns" Content="{x:Static resx:Languages.ma_target_lbl_ws_trackcolumns}" Height="25" Width="430" Canvas.Left="15" Canvas.Top="80"/>
+                                <TextBox x:Name="tbWSResponsesLogTable" Style="{StaticResource TextBoxFlatStyle}" Height="25" TextWrapping="Wrap"  Width="235" Canvas.Left="565" MaxLength="40" MaxLines="1"  Canvas.Top="20" Text="API_Log_{%YYYY%MM%DD}"/>
+                                <TextBox x:Name="tbWSReponsesTrackingColumn" Style="{StaticResource TextBoxFlatStyle}" Height="25" TextWrapping="Wrap"  Width="350" Canvas.Left="450" Canvas.Top="80" MaxLength="80" MaxLines="1" />
+                                <Label Content="{x:Static resx:Languages.ma_target_lbl_ws_stringsayssuccess}" Height="25" Width="550" Canvas.Left="15" Canvas.Top="50"/>
+                                <TextBox x:Name="tbWSSuccessString" Style="{StaticResource TextBoxFlatStyle}" Text="" Height="25" TextWrapping="Wrap" Width="235" Canvas.Left="565" MaxLength="1" MaxLines="1"  Canvas.Top="50"/>
+
+                                <Canvas x:Name="CanvasWebserviceRESTTarget" Width="815" Height="60" Canvas.Top="115" Canvas.Left="0" Visibility="Hidden">
+
+                                    <Canvas x:Name="CanvasWebserviceHttpParamsSettings" Width="815" Height="25" Canvas.Top="30" Canvas.Left="0" Visibility="Hidden" HorizontalAlignment="Center" VerticalAlignment="Top">
+                                        <Label Content="{x:Static resx:Languages.ma_target_lbl_rest_columnoffset}" Height="25" Width="305" Canvas.Left="475" Canvas.Top="0"/>
+                                        <TextBox x:Name="tbWSColumnsSendOffset" Style="{StaticResource TextBoxFlatStyle}" Text="0" Height="25" TextWrapping="Wrap" Width="30" Canvas.Left="780" Canvas.Top="0" MaxLength="1" MaxLines="1" />
+
+                                        <CheckBox x:Name="ckWSFormatURLInUpper" Style="{StaticResource FlatCheckBox}" Height="25" Content="{x:Static resx:Languages.ma_target_ck_rest_formatinupper}" Canvas.Left="10"  Width="200" Canvas.Top="0" />
+                                        <CheckBox x:Name="ckWSDontSendEmptyValues" Style="{StaticResource FlatCheckBox}" Height="25" Content="{x:Static resx:Languages.ma_target_ck_rest_dontsendemptyvalues}" Canvas.Left="210"  Width="210" Canvas.Top="0" />
+                                    </Canvas>
+                                    <Canvas x:Name="CanvasWebserviceHttpParamsSpecial" Width="815" Height="25" Canvas.Top="30" Canvas.Left="0" Visibility="Hidden" HorizontalAlignment="Center" VerticalAlignment="Top">
+                                        <Label Content="{x:Static resx:Languages.ma_target_lbl_rest_specialhttpparams}" HorizontalContentAlignment="Right" Height="25" Width="365" Canvas.Left="10" Canvas.Top="0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                                        <TextBox x:Name="tbWSSpecialHttpParams" Style="{StaticResource TextBoxFlatStyle}" Text="0" Height="25" TextWrapping="Wrap" Width="440" Canvas.Left="375" Canvas.Top="0" MaxLength="400" MaxLines="1" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                                    </Canvas>
+
+                                    <ComboBox x:Name="cbWSCallMethodTarget" SelectedValuePath="Tag" Width="70" Height="25" SelectedIndex="1" Canvas.Left="120">
+                                        <ComboBoxItem Content="{x:Static resx:Languages.ma_target_cb_rest_callmethod_01}" HorizontalAlignment="Left" Width="100" Tag="POST"/>
+                                        <ComboBoxItem Content="{x:Static resx:Languages.ma_target_cb_rest_callmethod_02}" HorizontalAlignment="Left" Width="100" Tag="PUT"/>
+                                        <ComboBoxItem Content="{x:Static resx:Languages.ma_target_cb_rest_callmethod_03}" HorizontalAlignment="Left" Width="100" Tag="DELETE"/>
+                                        <ComboBoxItem Content="{x:Static resx:Languages.ma_target_cb_rest_callmethod_04}" HorizontalAlignment="Left" Width="100" Tag="PATCH"/>
+                                    </ComboBox>
+                                    <Label Content="{x:Static resx:Languages.ma_target_lbl_rest_callmethod}" Height="25" Width="110" Canvas.Left="10"/>
+                                    <ComboBox x:Name="cbWSContentTypeTarget" SelectedValuePath="Tag" Width="180" Height="25" SelectedIndex="1" Canvas.Left="475" Canvas.Top="0">
+                                        <ComboBoxItem Content="{x:Static resx:Languages.ma_target_cb_rest_contenttype_01}" HorizontalAlignment="Left" Width="200" Tag="HTTP_PARAMS"/>
+                                        <ComboBoxItem Content="{x:Static resx:Languages.ma_target_cb_rest_contenttype_02}" HorizontalAlignment="Left" Width="200" Tag="JSON"/>
+                                        <ComboBoxItem Content="{x:Static resx:Languages.ma_target_cb_rest_contenttype_03}" HorizontalAlignment="Left" Width="200" Tag="XML"/>
+                                        <ComboBoxItem Content="{x:Static resx:Languages.ma_target_cb_rest_contenttype_04}" HorizontalAlignment="Left" Width="200" Tag="TXT"/>
+                                        <ComboBoxItem Content="{x:Static resx:Languages.ma_target_cb_rest_contenttype_05}" HorizontalAlignment="Left" Width="200" Tag="BINARY"/>
+                                    </ComboBox>
+                                    <Button x:Name="btnDefineWsContentStructure" Style="{StaticResource FlatButton}" HorizontalContentAlignment="Left" Content="{x:Static resx:Languages.ma_target_btn_editwsstructure}"  Width="150" Click="BtnDefineWsContentStructure_Click" Height="25" Canvas.Left="660" />
+                                    <Label x:Name="lbWsJsonStructure" Content="" Height="25" Width="26" Canvas.Left="780"/>
+                                    <Label Content="{x:Static resx:Languages.ma_target_lbl_rest_contenttype}"  Height="25" Width="250" Canvas.Left="225" Canvas.Top="0" HorizontalContentAlignment="Right" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                                </Canvas>
+
+                                <Canvas x:Name="CanvasWebserviceNUXEOTarget" Width="830" Height="35" Canvas.Top="140" Canvas.Left="0" Visibility="Hidden">
+                                </Canvas>
+
+                            </Canvas>
+
+                            <Canvas x:Name="CanvasMailTarget" Width="815" Height="160" Canvas.Top="310" Canvas.Left="10" Visibility="Hidden">
+                                <CheckBox x:Name="ckMailAssembleQueriesRecipient" Style="{StaticResource FlatCheckBox}" Content="{x:Static resx:Languages.ma_target_ck_mail_assemblequeries}"  Height="25" Width="420" Canvas.Left="5" Canvas.Top="5" />
+                                <Label x:Name="lbMailTargetDataFormat" Content="{x:Static resx:Languages.ma_target_lbl_mail_dataformat}"  Height="25" Width="160" Canvas.Left="5" Canvas.Top="40"/>
+                                <ComboBox x:Name="cbMailTargetDataFormat" SelectedValuePath="Tag" Width="250" Height="25" SelectedIndex="0" Canvas.Left="220" Canvas.Top="40">
+                                    <ComboBoxItem Content="{x:Static resx:Languages.ma_target_cb_mail_dataformat_01}" HorizontalAlignment="Left" Width="250" Tag="HTML_TABLE"/>
+                                    <ComboBoxItem Content="{x:Static resx:Languages.ma_target_cb_mail_dataformat_02}" HorizontalAlignment="Left" Width="250" Tag="ATT_EXCEL_H"/>
+                                    <ComboBoxItem Content="{x:Static resx:Languages.ma_target_cb_mail_dataformat_03}" HorizontalAlignment="Left" Width="250" Tag="ATT_EXCEL"/>
+                                    <ComboBoxItem Content="{x:Static resx:Languages.ma_target_cb_mail_dataformat_04}" HorizontalAlignment="Left" Width="250" Tag="ATT_CSV_H"/>
+                                    <ComboBoxItem Content="{x:Static resx:Languages.ma_target_cb_mail_dataformat_05}" HorizontalAlignment="Left" Width="250" Tag="ATT_CSV"/>
+                                </ComboBox>
+                                <Label x:Name="lbTargetMailHTMLTemplate" Content="{x:Static resx:Languages.ma_target_lbl_mail_choosetemplate}"  Height="25" Width="210" Canvas.Left="5" Canvas.Top="75"/>
+                                <Label x:Name="lbTargetMailHTMLDataKeyWord" Content="{x:Static resx:Languages.ma_target_lbl_mail_datasetkeywordidentifier}"  Height="25" Width="505" Canvas.Left="101" Canvas.Top="105" FontStyle="Italic"/>
+                                <TextBox x:Name="tbTargetMailHTMLTemplate" Style="{StaticResource TextBoxFlatStyle}" FontSize="10"  Height="25" TextWrapping="Wrap" Text=""  Width="330" MaxLength="100" Canvas.Left="220" Canvas.Top="75" />
+                                <Button x:Name="btnChooseHTMLTemplate"  Width="25" Click="BtnChooseHTMLTemplate_Click" Height="25" Canvas.Left="555" Canvas.Top="75" Background="{x:Null}">
+                                    <Button.Content>
+                                        <DockPanel>
+                                            <Image Source="pack://application:,,,/Resources/btn_loadfile.png" Height="20" />
+                                        </DockPanel>
+                                    </Button.Content>
+                                </Button>
+                                <TextBox x:Name="tbTargetMailHTMLDataKeyWord" Style="{StaticResource TextBoxFlatStyle}" FontSize="10"  Height="25" TextWrapping="Wrap" Text=""  Width="175" MaxLength="50" Canvas.Left="610" Canvas.Top="105" />
+                                <Button x:Name="btnHelpForHTMLTemplate" Content="?" Click= "BtnHelp_Click" Background="White" BorderThickness="1" FontWeight="Bold"  FontSize="16" Canvas.Left="790" Canvas.Top="103" Width="25"/>
+                            </Canvas>
+
+                            <Canvas x:Name="CanvasNOSQLTarget" Width="805" Height="160" Canvas.Top="310" Canvas.Left="10" Visibility="Hidden">
+                                <ComboBox x:Name="cbDropCollectionMongoDB" SelectedValuePath="Tag" HorizontalAlignment="Left" VerticalAlignment="Top" Width="250" Height="25" SelectedIndex="1" Canvas.Left="220" Canvas.Top="5">
+                                    <ComboBoxItem Content="{x:Static resx:Languages.ma_target_cb_mongodb_behavior_01}" HorizontalAlignment="Left" Width="250" Tag="NOTHING"/>
+                                    <ComboBoxItem Content="{x:Static resx:Languages.ma_target_cb_mongodb_behavior_02}" HorizontalAlignment="Left" Width="250" Tag="DROP"/>
+                                    <ComboBoxItem Content="{x:Static resx:Languages.ma_target_cb_mongodb_behavior_03}" HorizontalAlignment="Left" Width="250" Tag="PARTIAL_DELETE"/>
+                                    <ComboBoxItem Content="{x:Static resx:Languages.ma_target_cb_mongodb_behavior_04}" HorizontalAlignment="Left" Width="250" Tag="PARTIAL_DELETE_COL_DYNPARAM"/>
+                                </ComboBox>
+                                <Label x:Name="lbDropCollectionMongoDB" Content="{x:Static resx:Languages.ma_target_lbl_mongodb_behavior}" Height="25" Width="210" Canvas.Left="10" Canvas.Top="5"/>
+                                <CheckBox x:Name="ckAddPkAfterCreateMongoCollection" Click="CkAddPkAfterCreateTable_Click" Style="{StaticResource FlatCheckBox}" Content="{x:Static resx:Languages.ma_target_ck_mongo_createprimarykey}" Width="530" Height="25" Canvas.Left="10" Canvas.Top="35" />
+                            </Canvas>
+
+                            <GroupBox x:Name="CanvasBorderM" Header="{x:Static resx:Languages.ma_target_gb_prepostcommands}" Foreground="DarkOrange" BorderBrush="DarkOrange" Width="825" Height="75" BorderThickness="1" Canvas.Top="480" Canvas.Left="5" HorizontalAlignment="Center" VerticalAlignment="Top"></GroupBox>
+
+                            <Label Content="{x:Static resx:Languages.ma_jobconf_lbl_useothercon}" Height="25" Width="90" FontSize="10" Canvas.Left="10" Canvas.Top="503" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                            <ComboBox x:Name="cbConnTargetPrePostCommand" FontSize="9" Style="{StaticResource ComboBoxFlatStyle}"  IsTextSearchEnabled="True" SelectedValuePath="Tag" Width="105" Height="20" SelectedIndex="-1" Canvas.Left="100" Canvas.Top="505" HorizontalAlignment="Left" VerticalAlignment="Center"></ComboBox>
+
+                            <RichTextBox x:Name="tbPostJobCommandTarget" Visibility="Hidden" Margin="0" Height="44" Width="450" Canvas.Left="210" Canvas.Top="505" AcceptsReturn="True" FontSize="9" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                            <ComboBox x:Name="cbPrePostJobCommands_Target" Visibility="Hidden" Style="{StaticResource ComboBoxFlatStyle}" VerticalContentAlignment="Center" SelectedValuePath="Tag" SelectedIndex="1" Canvas.Left="15" Canvas.Top="528" Width="190" Height="20" HorizontalAlignment="Center" VerticalAlignment="Top">
+                                <ComboBoxItem Content="{x:Static resx:Languages.ma_target_cb_prepost_pre}" HorizontalAlignment="Left" Width="190" Tag="PRE_JOB_COMMANDS"/>
+                                <ComboBoxItem Content="{x:Static resx:Languages.ma_target_cb_prepost_post}" HorizontalAlignment="Left" Width="190" Tag="POST_JOB_COMMANDS"/>
+                            </ComboBox>
+                            <Button x:Name="btnHelpForPrePostCommandsTarget" Visibility="Hidden" Content="?" Click= "BtnHelp_Click" Background="White" BorderThickness="1" FontWeight="Bold"  FontSize="16" Canvas.Left="800" Canvas.Top="509" Width="25" Height="30" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                            <CheckBox x:Name="ckPreJobCommandTarget_LoopThroughResult" IsChecked="False" Style="{StaticResource FlatCheckBox}" Height="30" Content="{x:Static resx:Languages.ma_prepost_loopthroughresults}" Visibility="Hidden" Canvas.Left="665" Canvas.Top="513" Width="135" Cursor="Hand" FontSize="11" Click="CkPreJobCommandSource_LoopThroughResult_Click" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+
+                        </Canvas>
+                    </TabItem>
+                    <TabItem Width="150" x:Name="tbQueries1" Header="{x:Static resx:Languages.ma_mnu_job_queries}" Style="{StaticResource FuzibleTabItemStyle}">
+                        <TabControl x:Name="tcQueries" Margin="5,5,5,5">
+                            <TabItem x:Name="tiJobQueries" Header="{x:Static resx:Languages.ma_mnu_job_queries_jobqueries}" Style="{StaticResource FuzibleTabItemStyle}">
+                                <Canvas x:Name="cvQueries" Margin="0,0,0,0">
+                                    <Button x:Name="btnQueryFontPlus" Content="+" Width="15" Height="25" Canvas.Left="805" Canvas.Top="15" Style="{StaticResource FlatButton}" FontWeight="Bold" Click="btnQueryFontPlus_Click" FontSize="16" Foreground="Black"/>
+                                    <Button x:Name="btnQueryFontMoins" Content="-" Canvas.Left="5" Canvas.Top="15" Width="15" Height="25" Style="{StaticResource FlatButton}" FontWeight="Bold" Click="btnQueryFontMoins_Click" FontSize="16" Foreground="Black"/>
+
+                                    <RichTextBox x:Name="tbQueries" MouseMove="UIElement_MouseDown" FlowDirection="LeftToRight" PreviewMouseLeftButtonDown="TbQueries_PreviewMouseLeftButtonDown" KeyUp="RichTextBox_KeyUp" Height="430" Width="810" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible" Canvas.Left="10" Canvas.Top="40" AcceptsReturn="True" AcceptsTab="True" Block.LineHeight="2" MouseRightButtonUp="TbQueries_MouseRightButtonUp" >
+                                        <FlowDocument Name="rtbFlowDocQueries" PageWidth="5000" />
+
+                                        <RichTextBox.ToolTip>
+                                            <TextBlock>
+                                                      A query must start like this : OUTPUT:SELECT
+                                                      <LineBreak /> 
+                                                      - F5 : Show Query Analysis and Data
+                                                      <LineBreak /> 
+                                                      - Right-Click : Advanced Operations (Cross-Join, Multi-Target...)
+                                                      <LineBreak /> 
+                                                      - Tab : Intellisense Selection
+                                            </TextBlock>
+                                        </RichTextBox.ToolTip>
+                                        <RichTextBox.Background>
+                                            <VisualBrush Opacity="0.5" Stretch="Uniform">
+                                                <VisualBrush.Visual>
+                                                    <Grid Width="700" Height="400">
+                                                        <TextBlock x:Name="txtQueryBackground" Text="" 
+                                                           TextWrapping="Wrap"
+                                                               FontSize="48"
+                                                               Foreground="Gray" 
+                                                               Opacity="0.25"
+                                                               TextAlignment="Center"
+                                                               VerticalAlignment="Center"
+                                                               HorizontalAlignment="Center"/>
+                                                    </Grid>
+                                                </VisualBrush.Visual>
+                                            </VisualBrush>
+                                        </RichTextBox.Background>
+                                    </RichTextBox>
+
+                                    <Button x:Name="btnLoadDemoQuery"  Style="{StaticResource FlatButton}" Content="{x:Static resx:Languages.ma_queries_btn_showexemple}" Width="125" Click="BtnLoadDemoQuery_Click" Height="25" Canvas.Left="680" Canvas.Top="5" />
+                                    <CheckBox x:Name="ckSynchroBypassFiltersInTargetQuery" MouseMove="UIElement_MouseDown" Style="{StaticResource FlatCheckBox}" Content="{x:Static resx:Languages.ma_queries_ck_bypasswhere}"  Height="25" Width="430" Canvas.Left="5" Canvas.Top="479" ToolTip="Query filters won't be added in the target Query" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                                    <Button x:Name="btnHelpForQueries" Content="{x:Static resx:Languages.ma_queries_btn_quickhelp}" Background="White" BorderThickness="1" Width="80" Click="BtnHelp_Click" Height="25" Canvas.Left="740" Canvas.Top="470" />
+                                    <Label x:Name="lbQueryLoading" Content="{x:Static resx:Languages.ma_queries_lbl_loading}" Height="25" FontSize="9" HorizontalContentAlignment="Right" Canvas.Left="440" Canvas.Top="495" Width="380" FontStyle="Italic"/>
+                                    <Label x:Name="lbQueryAutoComplete" Content="{x:Static resx:Languages.ma_queries_lbl_howtoquery}" Height="40" VerticalContentAlignment="Top" Width="655" Canvas.Left="25" Foreground="Red" FontSize="10"/>
+                                    <ListBox Name="LbQueryTooltip" Visibility="Hidden" BorderThickness="1" ScrollViewer.VerticalScrollBarVisibility="Visible" MaxHeight="200" FontWeight="DemiBold" FontSize="9" Foreground="DarkBlue" Background="White" KeyUp="LbQueryTooltip_KeyUp" MouseDoubleClick="LbQueryTooltip_MouseDoubleClick" />
+
+                                </Canvas>
+                            </TabItem>
+                            <TabItem Header="{x:Static resx:Languages.ma_mnu_job_queries_sandbox}" Style="{StaticResource FuzibleTabItemStyle}">
+                                <Canvas x:Name="cvQueriesSandbox">
+                                    <TextBox x:Name="tbDatabaseSandbox" Style="{StaticResource TextBoxFlatStyle}" Height="25" TextWrapping="Wrap" Text="" Width="255" MaxLength="30" Canvas.Left="565" Canvas.Top="10"/>
+                                    <Label x:Name="lbSandboxDatabse" Content="{x:Static resx:Languages.ma_queries_sandbox_lbl_database}" Height="30" Width="100" Canvas.Left="460" Canvas.Top="10" />
+
+                                    <Label x:Name="lbSandboxList" Content="{x:Static resx:Languages.ma_queries_sandbox_lbl_choose}" Height="25" Width="128" Canvas.Left="10" Canvas.Top="10"/>
+                                    <ComboBox x:Name="cbConnSandbox" Style="{StaticResource ComboBoxFlatStyle}" IsTextSearchEnabled="True" SelectedValuePath="Tag" Width="310" Height="25" SelectedIndex="-1" Canvas.Left="140" Canvas.Top="10"></ComboBox>
+
+                                    <Label x:Name="lbQuerySandboxInfo" Content="{x:Static resx:Languages.ma_queries_sandbox_lbl_howtoquery}" Height="25" VerticalContentAlignment="Center" Width="800" Canvas.Left="10" Canvas.Top="40" Foreground="Red" FontSize="10"/>
+
+                                    <RichTextBox x:Name="tbQueriesSandbox" MouseMove="UIElement_MouseDown" FlowDirection="LeftToRight" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible" KeyUp="TbQueriesSandbox_KeyUp" Height="455" Width="810" Canvas.Left="10" Canvas.Top="70" AcceptsReturn="True" AcceptsTab="True" Block.LineHeight="2">
+                                        <FlowDocument Name="rtbFlowDocSandbox" PageWidth="5000" />
+                                        <RichTextBox.ToolTip>
+                                            <TextBlock>
+                                                      A query must start like this : SELECT
+                                                      <LineBreak /> 
+                                                      - F5 : Show Query Analysis and Data
+                                            </TextBlock>
+                                        </RichTextBox.ToolTip>
+                                    </RichTextBox>
+                                </Canvas>
+                            </TabItem>
+                        </TabControl>
+                    </TabItem>
+                    <TabItem  Width="150" x:Name="tbLog" Header="{x:Static resx:Languages.ma_mnu_job_logviewer}" Style="{StaticResource FuzibleTabItemStyle}">
+                        <Canvas x:Name="cvLogViewer">
+                            <ScrollViewer x:Name="scConsole" Style="{StaticResource FavsScrollViewer}" VerticalScrollBarVisibility="Visible" Height="525" Width="825" Canvas.Left="5" Canvas.Top="10">
+                                <GroupBox Foreground="DarkOrange" BorderBrush="DarkOrange" Header="Log" BorderThickness="1">
+                                    <Border Margin="5" Padding="3" BorderThickness="1" Background="Black" CornerRadius="5">
+                                        <RichTextBox x:Name="tbConsole" Block.LineHeight="2" IsReadOnly="True" Width="795" Height="480" Padding="1,1,1,1" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Background="Black" Foreground="White" FontSize="10"/>
+                                    </Border>
+                                </GroupBox>
+                            </ScrollViewer>
+                            <CheckBox x:Name="cbLogView" Style="{StaticResource FlatCheckBox}" Content="{x:Static resx:Languages.ma_logviewer_ck_viewthreads}"  Width="140" Height="25" Canvas.Left="10" Canvas.Top="533" Cursor="Hand" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                            <Button x:Name="btnCopyLog" HorizontalContentAlignment="Right" Style="{StaticResource FlatButton}" Content="{x:Static resx:Languages.ma_logviewer_btn_exportlog}"  Width="120" Height="25" Canvas.Left="710" Canvas.Top="532" Click="BtnExportLog_Click" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+
+                        </Canvas>
+                    </TabItem>
+
+                </TabControl>
+            </Canvas>
+
+        </Grid>
+    </Viewbox>
+</Window>
+    

@@ -1,0 +1,61 @@
+﻿<Window x:Class="Fuzible.JobOrchestration"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Fuzible"
+      xmlns:resx="clr-namespace:Fuzible.Languages"
+      mc:Ignorable="d"
+      KeyDown="JobOrchestration_KeyDown"
+      Title="{x:Static resx:Languages.jo_lbl_title}" ResizeMode="CanResizeWithGrip" SizeToContent="Width" Background="White" WindowStartupLocation="CenterScreen">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/FuzibleSkin.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Viewbox Stretch="Uniform">
+        <Grid Height="380" Width="580">
+
+            <GroupBox Header="{x:Static resx:Languages.jo_gb_setplanif}" Foreground="DarkOrange" BorderBrush="DarkOrange" Margin="5,10,5,5">
+                <Canvas x:Name="cvLists">
+                    <CheckBox x:Name="ckDayModel" Style="{StaticResource FlatCheckBox}" Click="CkDayModel_Click" Height="25" FontSize="7" Content="{x:Static resx:Languages.jo_ck_dow}" Canvas.Left="330" Canvas.Top="190" IsChecked="True" ToolTip="Change from a 'day of week' to a 'day of month' model" Padding="2,0,0,0" Width="130" />
+                    <Label Content="{x:Static resx:Languages.jo_lbl_description}" Height="30" Width="90" Canvas.Left="10" Canvas.Top="20"/>
+                    <TextBox x:Name="tbPlanifDescription" Style="{StaticResource TextBoxFlatStyle}" Canvas.Left="105" Canvas.Top="20" Height="25" Width="445" MaxLines="1" MaxLength="100" ToolTip="Describe the Planification Model"/>
+
+                    <Label Content="{x:Static resx:Languages.jo_lbl_minutes}" HorizontalContentAlignment="Center" Height="30" Width="100" Canvas.Top="60" Canvas.Left="10"/>
+                    <ListBox x:Name="lbFrequencyMIN" Height="120" Canvas.Left="10" Canvas.Top="90" Width="100" SelectionMode="Multiple"/>
+
+                    <Label Content="{x:Static resx:Languages.jo_lbl_hours}" HorizontalContentAlignment="Center" Height="30" Width="100" Canvas.Top="60" Canvas.Left="120"/>
+                    <ListBox x:Name="lbFrequencyHOUR" Height="120" Canvas.Left="120" Canvas.Top="90" Width="100" SelectionMode="Multiple"/>
+
+                    <Label Content="{x:Static resx:Languages.jo_lbl_days}" HorizontalContentAlignment="Center" Height="30" Width="100" Canvas.Top="60" Canvas.Left="230"/>
+                    <ListBox x:Name="lbFrequencyDAY" Height="120" Canvas.Left="230" Canvas.Top="90" Width="100" SelectionMode="Multiple"/>
+
+                    <Label Content="{x:Static resx:Languages.jo_lbl_weeks}" HorizontalContentAlignment="Center" Height="30" Width="100" Canvas.Top="60" Canvas.Left="340"/>
+                    <ListBox x:Name="lbFrequencyWEEK" Height="100" Canvas.Left="340" Canvas.Top="90" Width="100" SelectionMode="Multiple"/>
+
+                    <Label Content="{x:Static resx:Languages.jo_lbl_months}" HorizontalContentAlignment="Center" Height="30" Width="100" Canvas.Top="60" Canvas.Left="450"/>
+
+                    <ListBox x:Name="lbFrequencyMONTH" Height="120" Canvas.Left="450" Canvas.Top="90" Width="100" SelectionMode="Multiple"/>
+                    <Label Content="{x:Static resx:Languages.jo_lbl_dynparams}" Height="30" Width="140" Canvas.Top="220" Canvas.Left="10"/>
+                    <TextBox x:Name="tbDynParams" Foreground="#FF052872" FontStyle="Italic" AcceptsReturn="False" AcceptsTab="False" Height="25" Width="400" VerticalContentAlignment="Center" Canvas.Left="150" Canvas.Top="220" ToolTip="Invoke a planification model with Job's variable parameters"/>
+
+                    <Border x:Name="CanvasBorderA" BorderBrush="DarkOrange" Width="540" Height="60" BorderThickness="1" Canvas.Top="280" Canvas.Left="10"></Border>
+
+                </Canvas>
+            </GroupBox>
+
+            <Canvas x:Name="cvConf">
+                <ComboBox x:Name="cbPlanifsForJob" Style="{StaticResource ComboBoxFlatStyle}" SelectedValuePath="Tag"  Width="285" Height="25" Canvas.Left="30" Canvas.Top="320" SelectionChanged="CbPlanifsForJob_SelectionChanged"/>
+                <Button x:Name="btnSavePlanif" Style="{StaticResource FlatButton}" Click="BtnSavePlanif_Click" Content="{x:Static resx:Languages.jo_btn_save}"  Width="140" Height="25" Canvas.Left="415" Canvas.Top="310"/>
+                <Button x:Name="btnDeletePlanif" Style="{StaticResource FlatButton}" Click="BtnDeletePlanif_Click" Content="{x:Static resx:Languages.jo_btn_delete}" Width="140" Height="25" Canvas.Left="415" Canvas.Top="340"/>
+                <CheckBox x:Name="ckPlanifActive" Style="{StaticResource FlatCheckBox}" Height="30" Content="{x:Static resx:Languages.jo_ck_active}" Canvas.Left="320" Canvas.Top="320" IsChecked="True" ToolTip="Enable/Disable Planification" Padding="2,0,0,0" Width="90" />
+            </Canvas>
+
+        </Grid>
+    </Viewbox>
+</Window>

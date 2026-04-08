@@ -1,0 +1,30 @@
+﻿<Window x:Class="Fuzible.ImportJob"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Fuzible"
+        xmlns:resx="clr-namespace:Fuzible.Languages"
+        mc:Ignorable="d"
+        Title="{x:Static resx:Languages.ij_lbl_title}" ResizeMode="CanResizeWithGrip" SizeToContent="Width" Background="White" WindowStartupLocation="CenterScreen">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/FuzibleSkin.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Viewbox Stretch="Uniform">
+        <Grid Height="110" Width="510">
+            <Canvas>
+                <ComboBox x:Name="cbUsersList" Style="{StaticResource ComboBoxFlatStyle}" SelectedValuePath="Tag"  Width="180" SelectionChanged="CbUsersList_SelectionChanged" Height="25" Canvas.Left="10" Canvas.Top="10" />
+                <Button x:Name="btnLoadAnotherDB" Visibility="Hidden" Style="{StaticResource FlatButton}" Content="{x:Static resx:Languages.ij_btn_loadanotheruserspace}"  Width="210" Click="BtnLoadAnotherDB_Click" Height="25" Canvas.Left="200" Canvas.Top="10"/>
+                <ComboBox x:Name="cbINISection" Style="{StaticResource ComboBoxFlatStyle}" SelectedValuePath="Tag"  Width="335" Height="25" Canvas.Left="10" Canvas.Top="40" />
+                <Button x:Name="btnImportJob" Style="{StaticResource FlatButton}" Content="{x:Static resx:Languages.ij_btn_importparameters}"  Width="145" Click="BtnImportJob_Click" Height="25" Canvas.Left="353" Canvas.Top="40"/>
+                <Button x:Name="btnCancel" Style="{StaticResource FlatButton}" Content="{x:Static resx:Languages.ij_btn_cancel}"  Width="146" Click="BtnCancel_Click" Height="25" Canvas.Left="353" Canvas.Top="75"/>
+            </Canvas>
+        </Grid>
+    </Viewbox>
+</Window>

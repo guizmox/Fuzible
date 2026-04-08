@@ -1,0 +1,58 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<OutputType>Exe</OutputType>
+		<TargetFramework>net6.0</TargetFramework>
+		<Platforms>x64</Platforms>
+		<StartupObject>FuzibleService.Program</StartupObject>
+		<ApplicationIcon>hnet.com-image_fat.ico</ApplicationIcon>
+		<SignAssembly>false</SignAssembly>
+		<DelaySign>false</DelaySign>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+		<PlatformTarget>x64</PlatformTarget>
+		<OutputPath>..\Fuzible\bin\x64\Debug</OutputPath>
+		<DebugType>portable</DebugType>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+	  <DebugType>portable</DebugType>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <PackageReference Include="Microsoft.Data.SqlClient" Version="5.2.2" />
+	  <PackageReference Include="MongoDB.Driver" Version="3.3.0" />
+	  <PackageReference Include="System.Data.Odbc" Version="6.0.2" />
+	  <PackageReference Include="System.Data.OleDb" Version="6.0.1" />
+	  <PackageReference Include="System.DirectoryServices.AccountManagement" Version="9.0.4" />
+	  <PackageReference Include="System.Management" Version="6.0.2" />
+	  <PackageReference Include="System.Text.Encoding.CodePages" Version="9.0.4" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\FuzibleFramework\FuzibleFramework.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Update="Languages\Languages.Designer.cs">
+	    <DesignTime>True</DesignTime>
+	    <AutoGen>True</AutoGen>
+	    <DependentUpon>Languages.resx</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <EmbeddedResource Update="Languages\Languages.EN.resx">
+	    <Generator>PublicResXFileCodeGenerator</Generator>
+	  </EmbeddedResource>
+	  <EmbeddedResource Update="Languages\Languages.FR.resx">
+	    <Generator>PublicResXFileCodeGenerator</Generator>
+	  </EmbeddedResource>
+	  <EmbeddedResource Update="Languages\Languages.resx">
+	    <Generator>PublicResXFileCodeGenerator</Generator>
+	    <LastGenOutput>Languages.Designer.cs</LastGenOutput>
+	  </EmbeddedResource>
+	</ItemGroup>
+
+</Project>

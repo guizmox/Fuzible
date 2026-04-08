@@ -1,0 +1,15 @@
+﻿<!-- LoadingWindow.xaml -->
+<Window x:Name="Fuzible" x:Class="Fuzible.LoadingWindow"
+       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:resx="clr-namespace:Fuzible.Languages"
+        mc:Ignorable="d"
+        Title="Chargement en cours" Height="50" Width="200"
+        WindowStyle="None" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Label Name="lbLoading" FontSize="12" Content="{x:Static resx:Languages.ma_loadingscreen}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Label Name="lbInfo" FontSize="9" Content="" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+        </Grid>
+    </Window>

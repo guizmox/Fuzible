@@ -1,0 +1,40 @@
+﻿<Window x:Class="Fuzible.JobsOrganize"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Fuzible"
+        xmlns:resx="clr-namespace:Fuzible.Languages"
+        mc:Ignorable="d"
+        Title="{x:Static resx:Languages.oj_lbl_title}" ResizeMode="CanResizeWithGrip" SizeToContent="Width" Background="White" WindowStartupLocation="CenterScreen">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/FuzibleSkin.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Viewbox Stretch="Uniform">
+        <Grid Height="390" Width="830" >
+
+            <Canvas>
+                <GroupBox Header="{x:Static resx:Languages.oj_gb_mainjobs}" Foreground="DarkOrange" BorderBrush="DarkOrange" Canvas.Left="15" Canvas.Top="10" Width="350" Height="300">
+                    <ListBox x:Name="lbJobsList" Height="260" Canvas.Left="15" Canvas.Top="110" Width="330" SelectionChanged="LbJobsList_SelectionChanged" SelectedValuePath="Tag"/>
+                </GroupBox>
+
+                <GroupBox Header="{x:Static resx:Languages.oj_gb_subjobs}" Foreground="DarkOrange" BorderBrush="DarkOrange" Canvas.Left="380" Canvas.Top="10" Width="350" Height="300">
+                    <ListBox x:Name="lbSubJobsList" SelectionChanged="LbSubJobsList_SelectionChanged" Height="260" Canvas.Left="380" Canvas.Top="110" Width="330" SelectedValuePath="Tag"/>
+                </GroupBox>
+                <Button x:Name="btnJobToSubJob" Style="{StaticResource FlatButton}" Click="BtnJobToSubJob_Click" Content="{x:Static resx:Languages.oj_btn_moveassubjob}"  Width="190" Height="25" Canvas.Left="15" Canvas.Top="310" ToolTip="Move as Sub Job" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                <Button x:Name="btnSubJobToJob" Style="{StaticResource FlatButton}" Click="BtnSubJobToJob_Click"  Content="{x:Static resx:Languages.oj_btn_moveasmainjob}"  Width="214" Height="25" Canvas.Left="380" Canvas.Top="310" ToolTip="Move as Main Job" HorizontalAlignment="Center" VerticalAlignment="Top" Visibility="Hidden"/>
+                <Button x:Name="btnMoveSubJobUp" Style="{StaticResource FlatButton}" Click="BtnMoveSubJobUp_Click" Content="{x:Static resx:Languages.oj_btn_moveup}"  Width="80" Height="25" Canvas.Left="735" Canvas.Top="180" ToolTip="Move as Sub Job"/>
+                <Button x:Name="btnMoveSubJobDown" Style="{StaticResource FlatButton}" Click="BtnMoveSubJobDown_Click" Content="{x:Static resx:Languages.oj_btn_movedown}"  Width="80" Height="25" Canvas.Left="735" Canvas.Top="140" ToolTip="Move as Main Job"/>
+
+                <Label Content="{x:Static resx:Languages.oj_lbl_infodynparams}" Foreground="DarkOrange" HorizontalContentAlignment="Right"  Height="25" Width="422" FontSize="10" Canvas.Left="373" Canvas.Top="355"/>
+
+            </Canvas>
+        </Grid>
+    </Viewbox>
+</Window>

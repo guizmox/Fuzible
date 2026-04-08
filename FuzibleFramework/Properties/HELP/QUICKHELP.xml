@@ -1,0 +1,1243 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<helpfile>
+	<help_en>
+		<API_DATA_HELPER>
+		<Name>API DATA HELPER</Name>
+			<Content>
+				Fuzible uses generic API calls to get data. If you need to get data from complex scenarios (ie : get files from MS Graph API), it would normally require a few sub-jobs and complex programming.
+				That menu offers some 'helpers', whose aim to greatly improve the workflow. As an exemple, if you want to get files from a specific MS Teams channel, you would normally call the API, then get the download links, 
+				then download byte content from each files using those links and store in in the local database, then create the final files from byte content that has been copied to the local database. 
+				Everything can be performed by Fuzible using the standard behavior but it will be a pain to set up.
+				The helper performs all of the sub-tasks and will automatically retrieve files from a single API call.
+			</Content>
+			<Exemples>
+				I want to download all of the files from a Onedrive folder : (Source Connection is Graph API, Target Connection is a File)
+				[RAWFILE_NAME]:SELECT * FROM drives/{drive_id}/items/{item_id}/children
+				
+				-> Fuzible retrieves 2 columns : RAWFILE_NAME, which is the Filename, and RAWFILE_DATA, which is the binary data
+				Using [RAWFILE_NAME] as an output will dynamically create files with proper names. 
+				And because "RAWFILE_DATA" is detected in the Source Data, the byte content will be used to create the file(s).
+			</Exemples>
+		</API_DATA_HELPER>
+		<MAIL_HTML_TEMPLATE>
+		<Name>MAIL HTML TEMPLATE</Name>
+			<Content>
+				Fuzible creates HTML content using data retrieved from Source Queries. The default Template is quite simple, that's why you can choose a customized one.
+				In that case, Fuzible needs to know where to include the Source Query data into that Template. This is where the Keyword option stands for : 
+				
+				1/ If no keyword is specified, Fuzible will behave like this : 
+				It will take the Query Alias (ie : mymail@mail.com:select * from myCustomers as MyAlias) and try to find it in the HTML Template.
+					- If found (in the example, MyAlias), it will be replaced by the HTML code that has been produced from Query results.
+					- If not found, the results will be concatenated to the Template HTML code.
+				
+				2/ If a keyword has been specified : 
+					- Fuzible will replace that keyword by the HTML code that has been produced from Query results.
+					- If the keyword has not been found into the Template, the results will be concatenated to the Template HTML code.
+					
+				3/ Special case when using "Assemble Queries with same Recipient in a single mail" 
+				If you have multiple queries that will be merged in a single mail, the Template can be populated smartly.
+					- Your Template uses a keyword (ie : MYTABLE01) that is intended to handle results from the first Query
+					- Your Templace uses another keyword (ie : MYTABLE02) that is intended to handle results from the second Query
+				-> You can set your Queries like this : 
+					- MyMail@mail.com:SELECT * FROM MyCustomers as MYTABLE01 WHERE last_transaction = CURRENT_TIMESTAMP
+					- MyMail@mail.com:SELECT * FROM MySuppliers as MYTABLE02 WHERE last_transaction = CURRENT_TIMESTEMP
+				
+				Results from 'MyCustomers' Query will be injected into the Template by replacing 'MYTABLE01' keyword.
+				Results from 'MySuppliers' Query will be injected into the Template by replacing 'MYTABLE02' keyword.
+				
+				Practical note: if you have injected dynamic parameters recognized by Fuzible in your HTML Template (e.g.: {?1}), 
+								these will be replaced by the dynamic values of the Job !
+			</Content>
+			<Exemples>		
+			</Exemples>
+		</MAIL_HTML_TEMPLATE>
+		<PRE_COMMANDS_DONT_LOOP_RESULTS>
+			<Name>PRE_COMMANDS_DONT_LOOP_RESULTS</Name>
+			<Content>
+				If the Pre-command returns more than one entry, your Job won't be looped but results will be concatenated as soon as you set Dynamic Parameter(s) that make use of the returned data.
+				Dynamic Parameters can be added from the Job Tab.
+				-> %CS1 means that the value from the First Pre-Command executed from the Source Connection (ie : a stored procedure, a SELECT statement) will be used.
+				In case the result set contains more than one column and you want to get the value from the second one, you can specify it like this : %CS1[ColumnIndexInBase1]
+				-> %CT1 means that the value from the First Pre-Command executed from the Target Connection (ie : a stored procedure, a SELECT statement) will be used.
+				In case the result set contains more than one column and you want to get the value from the second one, you can specify it like this : %CT1[ColumnIndexInBase1]
+				
+				All of the returned rows will be aggregated in a single value.
+			</Content>
+			<Exemples>
+				My Target connection is a Mailbox (I want to send some data to a mail adress)
+				My Source is a SQL Server Connection, and my Source Pre-Command calls a Stored Procedure (ie : EXECUTE myStoredProcedure) that delivers back 3 rows and 2 columns, ie : 
+					mail01@mymail.com;1
+					mail02@mymail.com;2
+					mail03@mymail.com;3
+				- Using '%CS1' a my first Dynamic Parameter means that it will build a value from the 3 rows : 'mail01@maymail.com','mail02@mymail.com','mail03@mymail.com'
+				
+				I could write a Query like this : 
+				mymail@mail.com:SELECT * from MyReminder WHERE emailField IN {?1}
+				-> Using {?1} (First Dynamic Parameter) means that it is replaced by the value from '%CS1', in our case, the concatenated e-mails
+
+				- I can also use '%CS1[2]' as my First Dynamic Parameter and write a Query like this :
+				mymail@mail.com:SELECT * FROM MyReminder were IdPeople IN {?1}
+				-> Using {?1} (First Dynamic Parameter) means that it is replaced by the value from '%CS1[2]' (Second column), in our case, concatenated ID's ('1', '2', '3')
+			</Exemples>
+		</PRE_COMMANDS_DONT_LOOP_RESULTS>
+		<PRE_COMMANDS_LOOP_RESULTS>
+			<Name>PRE_COMMANDS_LOOP_RESULTS</Name>
+			<Content>
+				If the Pre-command returns more than one entry, your Job can be looped as many times as there are results as soon as you set Dynamic Parameter(s) that make use of the returned data.
+				Dynamic Parameters can be added from the Job Tab.
+				-> %CS1 means that the value from the First Pre-Command executed from the Source Connection (ie : a stored procedure, a SELECT statement) will be used.
+				In case the result set contains more than one column and you want to get the value from the second one, you can specify it like this : %CS1[ColumnIndexInBase1]
+				-> %CT1 means that the value from the First Pre-Command executed from the Target Connection (ie : a stored procedure, a SELECT statement) will be used.
+				In case the result set contains more than one column and you want to get the value from the second one, you can specify it like this : %CT1[ColumnIndexInBase1]
+				
+				Each Job iteration will make use of the next row that was retrieved from the Pre-Command Result Set.
+				
+				Limitation : You can't use that feature if you use multiple Pre-Commands.
+			</Content>
+			<Exemples>
+				My Target connection is a Mailbox (I want to send some data to a mail adress)
+				My Source is a SQL Server Connection, and my Source Pre-Command calls a Stored Procedure (ie : EXECUTE myStoredProcedure) that delivers back 3 rows and 2 columns, ie : 
+					mail01@mymail.com;1
+					mail02@mymail.com;2
+					mail03@mymail.com;3
+				- Using '%CS1' a my first Dynamic Parameter means that the Job will be iterated 3 times, with the following values : mail01@mymail, then mail02@mymail.com, and finally mail03@mymail.com
+				
+				I could write a Query like this : 
+				{?1}:SELECT * from MyReminder
+				-> Using {?1} (First Dynamic Parameter) means that it is replaced by the value from '%CS1', in our case, an e-mail adress.
+				And because the Job will be executed 3 times, the e-mail will dynamically change on each iteration.
+
+				- I can also use '%CS1[1]' as my First Dynamic Parameter and '%CS1[2]' as a second one.
+				I could write a Query like this : 
+				{?1}:SELECT * FROM MyReminder were IdPeople = {?2}
+				-> Using {?1} (First Dynamic Parameter) means that it is replaced by the value from '%CS1[1]' (First column), in our case, an e-mail adress.
+				-> Using {?2} (Second Dynamic Parameter) means that it is replaced by the value from '%CS1[2]' (Second column), in our case, an ID.
+			</Exemples>
+		</PRE_COMMANDS_LOOP_RESULTS>
+		<COMMAND_LINE>
+			<Name>COMMAND LINE</Name>
+			<Content>
+				This is the shell command that can be used to launch the Job without opening the application.
+				- > You can use any Orchestration tool to launch Fuzible Jobs but you can also use the internal Orchestration System.
+				Arguments :
+				1 - Userspace
+				2 - Job ID
+				3 - Password (encrypted)
+				3 - Dynamic Parameters (optional)
+			</Content>
+			<Exemples>
+			</Exemples>
+		</COMMAND_LINE>
+		<PARALLEL_QUERIES>
+			<Name>PARALLEL QUERIES</Name>
+			<Content>
+				If your Job has more than one query, you can choose to execute more than one at one.
+				Adding more threads requires more resources (CPU, RAM, Network bandwidth)
+			</Content>
+			<Exemples>
+			</Exemples>
+		</PARALLEL_QUERIES>
+		<PARALLEL_INSERT>
+			<Name>PARALLEL INSERT</Name>
+			<Content>
+				If you have a lot of rows to insert in your Target table, you can choose to perform multiple INSERT statements in parallel.
+				Adding more threads requires more resources in your Target SQL instance.
+			</Content>
+			<Exemples>
+			</Exemples>
+		</PARALLEL_INSERT>
+		<SQL_COMPATIBILITY_PARAMS>
+			<Name>SQL_COMPATIBILITY_PARAMS</Name>
+			<Content>
+				You are using an ODBC driver.
+				Some features depend on driver-specific SQL commands.
+				Although Fuzible can do without when using the connexion as a Source, using it as a target will cause issues.
+				You need to manually set the Compatibility Parameters according to the driver you're using.
+				Refer to the documentation for details of what is expected.
+			</Content>
+			<Exemples>
+				P_CREATE_PRIMARY_KEY : Used if you allow target schema alteration
+				P_CHANGE_COLUMN_ALLOW_NULL : Used if you allow target schema alteration
+				P_CHANGE_COLUMN_DISALLOW_NULL : Used if you allow target schema alteration
+				P_CREATE_COLUMN : Used if you allow target schema alteration
+				P_CHANGE_COLUMN_TYPE : Used if you allow target schema alteration
+				P_CHANGE_COLUMN_DEFAULT_VALUE : Used if you allow target schema alteration
+				P_CHANGE_COLUMN_ADD_UNIQUE : Used if you allow target schema alteration
+				P_SHRINK_TABLE : Used if you choose 'Shrink Tables' in main SQL paramters
+				P_DISABLE_TABLE_CONSTRAINTS : Used if you have to manipulate data in a table with activated foreign keys/constraints
+				P_ENABLE_TABLE_CONSTRAINTS : Used if you have to manipulate data in a table with activated foreign keys/constraints
+			</Exemples>
+		</SQL_COMPATIBILITY_PARAMS>
+		<SHS_DATA_ANALYZER>
+			<Name>SHS DATA ANALYZER</Name>
+			<Content>
+				Fuzible analyzes Source Data to optimize SQL table creation &amp; modification.
+
+				Currently Supported Data Types (for automated Table Creation) :
+				SMALLINT, INTEGER, BIGINT, FLOAT, DECIMAL, NUMERIC, CHAR, VARCHAR, TEXT, BIT, BOOLEAN, DATE, DATE, DATETIME, TIMESTAMP
+				Datatypes are automatically translated according to the SQL target driver.
+			</Content>
+			<Exemples>
+			</Exemples>
+		</SHS_DATA_ANALYZER>
+		<DATA_TRANSFORMATION>
+			<Name>DATA TRANSFORMATION</Name>
+			<Content>
+				Fuzible can perform PIVOT operations on Source Data.
+			</Content>
+			<Exemples>
+				Examples (using &amp;apos;_&amp;apos; as transformation separator)
+				Datasource columns : COLA, COLB, COLC_1, COLC_2, COLC_3, COLD
+				-&amp;gt; Output fields :
+				COLA, COLB, COLC, COLD
+				For ONE row in Source, you&amp;apos;ll get THREE rows in Target (with duplicated data in COLA, COLB, COLD columns and variable data in COLC)
+			</Exemples>
+		</DATA_TRANSFORMATION>
+		<BASIC_SCRIPT_LANGUAGE>
+			<Name>BASIC SCRIPT LANGUAGE</Name>
+			<Content>
+				Script patterns can be used anywhere : Connection Strings, Post-Job Commands, Queries, Job Description...
+
+				Scripts have to be written inside brace brackets : {MYSCRIPT}
+				- %USER : User who&amp;apos;s running the application
+				- %QUERYTARGETNAME (Applies On Connection String &amp; Multiple Files Pattern. Will be Removed for any other usage) : Target as shown on the start of each query (before the &amp;apos;:&amp;apos;)
+				- %GUID : Generates a 48 char. GUID that is specific to each session. If you restart the software, the GUID will change
+				- %RNDGEN : Generates a fixed 12 char random string (ie : a password) that is specific to each session
+				- %RNDGEN[8] : Generates a variable random string (ie : a password) with a length defined between brackets. It is also specific to each session
+				- %MM : Month (2 digits)
+				- %YY : Year (2 digits)
+				- %YYYY : Year (4 digits)
+				- %WW : Week of Year (2 digits)
+				- %DD : Day (2 digits)
+				- %HH : Hour (2 digits)
+				- %HUTC : UTC Hour (2 digits)
+				- %mm : Minute (2 digits)k
+				- %SS : Second (2 digits)
+				- %DTTS, %DTTSMILLI : Unix actual Datestamp / Timestamp
+				- &amp;lt;XM : Remove X Months to MM keyword (ex : %MM&amp;lt;2M)
+				- &amp;lt;XY : Remove X Years to YY (or YYYY) keyword (ex : %YY&amp;lt;2Y)
+				- &amp;lt;XD : Remove X Days to DD keyword (ex : %DD&amp;lt;2D)
+				- &amp;lt;XW : Remove X Weeks to WW keyword (ex : %WW&amp;lt;2W)
+				- &amp;gt;XM : Add X Months to MM keyword (ex : %MM&amp;gt;2M)
+				- &amp;gt;XY : Add X Years to YY (or YYYY) keyword (ex : %YY&amp;gt;2Y)
+				- &amp;gt;XD : Add X Days to DD keyword (ex : %DD&amp;gt;2D)
+				- &amp;gt;XW : Add X Weeks to WW keyword (ex : %WW&amp;gt;2W)
+				- ?1, ?2, ?3 ... : Those keywords will be replaced by dynamic parameters written in the textbox (separated by a &amp;apos;;&amp;apos;)
+				- %SC1, %SC2... : Those keywords will be filled with the output result from the optional Source Pre-Job Command(s)
+				- %TC1,%TC2... : Those keywords will be filled with the output result from the optional Target Pre-Job Command(s)
+			</Content>
+			<Exemples>
+				--- SOME EXAMPLES (Actual Date : 20/03/2018) ---
+				SELECT * FROM MYFILE_{%MM%YYYY}.csv -&amp;gt; SELECT * FROM MYFILE_032018.csv
+				SELECT * FROM MYFILE{%MM_%DD_%YYYY}.csv -&amp;gt; SELECT * FROM MYFILE03_20_2018.csv
+				SELECT * FROM MYFILE_{%MM%YYYY&amp;gt;3M}.csv -&amp;gt; SELECT * FROM MYFILE_062018.csv
+				SELECT * FROM MYFILE_{%MM%YYYY&amp;gt;3M&amp;gt;1Y}.csv -&amp;gt; SELECT * FROM MYFILE_062019.csv
+				SELECT * FROM MYFILE_{%DD&lt;10D}.csv -&amp;gt; SELECT * FROM MYFILE_10.csv
+				SELECT * FROM MYTABLE WHERE ID_TEST={?1} -&amp;gt; SELECT * FROM MYTABLE WHERE ID_TEST=100
+			</Exemples>
+		</BASIC_SCRIPT_LANGUAGE>
+		<RULES_FOR_MULTIPLE_FILES_EXPORT>
+			<Name>RULES FOR MULTIPLE FILES OUTPUT</Name>
+			<Content>
+				You can conditionnaly script Output filenames in your Query
+				Supported Keywords :
+				- [EXTENSION] : File Extension
+				- [QUERYALIAS] : Alias Used in the SELECT Statement (SELECT * FROM MATABLE AS QUERY =&amp;gt; QUERY
+				- [FILECOUNT] : The Filecounter when Creating the New File
+				- [ROWCOUNT] : The Rowcounter when Creating the New File
+				- [Column_Data] : Value in the selected column when Creating the New File (will remove symbols)
+			</Content>
+			<Exemples>
+				--- SOME EXAMPLES (Rows/File set to 1000, Export as CSV, Value in Col_01 at 1001 = Hello World) ---
+				- [FILECOUNT]_MYFILE_[ROWCOUNT].CSV:SELECT * FROM MyTable -&amp;gt; 2_MYFILE_1001.CSV
+				- [ROWCOUNT]-[Col_01]-MYFILE.CSV:SELECT * FROM MyTable -&amp;gt; 1001-Hello World-MYFILE.CSV
+				- Myfile.[EXTENSION]:SELECT * FROM MyTable -&amp;gt; Myfile.CSV
+			</Exemples>
+		</RULES_FOR_MULTIPLE_FILES_EXPORT>
+		<RULES_FOR_MULTIPLES_FILES_AT_ONCE>
+			<Name>RULES FOR MULTIPLES FILES AT ONCE</Name>
+			<Content>
+				Fuzible can merge multiple files as a single one if those have the same data schema and name root.
+				This can be useful if you want to avoid a lot of queries, and if you want better data analysis (Fuzible will have more rows to analyze : it will help to provide a more accurate data schema)
+				Files need to have the same data schema and the same name root.
+			</Content>
+			<Exemples>
+				--- SOME EXAMPLES --- (Query : MY_TARGET_TABLE:SELECT * FROM MYFILE)
+
+				MYFILE_001.CSV, MYFILE_002.CSV, MYFILE_003.CSV, MYFILE-004.CSV -&amp;gt; By using &amp;apos;_&amp;apos; as the separator, Fuzible will read all files starting by &amp;apos;MYFILE_&amp;apos; (and avoid &amp;apos;MYFILE-004.CSV&amp;apos; because the separator is not present in the filename)
+
+				MYFILE-*-AA.CSV, MYFILE-*-BAAAAA.CSV, MYFILE-*-78984.CSV, MYBADCSV-*-001.CSV -&amp;gt; By using &amp;apos;-*-&amp;apos; as the separator, Fuzible will read all files starting by &amp;apos;MYFILE--&amp;apos; (and avoid &amp;apos;MYBADCSV--001.CSV&amp;apos; because the naming root does not match the query)
+			</Exemples>
+		</RULES_FOR_MULTIPLES_FILES_AT_ONCE>
+		<PRE_AND_POST_JOB_COMMANDS>
+			<Name>PRE AND POST JOB COMMANDS</Name>
+			<Content>
+				You can input some manual commands to be executed before OR after the Job execution.
+				Multiple commands can be executed using the semicolon separator.
+
+				Source/Target is a Database :
+				Any SQL command(s) will be performed in the Database. You can, for example, execute a stored procedure.
+				Example : UPDATE ANYTABLE SET ANYFIELD = 1; DROP DATABASE;
+				Or make a SELECT statement :
+				Example : SELECT COUNT(*) FROM MyTable
+				(the returned value can also be exploited as a Dynamic Parameter !)
+
+				Source/Target is a File :
+				Any shell command will be performed from the Fuzible Path. You can, for exemple, call a .BAT file.
+				Example : C:\\TOOLS\\BATCHFILE.EXE /param1 /param2
+				Or call a function :
+				Example : DATE /T
+				(the returned value can also be exploited as a Dynamic Parameter !)
+
+				Source/Target is a MongoDB database :
+				Any BSON formatted raw command. It will be executed "as it" on the database.
+				Example : { drop: "myCollection" }
+				(the returned value can also be exploited as a Dynamic Parameter !)
+			</Content>
+			<Exemples>
+			</Exemples>
+		</PRE_AND_POST_JOB_COMMANDS>
+		<XML_ROW_BUILDER>
+			<Name>XML ROW BUILDER</Name>
+			<Content>
+				During XML file creation, each row must have a parent tag to define it.
+				You can script that tag using special commands
+				Supported Commands :
+
+				- [FILECOUNT] : The Filecounter when Creating the New File
+				- [ROWCOUNT] : The Rowcounter when Creating the New File
+				- [Column_Data] : Value from the indicated column
+			</Content>
+			<Exemples>
+				--- SOME EXAMPLES (Row is 1000, Value in Col_01 = Hello World) ---
+				- [ROWCOUNT]_[Col_01] : &amp;lt1000_HelloWorld&amp;gt
+				- Col_01='[Col_01]' : &amp;ltCol_01='Hello World'&amp;gt
+			</Exemples>
+		</XML_ROW_BUILDER>
+		<SOURCE_QUERIES>
+			<Name>SOURCE QUERIES</Name>
+			<Content>
+				Fuzible uses the concept of Queries for any Replication or Synchronization operation
+				Note : The contextual menu is accessible by right-clicking on your Query. That menu will be your best friend to help you during the Job creation.
+
+				- Source is a Database :
+				Any simple or advanced SELECT statement will work (SQL syntax must match the selected driver !)
+				Example : MYOUTPUTFILE.CSV:SELECT * FROM MYTABLE
+				Example 2 : MYOUTPUTFILE.CSV:SELECT COL1, COL2, CAST(COL3 AS VARCHAR) FROM MYTABLE WHERE MYFILTER = 1 AND SUBSTRING(X, 1, 3) = &amp;apos;SHS&amp;apos;
+				Example 3 : MYOUTPUTFILE.CSV:SELECT * FROM %CLI% will automatically query all tables with 'CLI' pattern (ex : client, ent_cli, cli_lig...), merge data into MYOUTPUTFILE.CSV
+				Example 4 : *.CSV:SELECT * FROM %CLI% will automatically query all tables with 'CLI' pattern (ex : client, ent_cli, cli_lig...), and create as many output files as there are tables using their respective names
+
+				- Source is a File :
+				Fuzible uses a standard SQL-like query language to read files. Load the sample Job for exemples, and read documentation for details. Query assistant will also help you to use the query language.
+				Example : MYOUTPUTSQLTABLE:SELECT * FROM MYFILE.CSV
+				Example 2 : MYOUTPUTSQLTABLE:SELECT COL1, COL2, COL3 FROM MYFILE.CSV WHERE COL4 = &amp;apos;SHS&amp;apos;
+				Example 3 : MYOUTPUTSQLTABLE:SELECT aF.COL1, aF.COL2, bF.NEWCOL FROM MYFILE.CSV as aF INNER JOIN MYFILE_2.CSV as bF ON aF.COL3 = bF.COL3 WHERE aF.COL4 = &amp;apos;SHS&amp;apos;
+				Example 4 : MYOUTPUTSQLTABLE:SELECT * FROM *cli.CSV will automatically query all CSV files ending with 'cli' pattern (ex : ent_cli, lig_cli, testcli...), merge data into MYOUTPUTSQLTABLE
+				Example 5 : MYOUTPUTSQLTABLE:SELECT * FROM cli*.* will automatically query all files (not only CSV) starting with 'cli' pattern (ex : cli_ent.csv, cli_lig.xls...), merge data into MYOUTPUTSQLTABLE
+				Example 6 : *:SELECT * FROM cli*four*.CSV will automatically query all CSV files starting with 'cli' pattern and containing 'four' pattern (ex : cli_four_001.csv, cli_four_list.csv...), and create as many output tables as there are files using their respective names
+				(Field names is what you get from the files. If there's no header, column names will be COLUMN_1, COLUMN_2... : You just have to alias them for a better namming schema)
+
+				- Source is a Mailbox :
+				Fuzible uses a standard SQL-like query language to read the mailbox. Read documentation for details. Query assistant will also help you to use the query language.
+				Example : MYOUTPUTSQLTABLE:SELECT * FROM test@test.com
+				Example 2 : MYOUTPUTSQLTABLE:SELECT * FROM test@test.com WHERE SUBJECT LIKE &amp;apos;Test&amp;apos;
+				Example 3 : MYOUTPUTSQLTABLE:SELECT BODY, SUBJECT, SENDER FROM test@test.com WHERE CONTENT LIKE &amp;apos;Test&amp;apos;
+				You can also specify the mailbox Password. If not, the password you specified in the connexion will be used :
+				Example : MYOUTPUTSQLTABLE:SELECT * from test@test.com[myPassword]
+				(Field names are Mailbox attributes. The Query Assistant will show them but you can also try a simple SELECT * [...] statement to see what you can get.)
+
+				- Source is an Active Directory Domain :
+				Fuzible uses a standard SQL queries to search data in the Active Directory. Read documentation for details. Query assistant will also help you to use the query language.
+				Example : MYOUTPUTFILE:SELECT * FROM users where samaccountname like apos;testapos;
+				Example 2 : MYOUTPUTFILE:SELECT * FROM groups
+				(Field names are AD attributes. The Query Assistant will show them but you can also try a simple SELECT * [...] statement to see what you can get.)
+
+				- Source is a Webservice :
+				Fuzible uses a standard SQL queries to parse data from a webservice object. Read documentation for details. Query assistant will also help you to use the query language.
+				Example : MYOUTPUTFILE:SELECT * FROM users/?range=0-5000;
+				Example 2 : MYOUTPUTFILE:SELECT * FROM Ticket/?order=desc as Ticket INNER JOIN RequestType/ AS Req ON Req.id = Ticket.requesttypes_id
+				(Field names are fully dependant on what you get back from the API. You can try a simple SELECT * [...] statement to see what you can get.)
+				(Please also note than any query will be concatenated with the base URL from the connexion, it means that a SELECT * from Ticket/?order=desc statement will be translated as an API call like this : http://myConnexionURL/Ticket/?order=desc)
+
+				(TARGET BEHAVIOR)
+
+				- Target is a Database :
+				Enter the table name you want to put data into.
+				Example : MYOUTPUTSQLTABLE:SELECT * FROM TEST will throw data in &amp;apos;MYOUTPUTSQLTABLE&amp;apos;
+				(Output names are scriptable. See the full documentation.)
+
+				- Target is a CSV file :
+				Enter the filename you want to insert data into.
+				Example : MYFILE.CSV:SELECT * FROM TEST will throw data in &amp;apos;MYFILE.CSV&amp;apos;
+				(Output names are scriptable. See the full documentation.)
+
+				- Target is a Webservice :
+				Enter the name of the webservice name (URL queue) you want to call and send data in.
+				Example : webService/insertData:SELECT * FROM TEST will be translated as a call to the webService/insertData URL (concatenated with the base URL from the connexion)
+
+				- Target is a Mailbox :
+				Enter the recipient mail address you want to send the source data to.
+				Example : Fuzible@gmail.com:SELECT * FROM TEST will send the e-mail to &amp;apos;Fuzible@gmail.com&amp;apos;
+				(If you want to send multiple datasets to a single person, just write multiple queries with the same recipient name. Fuzible will merge them in a single e-mail)
+
+				- Target is Active Directory :
+				Enter the object you want to copy/synchronize data in .
+				Example : USERS:SELECT * FROM MYTABLE WHERE name = apos;dupontapos;
+			</Content>
+			<Exemples>
+			</Exemples>
+		</SOURCE_QUERIES>
+		<TUTO_01>
+			<Name>TUTORIAL 01</Name>
+			<Content>
+				In this Tutorial, you'll learn how to quickly import a CSV file into a database.
+				Fuzible is based around the SQL language ; you'll query the file as you would do with a database.
+				After a few configuration steps, a query will allow you to choose the fields you want to import, and the data you want to transform and filter.
+
+				What you'll learn :
+				- Choose a Source connection and set it up according to the need
+				- Choose a Target connection and set it up according to the need
+				- Using Dynamic Parameters
+				- Using Pre/Post Job Command(s)
+				- Fuzible SQL : How to query a file like you would do with an SQL database
+				- Query Assistant, Contextual query menu
+
+				Note : The CSV file is provided with Fuzible, it's named SAMPLE.CSV, has an header and 100 rows.
+				A extract of that file :
+			</Content>
+			<Exemples>
+				id_sample;li_sample;dt_random_date;nb_random_number;li_random_string;id_group;id_ssgroup
+				1;one;23/01/2021 22:35:34;20,625;fsdnmvuxzosqhmgy;001;001
+				2;two;17/10/2020 22:35:34;14,5;ywelnymjcdsepfib;002;002
+				3;three;26/10/2020 22:35:34;26,4375;gawjbwqugugscvhq;003;003
+				4;four;05/03/2021 22:35:34;22,125;bteeadsrfvzniglw;004;004
+				5;five;27/04/2021 22:35:34;32,625;hpuivsrsdjawxzda;005;000
+			</Exemples>
+		</TUTO_01>
+		<TUTO_02>
+			<Name>TUTORIAL 02</Name>
+			<Content>
+				In this Tutorial, you'll learn how to quickly extract data from a database to a file.
+				Fuzible is based around the SQL language ; you'll query your database according to what you want to extract from it.
+				After a few configuration steps, the query will reflect what will be copied in the output file(s).
+
+				What you'll learn :
+				- Choose a Source connection and set it up according to the need
+				- Choose a Target connection and set it up according to the need
+				- Advanced features of the Dynamic Parameters
+				- Advanced usage of Pre/Port Job Command(s)
+				- Query Assistant, Contextual query menu
+				- Dynamic Target, Dual-Target Mode
+
+				Note : We'll make use of some SQL tables from the Fuzible internal SQLite Database.
+			</Content>
+			<Exemples>
+			</Exemples>
+		</TUTO_02>
+		<TUTO_03>
+			<Name>TUTORIAL 03</Name>
+			<Content>
+				In this Tutorial, you'll learn how to synchronize data between a Source and a Target.
+				This operating mode will compare data from the Source and the Target, and update the Target accordingly.
+				In contrast to the Replication mode, which is based on deletion and copy, synchronization is based on data comparison.
+				This is very useful when you need to maintain a permanent availability of your data, while updating it regularly.
+				The Source data will be taken from an Excel file. As Fuzible only works with SQL language, you will query this file like this.
+
+				What you'll learn : :
+				- Define the behavior of a synchronization job
+				- Choose a Source connection and set it up according to the need
+				- Choose a Target connection and set it up according to the need
+				- Perform a query with a "no sql" Source connexion, and see how it will be transcoded for the Target
+				- Query Assistant, Contextual query menu
+				- The LOG output, as it appears when running a synchronization Job
+
+				Note : The Excel file is provided with Fuzible, it's named SAMPLE.XLSX, and contains (on the 2nd sheet) and header and 100 rows.
+				A extract of that file :
+			</Content>
+			<Exemples>
+				sample code	sample untrimmed name	random number	sample group
+				0			rwlckqgyeivqvyae        349610			0
+				1			xqijagrgqxjgeqew        -650512			0
+				2			pmictjidwjvozcbi        -552614			0
+				3			majkrquvutwrasrt        289171			0
+				4			iowpdgzfexvsquiy        873493			0
+			</Exemples>
+		</TUTO_03>
+		<QUERY_DB>
+			<Name>QUERY DB</Name>
+			<Content>
+				You're querying a database, it means that you will be able to perform any SQL query which is compatible with the chosen DBMS :
+				Any "SELECT" statement, from the simplest to the most complex, will be accepted.
+				The Query Assistant will open punctually (in the form of a small context menu) to help you choose fields and tables.
+				You can write several queries.
+
+				Each query must be preceded by "OUTPUT:SELECT...".
+			</Content>
+			<Exemples>
+				Target is a database : MyDestinationTable:SELECT * FROM mySourceTable (Table will be created if non-existent. Otherwise, only identical fields between Source and Target will be processed)
+				Target is a CSV file : MyDestinationFile.csv:SELECT * FROM mySourceTable
+				Target is a EXCEL file : MyDestinationFile.xlsx:SELECT * FROM mySourceTable
+				Target is a XML file : MyDestinationFile.xml:SELECT * FROM mySourceTable
+				Target is a JSON file : MyDestinationFile.json:SELECT * FROM mySourceTable
+				Target is a mailbox : Email@MyProvider.com:SELECT * FROM mySourceTable
+				Target is the AD object 'users' : users:SELECT * FROM mySourceTable (Source fields names must be AD attributes)
+				Target is the AD object 'groups' : groups:SELECT * FROM mySourceTable (Source fields names must be AD attributes)
+				Target is a Webservice : /url/myWebservice:SELECT * FROM mySourceTable ("/url/myWebservice" is only the end of the URL: the root is defined in the Connection)
+			</Exemples>
+		</QUERY_DB>
+		<QUERY_FI>
+			<Name>QUERY FI</Name>
+			<Content>
+				You're querying a file using Fuzible SQL, a perfectly standard SQL language: you query files like SQL tables.
+				Any "SELECT" statement, from the simplest to the most complex will work (transformations, aggregations, joins...).
+				The Query Assistant will open punctually (in the form of a small context menu) to help you choose the syntax, the fields, the files.
+				You can write several queries.
+
+				Each query must be preceded by "OUTPUT:SELECT...".
+			</Content>
+			<Exemples>
+				Target is a database : MyDestinationTable:SELECT * FROM mySourceFile.csv (Table will be created if non-existent. Otherwise, only identical fields between Source and Target will be processed)
+				Target is a CSV file : MyDestinationFile.csv:SELECT * FROM mySourceFile.csv
+				Target is a EXCEL file : MyDestinationFile.xlsx:SELECT * FROM mySourceFile.csv
+				Target is a XML file : MyDestinationFile.xml:SELECT * FROM mySourceFile.csv
+				Target is a JSON file : MyDestinationFile.json:SELECT * FROM mySourceFile.csv
+				Target is a mailbox : Email@MyProvider.com:SELECT * FROM mySourceFile.csv
+				Target is the AD object 'users' : users:SELECT * FROM mySourceFile.csv (Source fields names must be AD attributes)
+				Target is the AD object 'groups' : groups:SELECT * FROM mySourceFile.csv (Source fields names must be AD attributes)
+				Target is a Webservice : /url/myWebservice:SELECT * FROM mySourceFile.csv ("/url/myWebservice" is only the end of the URL: the root is defined in the Connection)
+			</Exemples>
+		</QUERY_FI>
+		<QUERY_WS>
+			<Name>QUERY WS</Name>
+			<Content>
+				You're querying a REST API using Fuzible SQL, a perfectly standard SQL language: you query API's like SQL tables.
+				Any "SELECT" statement, from the simplest to the most complex will work (transformations, aggregations, joins...).
+				The Query Assistant will open punctually (in the form of a small context menu) to help you choose the syntax. On the other hand, since it is not
+				possible to determinate the fields which will be returned by the webservice, the Query Assistant will be limited.
+
+				It is advised to start with a "SELECT * FROM..." statement, followed by the tail of the URL (whose root is set in the connection string) to see what will be retrieved.
+
+				In addition, you can inject a body in the query, between square brackets. If you are querying an API on the URL www.myWS.COM/myAPI and you need to send
+				in the body as a JSON content, you can do so :
+				OUTPUT:SELECT * FROM /myAPI[{"myfilter":"myvalue"}]
+				(assuming that "www.myWS.COM" has been set as the connection string)
+
+				You can write several queries.
+
+				Each query must be preceded by "OUTPUT:SELECT...".
+			</Content>
+			<Exemples>
+				Target is a database : MyDestinationTable:SELECT * FROM /myAPI/MyWS (Table will be created if non-existent. Otherwise, only identical fields between Source and Target will be processed)
+				Target is a CSV file : MyDestinationFile.csv:SELECT * FROM /myAPI/MyWS
+				Target is a EXCEL file : MyDestinationFile.xlsx:SELECT * FROM /myAPI/MyWS
+				Target is a XML file : MyDestinationFile.xml:SELECT * FROM /myAPI/MyWS
+				Target is a JSON file : MyDestinationFile.json:SELECT * FROM /myAPI/MyWS
+				Target is a mailbox : Email@MyProvider.com:SELECT * FROM /myAPI/MyWS
+				Target is the AD object 'users' : users:SELECT * FROM /myAPI/MyWS (Source fields names must be AD attributes)
+				Target is the AD object 'groups' : groups:SELECT * FROM /myAPI/MyWS (Source fields names must be AD attributes)
+				Target is a Webservice : /url/myWebservice:SELECT * FROM /myAPI/MyWS ("/url/myWebservice" is only the end of the URL: the root is defined in the Connection)
+			</Exemples>
+		</QUERY_WS>
+		<QUERY_AD>
+			<Name>QUERY AD</Name>
+			<Content>
+				You're querying an Active Directory domain using Fuzible SQL, a perfectly standard SQL language: you query AD objects like SQL tables.
+				Any "SELECT" statement, from the simplest to the most complex will work (transformations, aggregations, joins...).
+				The Query Assistant will open punctually (in the form of a small context menu) to help you choose the syntax.
+				The Objects list is limited to "users" and "groups", and the list of fields associated with each object corresponds to available attributes. These will be proposed to you during input.
+
+				It is advised to start with a "SELECT * FROM..." statement, followed by "users" ou "groups" to see what will be retrieved.
+
+				You can write several queries.
+
+				Each query must be preceded by "OUTPUT:SELECT...".
+			</Content>
+			<Exemples>
+				Target is a database : MyDestinationTable:SELECT * FROM users (Table will be created if non-existent. Otherwise, only identical fields between Source and Target will be processed)
+				Target is a CSV file : MyDestinationFile.csv:SELECT * FROM users
+				Target is a EXCEL file : MyDestinationFile.xlsx:SELECT * FROM users
+				Target is a XML file : MyDestinationFile.xml:SELECT * FROM users
+				Target is a JSON file : MyDestinationFile.json:SELECT * FROM users
+				Target is a mailbox : Email@MyProvider.com:SELECT * FROM users
+				Target is the AD object 'users' : users:SELECT * FROM users (Source fields names must be AD attributes)
+				Target is the AD object 'groups' : groups:SELECT * FROM users (Source fields names must be AD attributes)
+				Target is a Webservice : /url/myWebservice:SELECT * FROM users ("/url/myWebservice" is only the end of the URL: the root is defined in the Connection)
+			</Exemples>
+		</QUERY_AD>
+		<QUERY_MB>
+			<Name>QUERY MB</Name>
+			<Content>
+				You're querying a Mailbox using Fuzible SQL, a perfectly standard SQL language: you query mailboxes like SQL tables.
+				Any "SELECT" statement, from the simplest to the most complex will work (transformations, aggregations, joins...).
+				The Query Assistant will open punctually (in the form of a small context menu) to help you choose the syntax.
+				The list of available fields is a set of fields specific to a mailbox, and will be proposed to you during the input of the query.
+
+				It is advised to start with a "SELECT * FROM..." statement, followed by the mailbox adress to see what will be retrieved.
+
+				The email address must be compatible with the ISP you set in the connection string.
+				If you want to query another email than the one from the connection string, but from the same provider, you can do so :
+				OUTPUT:SELECT * FROM Email@MyProvider.com[myPassword]
+				You force the use of the password between the square brackets for the specified adress.
+
+				You can write several queries.
+
+				Each query must be preceded by "OUTPUT:SELECT...".
+			</Content>
+			<Exemples>
+				Target is a database : MyDestinationTable:SELECT * FROM Email@MyProvider.com (Table will be created if non-existent. Otherwise, only identical fields between Source and Target will be processed)
+				Target is a CSV file : MyDestinationFile.csv:SELECT * FROM Email@MyProvider.com
+				Target is a EXCEL file : MyDestinationFile.xlsx:SELECT * FROM Email@MyProvider.com
+				Target is a XML file : MyDestinationFile.xml:SELECT * FROM Email@MyProvider.com
+				Target is a JSON file : MyDestinationFile.json:SELECT * FROM Email@MyProvider.com
+				Target is a mailbox : Email@MyProvider.com:SELECT * FROM Email@MyProvider.com
+				Target is the AD object 'users' : users:SELECT * FROM Email@MyProvider.com (Source fields names must be AD attributes)
+				Target is the AD object 'groups' : groups:SELECT * FROM Email@MyProvider.com (Source fields names must be AD attributes)
+				Target is a Webservice : /url/myWebservice:SELECT * FROM Email@MyProvider.com ("/url/myWebservice" is only the end of the URL: the root is defined in the Connection)
+			</Exemples>
+		</QUERY_MB>
+		<QUERY_NS>
+			<Name>QUERY NS</Name>
+			<Content>
+				You're querying a MongoDB database using Fuzible SQL, a perfectly standard SQL language: you query collections like SQL tables.
+				Any "SELECT" statement, from the simplest to the most complex, will be accepted.
+				The Query Assistant will open punctually (in the form of a small context menu) to help you choose the syntax, fields and collections.
+				You can write several queries.
+
+				You can write several queries.
+
+				Each query must be preceded by "OUTPUT:SELECT...".
+			</Content>
+			<Exemples>
+				Target is a database : MyDestinationTable:SELECT * FROM myCollection (Table will be created if non-existent. Otherwise, only identical fields between Source and Target will be processed)
+				Target is a CSV file : MyDestinationFile.csv:SELECT * FROM myCollection
+				Target is a EXCEL file : MyDestinationFile.xlsx:SELECT * FROM myCollection
+				Target is a XML file : MyDestinationFile.xml:SELECT * FROM myCollection
+				Target is a JSON file : MyDestinationFile.json:SELECT * FROM myCollection
+				Target is a mailbox : Email@MyProvider.com:SELECT * FROM myCollection
+				Target is the AD object 'users' : users:SELECT * FROM myCollection (Source fields names must be AD attributes)
+				Target is the AD object 'groups' : groups:SELECT * FROM myCollection (Source fields names must be AD attributes)
+				Target is a Webservice : /url/myWebservice:SELECT * FROM myCollection ("/url/myWebservice" is only the end of the URL: the root is defined in the Connection)
+			</Exemples>
+		</QUERY_NS>
+	</help_en>
+	<help_fr>
+		<API_DATA_HELPER>
+		<Name>API DATA HELPER</Name>
+			<Content>
+				Fuzible utilise des appels génériques aux API pour récupérer les données. Si vous devez récupérer des données à partir de scénarios plus complexes (ex : récupérer des fichiers à partir de l'API MS Graph), il faudrait normalement plusieurs sous-jobs et une programmation plutôt complexe.
+				Ce menu vous propose des "helpers" qui vous simplifieront nettement ces tâches. En exemple, si vous voulez récupérer des fichiers à partir d'un canal MS Teams spécifique, vous devriez normalement appeller l'API, puis y récupérer les liens de téléchargement,
+				puis télécharger le contenu binaire de chaque fichier en utilisant ces liens, et vers la BDD locale, puis créer les fichiers finaux en utilisant le contenu binaire précédemment stocké en BDD locale.
+				Toutes ces tâches peuvent être réalisées par Fuzible en utilisant le fonctionnement standard mais ce sera difficile à configurer/programmer.
+				Les Helpers réalisent ces sous-tâches automatiquement, et vous pourrez obtenir vos fichier en un seul appel à l'API.
+			</Content>
+			<Exemples>
+				Je veux télécharger tous les fichiers d'un canal Teams : (la Connexion Source est l'API Graph, la Connexion Cible est un fichier)
+				[RAWFILE_NAME]:SELECT * FROM drives/{drive_id}/items/{item_id}/children
+				
+				-> Fuzible récupère 2 colonnes : RAWFILE_NAME, qui contient le nom du fichier, et RAWFILE_DATA, qui contient le contenu binaire
+				En utilisant [RAWFILE_NAME], le nom de sortie du fichier sera dynamiquement calqué sur celui qui vient de l'API.
+				...et parce que "RAWFILE_DATA" sera détecté dans les données Source, le contenu binaire servira pour construire les fichiers.
+			</Exemples>
+		</API_DATA_HELPER>
+		<MAIL_HTML_TEMPLATE>
+		<Name>MAIL HTML TEMPLATE</Name>
+			<Content>
+				Fuzible crée du contenu HTML à partir des données des Requêtes Source. Le Template par défaut est très simple, c'est pourquoi vous pouvez en choisir un autre.
+				Dans ce cas, Fuzible doit savoir ou inclure les données de la Requête Source dans ce Template. C'est là que le mot-clé a son utilité : 
+				
+				1/ Si aucun mot-clé n'a été saisi, Fuzible va procéder comme ceci : 
+				Il va prendre l'alias de la requête (ex : mymail@mail.com:select * from myCustomers as MonAlias) et tâcher de le trouver dans le Template HTML.
+					- Si trouvé (dans l'exemple, MonAlias), celui-ci sera remplacé par le code HTML qui a été produit par les résultats de la Requête.
+					- Si non trouvé, les résultats seront simplement concaténés au code HTML du Template.
+
+				2/ Si un mot-clé a été spécifié :
+					- Fuzible va remplacer ce mot-clé par le code HTML qui a été produit par les résultats de la Requête.
+					- Si le mot-clé n'a pas été trouvé dans le Template, les résultats seront simplement concaténés au code HTML du Template.
+					
+				3/ Cas spécial en utilisant la fonction "Assembler les requêtes qui ont le même destinataire en un seul mail"
+				Si vous avez plusieurs requêtes qui doivent être assemblées en un seul mail, le Template peut être peuplé intelligemment.
+					- Le Template utilise un mot-clé (ex : MYTABLE01) qui doit servir à recevoir les résultats de la première Requête.
+					- Le Template utilise un autre mot-clé (ex : MYTABLE02) qui doit servir à recevoir les résultats de la seconde Requête.
+				-> Vous pouvez alors définir vos Requêtes ainsi :
+					- MyMail@mail.com:SELECT * FROM MyCustomers as MYTABLE01 WHERE last_transaction = CURRENT_TIMESTAMP
+					- MyMail@mail.com:SELECT * FROM MySuppliers as MYTABLE02 WHERE last_transaction = CURRENT_TIMESTEMP
+
+				Les résultats de la Requête 'MyCustomers' seront injectés dans le Template en lieu et place du mot 'MYTABLE01'
+				Les résultats de la Requête 'MySuppliers' seront injectés dans le Template en lieu et place du mot 'MYTABLE02'
+				
+				Note Pratique : si vous avez injecté des paramètres dynamiques reconnus par Fuzible dans votre Template HTML (ex : {?1}), 
+								ceux-ci seront remplacés par les valeurs dynamiques du Job ! 
+			</Content>
+			<Exemples>
+				
+			</Exemples>
+		</MAIL_HTML_TEMPLATE>
+		<PRE_COMMANDS_DONT_LOOP_RESULTS>
+			<Name>PRE_COMMANDS_DONT_LOOP_RESULTS</Name>
+			<Content>
+				Si la Commande Pré-Job retourne plus qu'une entrée, le Job ne sera pas mis en boucle mais les résultats seront concaténés dès lors que vous attribuez des Paramètres Dynamiques qui font usage de ces données.
+				
+				Les Paramètres Dynamiques sont configurables à partir de l'onglet 'Job'
+				-> %CS1 signifie que la valeur issue de la première Commande Pré-Job de la connexion Source (ex : une procédure stockée, une requête SELECT) sera utilisée
+				Dans le cas ou le jeu de résultats contiendrait plusieurs colonnes, il est possible de spécifier quelle colonne utiliser : %CS1[IndexEnBase1]
+				-> %CT1 signifie que la valeur issue de la première Commande Pré-Job de la connexion Cible (ex : une procédure stockée, une requête SELECT) sera utilisée
+				Dans le cas ou le jeu de résultats contiendrait plusieurs colonnes, il est possible de spécifier quelle colonne utiliser : %CT1[IndexEnBase1]
+				
+				Les données de chaque ligne seront concaténées pour ne former qu'une seule valeur.
+			</Content>
+			<Exemples>
+				Ma Connexion Cible est une boîte mail (Je veux envoyer des données à quelqu'un)
+				Ma Connexion Source est une BDD SQL Server, and ma Commande Pré-Job appelle une Procédure Stockée (ex : EXECUTE myStoredProcedure) qui retourne 3 lignes de 2 colonnes :
+					mail01@mymail.com;1
+					mail02@mymail.com;2
+					mail03@mymail.com;3
+
+				- En utilisant '%CS1' comme premier Paramètre Dynamique, une valeur sera construite à partir des données des 3 lignes : 'mail01@mymail', 'mail02@mymail.com', 'mail03@mymail.com'
+				Je pourrais écrire une requête comme celle-ci :
+				mymail@mail.com:SELECT * from MyReminder WHERE emailField IN {?1}
+				-> En utilisant {?1} (Premier Paramètre Dynamique) la valeur sera prise sur '%CS1', dans notre cas, les adresse mail concaténées.
+
+				- Je peux aussi utiliser '%CS1[2]' comme Premier Paramètre Dynamique et écrire une requête comme celle-ci :
+				mymail@mail.com:SELECT * FROM MyReminder were IdPeople IN {?1}
+				-> En utilisant {?1} (Premier Paramètre Dynamique), la valeur utilisée sera celle de '%CS1[2]' (Seconde colonne), dans notre cas, les ID concaténés ('1', '2', '3')
+			</Exemples>
+		</PRE_COMMANDS_DONT_LOOP_RESULTS>
+		<PRE_COMMANDS_LOOP_RESULTS>
+			<Name>PRE_COMMANDS_LOOP_RESULTS</Name>
+			<Content>
+				Si la Commande Pré-Job retourne plus qu'une entrée, le Job peut alors être mis en boucle autant de fois qu'il y a de résultats, dès lors que vous attribuez des Paramètres Dynamiques qui font usage de ces données.
+				Les Paramètres Dynamiques sont configurables à partir de l'onglet 'Job'
+				-> %CS1 signifie que la valeur issue de la première Commande Pré-Job de la connexion Source (ex : une procédure stockée, une requête SELECT) sera utilisée
+				Dans le cas ou le jeu de résultats contiendrait plusieurs colonnes, il est possible de spécifier quelle colonne utiliser : %CS1[IndexEnBase1]
+				-> %CT1 signifie que la valeur issue de la première Commande Pré-Job de la connexion Cible (ex : une procédure stockée, une requête SELECT) sera utilisée
+				Dans le cas ou le jeu de résultats contiendrait plusieurs colonnes, il est possible de spécifier quelle colonne utiliser : %CT1[IndexEnBase1]
+				
+				Chaque itération du Job fera usage de la valeur issue de chaque ligne du jeu de résultats de la Commande Pré-Job.
+
+				Limitation : Vous ne pouvez utiliser cette fonctionnalité que si vous utilisez une seule Commande Pré-Job.
+			</Content>
+			<Exemples>
+				Ma Connexion Cible est une boîte mail (Je veux envoyer des données à quelqu'un)
+				Ma Connexion Source est une BDD SQL Server, and ma Commande Pré-Job appelle une Procédure Stockée (ex : EXECUTE myStoredProcedure) qui retourne 3 lignes de 2 colonnes :
+					mail01@mymail.com;1
+					mail02@mymail.com;2
+					mail03@mymail.com;3
+
+				- En utilisant '%CS1' comme premier Paramètre Dynamique, le Job s'exécutera 3 fois, avec les valeurs suivantes : d'abord mail01@mymail, puis mail02@mymail.com, et enfin mail03@mymail.com
+				Je pourrais écrire une requête comme celle-ci :
+				{?1}:SELECT * from MyReminder
+				-> En utilisant {?1} (Premier Paramètre Dynamique) la valeur sera prise sur '%CS1', dans notre cas, une adresse e-mail.
+				... et parce que le Job sera exécuté 3 fois, l'e-mail sera dynamiquement changé à chaque itération.
+
+				- Je peux aussi utiliser '%CS1[1]' comme Premier Paramètre Dynamique, et '%CS1[2]' comme Second.
+				Je pourrais écrire une requête comme celle-ci :
+				{?1}:SELECT * FROM MyReminder were IdPeople = {?2}
+				-> En utilisant {?1} (Premier Paramètre Dynamique), la valeur utilisée sera celle de '%CS1[1]' (Première colonne), dans notre cas, l'adresse e-mail.
+				-> En utilisant {?2} (Second Paramètre Dynamique) la valeur utilisée sera celle de '%CS1[2]' (Seconde colonne), dans notre cas, un ID.
+			</Exemples>
+		</PRE_COMMANDS_LOOP_RESULTS>
+		<COMMAND_LINE>
+			<Name>COMMAND LINE</Name>
+			<Content>
+				C'est la commande Shell que vous pouvez utiliser pour lancer le Job sans démarrer l'application.
+				- > Vous pouvez utiliser n'importe quel logiciel d'Orchestration pour lancer des Jobs ou utiliser celui qui est fourni avec Fuzible.
+				Arguments :
+				1 - Userspace (nom d'utilisateur)
+				2 - Job ID
+				3 - Mot de passe (chiffré)
+				3 - Paramètres dynamiques (optionnel)
+			</Content>
+			<Exemples>
+			</Exemples>
+		</COMMAND_LINE>
+		<PARALLEL_QUERIES>
+			<Name>PARALLEL QUERIES</Name>
+			<Content>
+				Si votre Job contient plusieurs requêtes, vous pouvez en exécuter plusieurs en parallèle.
+				Plus vous ajoutez de threads, plus les besoins en ressources (CPU, RAM, bande passante) seront importants.
+			</Content>
+			<Exemples>
+			</Exemples>
+		</PARALLEL_QUERIES>
+		<PARALLEL_INSERT>
+			<Name>PARALLEL INSERT</Name>
+			<Content>
+				Si vous avez de nombreuses lignes à insérer dans une table SQL, vous pouvez multiplier le nombre d'insertions qui peuvent être réalisées en parallèle.
+				Plus vous ajoutez de threads, plus les besoins en ressources sur l'instance SQL de destination seront importants.
+			</Content>
+			<Exemples>
+			</Exemples>
+		</PARALLEL_INSERT>
+		<SQL_COMPATIBILITY_PARAMS>
+			<Name>SQL_COMPATIBILITY_PARAMS</Name>
+			<Content>
+				Vous utilisez un pilote ODBC.
+				Certains aspects du programme font appel à des fonctions SQL propres à chaque pilote.
+				Bien que vous pourrez utiliser sans problème cette connexion en tant que Source, l'utiliser en tant que Cible ne fonctionnera probablement pas.
+				Vous devrez saisir manuellement les paramètres de compatibilité, en accord avec le SGBD que vous avez choisi d'utiliser.
+				Consultez la documentation pour obtenir des détails sur la façon de procéder.
+			</Content>
+			<Exemples>
+				P_CREATE_PRIMARY_KEY : Utilisé si vous cochez l'option qui autorise la réécriture du schéma de données Cible
+				P_CHANGE_COLUMN_ALLOW_NULL : Utilisé si vous cochez l'option qui autorise la réécriture du schéma de données Cible
+				P_CHANGE_COLUMN_DISALLOW_NULL : Utilisé si vous cochez l'option qui autorise la réécriture du schéma de données Cible
+				P_CREATE_COLUMN : Utilisé si vous cochez l'option qui autorise la réécriture du schéma de données Cible
+				P_CHANGE_COLUMN_TYPE : Utilisé si vous cochez l'option qui autorise la réécriture du schéma de données Cible
+				P_CHANGE_COLUMN_DEFAULT_VALUE : Utilisé si vous cochez l'option qui autorise la réécriture du schéma de données Cible
+				P_CHANGE_COLUMN_ADD_UNIQUE : Utilisé si vous cochez l'option qui autorise la réécriture du schéma de données Cible
+				P_SHRINK_TABLE : Utilisé si vous cochez 'Nettoyer les tables SQL' dans les paramètres SQL généraux
+				P_DISABLE_TABLE_CONSTRAINTS : Utilisé si vous manipulez des tables contenant des contraintes de clés étrangères
+				P_ENABLE_TABLE_CONSTRAINTS : Utilisé si vous manipulez des tables contenant des contraintes de clés étrangères
+			</Exemples>
+		</SQL_COMPATIBILITY_PARAMS>
+		<SHS_DATA_ANALYZER>
+			<Name>SHS DATA ANALYZER</Name>
+			<Content>
+				Fuzible analyse des données Source pour optimiser la création des tables SQL et leur éventuelle modification.
+
+				Types de données supportés (lors de la création automatique d'une table SQL) :
+				SMALLINT, INTEGER, BIGINT, FLOAT, DECIMAL, NUMERIC, CHAR, VARCHAR, TEXT, BIT, BOOLEAN, DATE, DATE, DATETIME, TIMESTAMP
+				Les types sont automatiquement transcodés en fonction du pilote Cible.
+			</Content>
+			<Exemples>
+			</Exemples>
+		</SHS_DATA_ANALYZER>
+		<DATA_TRANSFORMATION>
+			<Name>DATA TRANSFORMATION</Name>
+			<Content>
+				Fuzible peut transformer les données en utilisant différentes fonctions de PIVOT.
+			</Content>
+			<Exemples>
+				Exemples (using &amp;apos;_&amp;apos; as transformation separator)
+				Datasource columns : COLA, COLB, COLC_1, COLC_2, COLC_3, COLD
+				-&amp;gt; Output fields :
+				COLA, COLB, COLC, COLD
+				For ONE row in Source, you&amp;apos;ll get THREE rows in Target (with duplicated data in COLA, COLB, COLD columns and variable data in COLC)
+			</Exemples>
+		</DATA_TRANSFORMATION>
+		<BASIC_SCRIPT_LANGUAGE>
+			<Name>BASIC SCRIPT LANGUAGE</Name>
+			<Content>
+				Le Langage de Script peut être utilisé partout : chaînes de connexion, opération pré/post-Job, requêtes, description du Job...
+
+				Les scripts sont saisis entre 2 accolades : {MYSCRIPT}
+				- %USER : L&amp;apos;utilisateur en cours
+				- %QUERYTARGETNAME (Applies On Connection String &amp; Multiple Files Pattern. Will be Removed for any other usage) : Target as shown on the start of each query (before the &amp;apos;:&amp;apos;)
+				- %GUID : Génère un GUID de 48 ccaractères propre à chaque session. En redémarrant le programme, le GUID changera
+				- %RNDGEN : Génère une chaîne aléatoire (ex : un mot de passe) d'une longueur de 12 et propre à chaque session
+				- %RNDGEN[8] : Génère une chaîne aléatoire (ex : un mot de passe) d'une longueur variable, définie entre crochets, et propre à chaque session
+				- %MM : Mois (sur 2 chiffres)
+				- %YY : Année (sur 2 chiffres)
+				- %YYYY : Année (sur 4 chiffres)
+				- %DD : Jour (sur 2 chiffres)
+				- %HH : Heure (sur 2 chiffres)
+				- %HUTC : Heure UTC (sur 2 chiffres)
+				- %mm : Minute (sur 2 chiffres)
+				- %SS : Seconde (sur 2 chiffres)
+				- %DTTS, %DTTSMILLI : Timestamp UNIX (secondes, millisecondes)
+				- &amp;lt;XM : Retire X Mois au mot-clé MM (ex : %MM&amp;lt;2M)
+				- &amp;lt;XY : Retire X Années au mot-clé YY (or YYYY) (ex : %YY&amp;lt;2Y)
+				- &amp;lt;XD : Retire X Jours au mot-clé DD (ex : %DD&amp;lt;2D)
+				- &amp;lt;XW : Retire X Semaines au mot-clé WW (ex : %WW&amp;lt;2W)
+				- &amp;gt;XM : Ajoute X Mois au mot-clé MM (ex : %MM&amp;gt;2M)
+				- &amp;gt;XY : Ajoute X Années au mot-clé YY (or YYYY) (ex : %YY&amp;gt;2Y)
+				- &amp;gt;XD : Ajoute X Jours au mot-clé DD (ex : %DD&amp;gt;2D)
+				- &amp;gt;XW : Ajoute X Semaines au mot-clé WW (ex : %WW&amp;gt;2W)
+				- ?1, ?2, ?3 ... : Ces mot-clé seront remplacés par le paramètre idoine dans le champ de texte qui permet de les saisir (ceux-ci sont séparés par un &amp;apos;;&amp;apos;)
+				- %SC1, %SC2... : Ces mot-clé correspondent à l'injection de la valeur de retour produite par une pré-commande saisie pour la connexion Source
+				- %TC1,%TC2... : Ces mot-clé correspondent à l'injection de la valeur de retour produite par une pré-commande saisie pour la connexion Cible
+			</Content>
+			<Exemples>
+				--- QUELQUES EXEMPLES (Date Actuelle : 20/03/2018) ---
+				SELECT * FROM MYFILE_{%MM%YYYY}.csv -&amp;gt; SELECT * FROM MYFILE_032018.csv
+				SELECT * FROM MYFILE{%MM_%DD_%YYYY}.csv -&amp;gt; SELECT * FROM MYFILE03_20_2018.csv
+				SELECT * FROM MYFILE_{%MM%YYYY&amp;gt;3M}.csv -&amp;gt; SELECT * FROM MYFILE_062018.csv
+				SELECT * FROM MYFILE_{%MM%YYYY&amp;gt;3M&amp;gt;1Y}.csv -&amp;gt; SELECT * FROM MYFILE_062019.csv
+				SELECT * FROM MYFILE_{%DD&lt;10D}.csv -&amp;gt; SELECT * FROM MYFILE_10.csv
+				SELECT * FROM MYTABLE WHERE ID_TEST={?1} -&amp;gt; SELECT * FROM MYTABLE WHERE ID_TEST=100
+			</Exemples>
+		</BASIC_SCRIPT_LANGUAGE>
+		<RULES_FOR_MULTIPLE_FILES_EXPORT>
+			<Name>RULES FOR MULTIPLE FILES OUTPUT</Name>
+			<Content>
+				Il est possible de scripter et conditionner le nom des fichiers produits par un Job
+				Mots-clé supportés :
+				- [EXTENSION] : Extension du fichier
+				- [QUERYALIAS] : Alias utilisé dans le requête SELECT (SELECT * FROM MATABLE AS REQUETE =&amp;gt; REQUETE
+				- [FILECOUNT] : Le compteur de fichiers crées
+				- [ROWCOUNT] : Le compteur de ligne des données Source, au moment ou un nouveau fichier est crée
+				- [Column_Data] : La valeur prise dans une colonne au moment du changement de fichier
+			</Content>
+			<Exemples>
+				--- QUELQUES EXEMPLES (Lignes/Fichier paramétréà  1000, Export vers CSV, Valeur dans Col_01 à la ligne 1001 = Hello World) ---
+				- [FILECOUNT]_MYFILE_[ROWCOUNT].CSV:SELECT * FROM MyTable -&amp;gt; 2_MYFILE_1001.CSV
+				- [ROWCOUNT]-[Col_01]-MYFILE.CSV:SELECT * FROM MyTable -&amp;gt; 1001-Hello World-MYFILE.CSV
+				- Myfile.[EXTENSION]:SELECT * FROM MyTable -&amp;gt; Myfile.CSV
+			</Exemples>
+		</RULES_FOR_MULTIPLE_FILES_EXPORT>
+		<RULES_FOR_MULTIPLES_FILES_AT_ONCE>
+			<Name>RULES FOR MULTIPLES FILES AT ONCE</Name>
+			<Content>
+				Fuzible peut regrouper plusieurs fichiers en un seul, si ceux-ci répondent aux mêmes critères (même schéma de données, et même racine de nom)
+				C'est très utile si vous voulez vous éviter plusieurs requêtes, et pour une meilleure analyse des données (plus de lignes à analyser = schéma de données plus précis)
+				Les fichiers doivent en revanche avoir un schéma identique (mêmes colonnes) et un nom avec une racine commune.
+			</Content>
+			<Exemples>
+				--- QUELQUES EXEMPLES --- (Requête : MY_TARGET_TABLE:SELECT * FROM MYFILE)
+
+				MYFILE_001.CSV, MYFILE_002.CSV, MYFILE_003.CSV, MYFILE-004.CSV -&amp;gt; En utilisant &amp;apos;_&amp;apos; comme séparateur, Fuzible lira tous les fichiers qui commençant par &amp;apos;MYFILE_&amp;apos; (et évitera &amp;apos;MYFILE-004.CSV&amp;apos; car le séparateur n'est pas présent dans le nom)
+
+				MYFILE-*-AA.CSV, MYFILE-*-BAAAAA.CSV, MYFILE-*-78984.CSV, MYBADCSV-*-001.CSV -&amp;gt; En utilisant &amp;apos;-*-&amp;apos; comme séparateur, Fuzible lira tous les fichiers commençant par &amp;apos;MYFILE--&amp;apos; (et évitera &amp;apos;MYBADCSV--001.CSV&amp;apos; car la racine du nom ne matche pas)
+			</Exemples>
+		</RULES_FOR_MULTIPLES_FILES_AT_ONCE>
+		<PRE_AND_POST_JOB_COMMANDS>
+			<Name>PRE AND POST JOB COMMANDS</Name>
+			<Content>
+				Vous pouvez saisir des commandes manuelles à exécuter AVANT ou APRES l'exécution du Job.
+				Plusieurs commandes peuvent être exécutées, en les séparant par un point-virgule.
+
+				La Source ou la Cible est un SGBD :
+				N'importe quelle commande peut être exécutée, comme par exemple lancer une procédure stockée.
+				Exemple : UPDATE ANYTABLE SET ANYFIELD = 1; DROP DATABASE;
+				Ou faire une requête SELECT :
+				Exemple : SELECT COUNT(*) FROM MyTable
+				(la valeur retournée peut par ailleurs être exploitée en tant que Paramètre Dynamique !)
+
+				La Source ou la Cible est un fichier :
+				N'importe quelle commande du SHELL sera exécutée. Vous pouvez par exemple lancer un fichier .BAT.
+				Exemple : C:\\TOOLS\\BATCHFILE.EXE /param1 /param2
+				Ou appeler une fonction :
+				Exemple : DATE /T
+				(la valeur retournée peut par ailleurs être exploitée en tant que Paramètre Dynamique !)
+
+				La Source ou la Cible est une BDD MongoDB :
+				N'importe quelle commande formattée en BSON. Elle sera exécutée sans contrôle dans la base de données.
+				Exemple : { drop: "myCollection" }
+				(la valeur retournée peut par ailleurs être exploitée en tant que Paramètre Dynamique !)
+			</Content>
+			<Exemples>
+			</Exemples>
+		</PRE_AND_POST_JOB_COMMANDS>
+		<XML_ROW_BUILDER>
+			<Name>XML ROW BUILDER</Name>
+			<Content>
+				Lors de la création d'un fichier XML, chaque ligne doit avoir une balise parent pour la caractériser.
+				Cette balise peut se paramétrer en utilisant des commandes scriptées
+				Commandes supportées :
+
+				- [FILECOUNT] : Le compteur de fichier crée
+				- [ROWCOUNT] : Le compteur de lignes des données Source au moment de la création du nouveau fichier
+				- [Column_Data] : La valeur de la colonne spécifiée au moment de la création du nouveau fichier
+			</Content>
+			<Exemples>
+				--- QUELQUES EXEMPLE (Ligne Source 1000, Valeur dans Col_01 = Hello World) ---
+				- [ROWCOUNT]_[Col_01] : &amp;lt1000_HelloWorld&amp;gt
+				- Col_01='[Col_01]' : &amp;ltCol_01='Hello World'&amp;gt
+			</Exemples>
+		</XML_ROW_BUILDER>
+		<SOURCE_QUERIES>
+			<Name>SOURCE QUERIES</Name>
+			<Content>
+				Fuzible utilise le concept des requêtes SQL pour toute opération de Réplication et Synchronisation.
+				Note : Le menu contextuel est accessible en double-cliquant sur une requête. Ce menu sera votre meilleur ami pour vous guider pendant la création du Job.
+
+				- La Source de données est un SGBD :
+				N'importe quelle requête SELECT, simple ou complexe fonctionnera (la syntaxe SQL doit correspondre au pilote choisi !)
+				Exemple : MYOUTPUTFILE.CSV:SELECT * FROM MYTABLE
+				Exemple 2 : MYOUTPUTFILE.CSV:SELECT COL1, COL2, CAST(COL3 AS VARCHAR) FROM MYTABLE WHERE MYFILTER = 1 AND SUBSTRING(X, 1, 3) = &amp;apos;SHS&amp;apos;
+				Exemple 3 : MYOUTPUTFILE.CSV:SELECT * FROM %CLI% récupèrera automatiquement toutes les tables possédant le pattern 'CLI' (ex : client, ent_cli, cli_lig...), et fusionnera le tout dans MYOUTPUTFILE.CSV
+				Exemple 4 : *.CSV:SELECT * FROM %CLI% récupèrera automatiquement toutes les tables possédant le pattern 'CLI' (ex : client, ent_cli, cli_lig...), et créera autant de fichiers de sortie qu'il y a de tables d'entrée
+
+				- La Source de données est un Fichier :
+				Fuzible utilise le langage SQL standard pour requêter des fichiers. Chargez le Job de démonstration pour comprendre le fonctionnement, consultez la documentation. L'assistant de Requête vous aidera également.
+				Exemple : MYOUTPUTSQLTABLE:SELECT * FROM MYFILE.CSV
+				Exemple 2 : MYOUTPUTSQLTABLE:SELECT COL1, COL2, COL3 FROM MYFILE.CSV WHERE COL4 = &amp;apos;SHS&amp;apos;
+				Exemple 3 : MYOUTPUTSQLTABLE:SELECT aF.COL1, aF.COL2, bF.NEWCOL FROM MYFILE.CSV as aF INNER JOIN MYFILE_2.CSV as bF ON aF.COL3 = bF.COL3 WHERE aF.COL4 = &amp;apos;SHS&amp;apos;
+				Exemple 4 : MYOUTPUTSQLTABLE:SELECT * FROM *cli.CSV récupèrera automatiquement tous les fichiers dont le nom se termine par 'cli' (ex : ent_cli, lig_cli, testcli...), et fusionnera le tout dans MYOUTPUTSQLTABLE
+				Exemple 5 : MYOUTPUTSQLTABLE:SELECT * FROM cli*.* récupèrera automatiquement tous les fichiers (et pas seulement les CSV) dont le nom commence par 'cli' (ex : cli_ent.csv, cli_lig.xls...), et fusionnera le tout dans MYOUTPUTSQLTABLE
+				Exemple 6 : *:SELECT * FROM cli*four*.CSV récupèrera automatiquement tous les fichiers CSV commençant par 'cli' et contenant 'four' dans le nom (ex : cli_four_001.csv, cli_four_list.csv...), et créera autant de tables de sortie qu'il y a de fichiers d'entrée
+				(le nom des colonnes vient de ce qu'il y a dans les fichiers. Si il n'y a pas d'entête, le nom des colonnes sera COLUMN_1, COLUMN_2... : Vous pourrez simplement utiliser les alias pour obtenir des noms plus appropriés)
+
+				- La Source de données est une Boîte Mail :
+				Fuzible utilise le langage SQL standard pour requêter une boîte mail. Chargez le Job de démonstration pour comprendre le fonctionnement, consultez la documentation. L'assistant de Requête vous aidera également.
+				Exemple : MYOUTPUTSQLTABLE:SELECT * FROM test@test.com
+				Exemple 2 : MYOUTPUTSQLTABLE:SELECT * FROM test@test.com WHERE SUBJECT LIKE &amp;apos;Test&amp;apos;
+				Exemple 3 : MYOUTPUTSQLTABLE:SELECT BODY, SUBJECT, SENDER FROM test@test.com WHERE CONTENT LIKE &amp;apos;Test&amp;apos;
+				Vous pouvez aussi spécifier le mot de passe de l'adresse mail. Sinon, c'est celui de la chaîne de connexion qui sera utilisé :
+				Exemple : MYOUTPUTSQLTABLE:SELECT * from test@test.com[myPassword]
+				(Le nom des colonnes correspond à des attributs de Boîte Mail. L'assistant de Requête vous les montrera mais vous pouvez aussi faire un simple SELECT * [...] pour voir tout ce que vous pouvez obtenir)
+
+				- La Source de données est un domaine Active Directory :
+				Fuzible utilise le langage SQL standard pour requêter un AD. Chargez le Job de démonstration pour comprendre le fonctionnement, consultez la documentation. L'assistant de Requête vous aidera également.
+				Exemple : MYOUTPUTFILE:SELECT * FROM users where samaccountname like apos;testapos;
+				Exemple 2 : MYOUTPUTFILE:SELECT * FROM groups
+				(Le nom des colonnes correspond à des attributs Active Directory. L'assistant de Requête vous les montrera mais vous pouvez aussi faire un simple SELECT * [...] pour voir tout ce que vous pouvez obtenir)
+
+				- La Source de données est un Webservice :
+				Fuzible utilise le langage SQL standard pour requêter une API Web. Chargez le Job de démonstration pour comprendre le fonctionnement, consultez la documentation. L'assistant de Requête vous aidera également.
+				Exemple : MYOUTPUTFILE:SELECT * FROM users/?range=0-5000;
+				Exemple 2 : MYOUTPUTFILE:SELECT * FROM Ticket/?order=desc as Ticket INNER JOIN RequestType/ AS Req ON Req.id = Ticket.requesttypes_id
+				(Field names are fully dependant on what you get back from the API. You can try a simple SELECT * statement to see what you can get.)
+				(Le nom des colonnes est dépendant de ce que l'API vous retourne. Vous pouvez faire un simple SELECT * [...] pour voir ce qu'il est possible de récupérer)
+				(Notez que la requête sera concaténée avec l'URL de base saisie dans la connexion. Celà signifie qu'une requête SELECT * from Ticket/?order=desc sera traduite en un appel vers l'API de cette manière : http://myConnexionURL/Ticket/?order=desc)
+
+				(COMPORTEMENT DE LA CIBLE)
+
+				- La Source de données est un SGBD :
+				Saisissez le nom de la table dans laquelle vous voulez insérer les données.
+				Exemple : MYOUTPUTSQLTABLE:SELECT * FROM TEST copiera les données dans &amp;apos;MYOUTPUTSQLTABLE&amp;apos;
+				(Le nom des tables de sortie est scriptable. Consultez la documentation complète)
+
+				- La Source de données est un Fichier :
+				Saisissez le nom du fichier dans lequel vous voulez insérer les données.
+				Exemple : MYFILE.CSV:SELECT * FROM TEST copiera les données dans &amp;apos;MYFILE.CSV&amp;apos;
+				(Le nom des tables de sortie est scriptable. Consultez la documentation complète)
+
+				- La Source de données est un Webservice :
+				Saisissez le nom du Webservice (queue de l'URL) que vous appellez pour envoyer des données.
+				Exemple : webService/insertData:SELECT * FROM TEST sera traduit par un appel vers webService/insertData URL (concaténé vace l'URL de base de la connexion)
+
+				- La Source de données est une Boîte Mail :
+				Saisissez le nom du destinataire qui recevra l'e-mail.
+				Exemple : Fuzible@gmail.com:SELECT * FROM TEST enverra un e-mail à &amp;apos;Fuzible@gmail.com&amp;apos;
+				(Pour envoyer plusieurs jeux de résultats à une seule personne, écrivez simplement plusieurs requêtes avec le même destinataire. Fuzible mixera tous les résultats dans un seul mail)
+
+				- La Source de données est un domaine Active Directory :
+				Saisissez le nom de l'objet AD dans lequel vous voulez intervenir.
+				Exemple : USERS:SELECT * FROM MYTABLE WHERE name = apos;dupontapos;
+			</Content>
+			<Exemples>
+			</Exemples>
+		</SOURCE_QUERIES>
+		<TUTO_01>
+			<Name>TUTORIAL 01</Name>
+			<Content>
+				Dans ce Tutorial, vous allez apprendre à intégrer un fichier dans une base de données.
+				Fuzible fonctionne uniquement avec le langage SQL ; vous allez requêter le fichier comme vous le feriez avec une base de données.
+				Une fois les étapes de paramétrage passées, la requête SQL vous permettra de choisir les champs à importer, les transformer, filtrer les données.
+
+				Ce que vous allez apprendre :
+				- Choisir une connexion Source, et la paramétrer en fonction du besoin.
+				- Choisir une connexion Cible, et la paramétrer en fonction du besoin.
+				- L'utilisation des paramètres dynamiques
+				- L'utilisation des commandes pré/post Job
+				- Fuzible SQL : Comment requêter un fichier comme vous le feriez avec une base de données
+				- L'assistant de requête, le menu contextuel de requêtes.
+
+				Note : Le fichier CSV est fourni avec le programme, il se nomme SAMPLE.CSV et contient un entête, ainsi que 100 lignes.
+				Extrait du fichier :
+			</Content>
+			<Exemples>
+				id_sample;li_sample;dt_random_date;nb_random_number;li_random_string;id_group;id_ssgroup
+				1;one;23/01/2021 22:35:34;20,625;fsdnmvuxzosqhmgy;001;001
+				2;two;17/10/2020 22:35:34;14,5;ywelnymjcdsepfib;002;002
+				3;three;26/10/2020 22:35:34;26,4375;gawjbwqugugscvhq;003;003
+				4;four;05/03/2021 22:35:34;22,125;bteeadsrfvzniglw;004;004
+				5;five;27/04/2021 22:35:34;32,625;hpuivsrsdjawxzda;005;000
+			</Exemples>
+		</TUTO_01>
+		<TUTO_02>
+			<Name>TUTORIAL 02</Name>
+			<Content>
+				Dans ce tutorial, vous allez apprendre à extraire les données d'une base de données vers un fichier.
+				Fuzible fonctionne uniquement avec le langage SQL ; vous requêterez donc votre base de données en fonction de ce que vous voulez en extraire.
+				Une fois les étapes de paramétrage passées, la requête SQL sera le reflet de ce qui sera copié dans le fichier.
+
+				Ce que vous allez apprendre :
+				- Choisir une connexion Source, et la paramétrer en fonction du besoin.
+				- Choisir une connexion Cible, et la paramétrer en fonction du besoin.
+				- Fonctionnalités avancées des Paramètres Dynamiques
+				- L'utilisation avancée des commandes pré/post Job
+				- L'assistant de requête, le menu contextuel de requête
+				- Les Cibles dynamiques, le mode "Double-Cible"
+
+				Note : Nous allons utiliser des tables issues de la base de données SQLite du programme pour réaliser cet exercice.
+			</Content>
+			<Exemples>
+			</Exemples>
+		</TUTO_02>
+		<TUTO_03>
+			<Name>TUTORIAL 03</Name>
+			<Content>
+				Dans ce tutorial, vous allez apprendre à synchroniser des données entre une connexion et une autre.
+				Ce mode de fonctionnement permet de comparer 2 environnements, et de modifier l'environnement cible en conséquence.
+				A l'inverse du mode de Réplication, basé sur la suppression et la copie, la synchronisation, elle, se base sur la comparaison des données.
+				C'est très utile quand vous devez maintenir une disponibilité permanente de vos données, tout en les mettant à jour régulièrement.
+				Les données Source seront prises dans un fichier Excel. Comme Fuzible fonctionne uniquement avec le langage SQL, vous requêterez donc ce fichier ainsi.
+
+				Ce que vous allez apprendre :
+				- Définir le comportement d'un Job de synchronisation.
+				- Choisir une connexion Source, et la paramétrer en fonction du besoin.
+				- Choisir une connexion Cible, et la paramétrer en fonction du besoin.
+				- Réaliser une requête sur une connexion Source "non sql", et voir comment elle se transcodera pour être exécutée également sur la Cible.
+				- L'assistant de requête, le menu contextuel de requête
+				- Le LOG produit par un Job de synchronisation
+
+				Note : Le fichier EXCEL est fourni avec le programme, il se nomme SAMPLE.XLSX et contient (sur la 2ème feuille) un entête et 100 lignes.
+				Extrait du fichier :
+			</Content>
+			<Exemples>
+				sample code	sample untrimmed name	random number	sample group
+				0			rwlckqgyeivqvyae        349610			0
+				1			xqijagrgqxjgeqew        -650512			0
+				2			pmictjidwjvozcbi        -552614			0
+				3			majkrquvutwrasrt        289171			0
+				4			iowpdgzfexvsquiy        873493			0
+			</Exemples>
+		</TUTO_03>
+		<QUERY_DB>
+			<Name>QUERY DB</Name>
+			<Content>
+				Vous allez requêter une base de données SQL, ce qui signifie que vous allez pouvoir réaliser n'importe quelle requête SQL compatible avec le SGBD choisi :
+				N'importe quel "SELECT", du plus simple au plus complexe, sera pris en charge.
+				L'assistant de requête s'ouvrira ponctuellement (sous forme d'un petit menu contextuel) pour vous aider à choisir les champs et les tables.
+				Vous pouvez écrire plusieurs requêtes à la suite.
+
+				Chaque requête doit être précédée de "OUTPUT:SELECT...".
+			</Content>
+			<Exemples>
+				La Cible est une base de données : MyDestinationTable:SELECT * FROM mySourceTable (la table sera crée si inexistante. Sinon, seuls les champs identiques entre la Source et la Cible seront traités)
+				La Cible est un fichier : MyDestinationFile.csv:SELECT * FROM mySourceTable
+				La Cible est un fichier EXCEL : MyDestinationFile.xlsx:SELECT * FROM mySourceTable
+				La Cible est un fichier XML : MyDestinationFile.xml:SELECT * FROM mySourceTable
+				La Cible est un fichier JSON : MyDestinationFile.json:SELECT * FROM mySourceTable
+				La Cible est une boîte mail : Email@MyProvider.com:SELECT * FROM mySourceTable
+				La Cible est l'objet AD 'users' : users:SELECT * FROM mySourceTable (les champs Source doivent correspondre à des attributs AD valides)
+				La Cible est l'objet AD 'groups' : groups:SELECT * FROM mySourceTable (les champs Source doivent correspondre à des attributs AD valides)
+				La Cible est un Webservice : /url/myWebservice:SELECT * FROM mySourceTable ("/url/myWebservice" est seulement la queue de l'URL : la racine est définie dans la Connexion)
+			</Exemples>
+		</QUERY_DB>
+		<QUERY_FI>
+			<Name>QUERY FI</Name>
+			<Content>
+				Vous allez requêter un fichier en utilisant Fuzible SQL, un langage SQL parfaitement standard : vous requêtez des fichiers comme des tables SQL.
+				N'importe quel "SELECT", du plus simple au plus complexe, sera pris en charge (transformations, aggrégations, jointures...)
+				L'assistant de requête s'ouvrira ponctuellement (sous forme d'un petit menu contextuel) pour vous aider à choisir la syntaxe, les champs, les fichiers.
+				Vous pouvez écrire plusieurs requêtes à la suite.
+
+				Chaque requête doit être précédée de "OUTPUT:SELECT...".
+			</Content>
+			<Exemples>
+				La Cible est une base de données : MyDestinationTable:SELECT * FROM mySourceFile.CSV (la table sera crée si inexistante. Sinon, seuls les champs identiques entre la Source et la Cible seront traités)
+				La Cible est un fichier : MyDestinationFile.csv:SELECT * FROM mySourceFile.CSV
+				La Cible est un fichier EXCEL : MyDestinationFile.xlsx:SELECT * FROM mySourceFile.CSV
+				La Cible est un fichier XML : MyDestinationFile.xml:SELECT * FROM mySourceFile.CSV
+				La Cible est un fichier JSON : MyDestinationFile.json:SELECT * FROM mySourceFile.CSV
+				La Cible est une boîte mail : Email@MyProvider.com:SELECT * FROM mySourceFile.CSV
+				La Cible est l'objet AD 'users' : users:SELECT * FROM mySourceFile.CSV (les champs Source doivent correspondre à des attributs AD valides)
+				La Cible est l'objet AD 'groups' : groups:SELECT * FROM mySourceFile.CSV (les champs Source doivent correspondre à des attributs AD valides)
+				La Cible est un Webservice : /url/myWebservice:SELECT * FROM mySourceFile.CSV ("/url/myWebservice" est seulement la queue de l'URL : la racine est définie dans la Connexion)
+			</Exemples>
+		</QUERY_FI>
+		<QUERY_WS>
+			<Name>QUERY WS</Name>
+			<Content>
+				Vous allez requêter une API Rest en utilisant Fuzible SQL, un langage SQL parfaitement standard : vous requêtez des Webservices comme des tables SQL.
+				N'importe quel "SELECT", du plus simple au plus complexe, sera pris en charge (transformations, aggrégations, jointures...)
+				L'assistant de requête s'ouvrira ponctuellement (sous forme d'un petit menu contextuel) pour vous aider à choisir la syntaxe. En revanche, comme il n'est pas
+				possible de déterminer à l'avance les Webservices disponibles à l'adresse définie dans la connexion, et encore moins les champs, l'assistant sera limité.
+
+				Il est préférable de commencer par un "SELECT * FROM..." suivi de la queue de l'URL (dont la racine est définie dans la connexion) pour voir ce qui sera récupéré.
+
+				Par ailleurs, il est possible d'injecter un corps dans la requête, entre crochets. Si vous interrogez une API sur l'URL www.myWS.COM/myAPI et que vous devez envoyer
+				dans le corps un contenu JSON, vous pouvez faire ainsi :
+				OUTPUT:SELECT * FROM /myAPI[{"myfilter":"myvalue"}]
+				(partant du principe que "www.myWS.COM" a été défini en tant que chaîne de connexion)
+
+				Vous pouvez écrire plusieurs requêtes à la suite.
+
+				Chaque requête doit être précédée de "OUTPUT:SELECT...".
+			</Content>
+			<Exemples>
+				La Cible est une base de données : MyDestinationTable:SELECT * FROM /myAPI/MyWS (la table sera crée si inexistante. Sinon, seuls les champs identiques entre la Source et la Cible seront traités)
+				La Cible est un fichier : MyDestinationFile.csv:SELECT * FROM /myAPI/MyWS
+				La Cible est un fichier EXCEL : MyDestinationFile.xlsx:SELECT * FROM /myAPI/MyWS
+				La Cible est un fichier XML : MyDestinationFile.xml:SELECT * FROM /myAPI/MyWS
+				La Cible est un fichier JSON : MyDestinationFile.json:SELECT * FROM /myAPI/MyWS
+				La Cible est une boîte mail : Email@MyProvider.com:SELECT * FROM /myAPI/MyWS
+				La Cible est l'objet AD 'users' : users:SELECT * FROM /myAPI/MyWS (les champs Source doivent correspondre à des attributs AD valides)
+				La Cible est l'objet AD 'groups' : groups:SELECT * FROM /myAPI/MyWS (les champs Source doivent correspondre à des attributs AD valides)
+				La Cible est un Webservice : /url/myWebservice:SELECT * /myAPI/MyWS ("/url/myWebservice" est seulement la queue de l'URL : la racine est définie dans la Connexion)
+			</Exemples>
+		</QUERY_WS>
+		<QUERY_AD>
+			<Name>QUERY AD</Name>
+			<Content>
+				Vous allez requêter un domaine AD en utilisant Fuzible SQL, un langage SQL parfaitement standard : vous requêtez des objets AD comme des tables SQL.
+				N'importe quel "SELECT", du plus simple au plus complexe, sera pris en charge (transformations, aggrégations, jointures...)
+				L'assistant de requête s'ouvrira ponctuellement (sous forme d'un petit menu contextuel) pour vous aider à choisir la syntaxe.
+				La liste des objets se limite à "users" et "groups", et la liste des champs associés à chaque objet correspond à des attributs disponibles. Ceux-ci vous seront proposés pendant la saisie.
+
+				Il est préférable de commencer par un "SELECT * FROM" suivi de "users" ou "groups" pour voir ce qui sera récupéré.
+
+				Vous pouvez écrire plusieurs requêtes à la suite.
+
+				Chaque requête doit être précédée de "OUTPUT:SELECT...".
+			</Content>
+			<Exemples>
+				La Cible est une base de données : MyDestinationTable:SELECT * FROM users (la table sera crée si inexistante. Sinon, seuls les champs identiques entre la Source et la Cible seront traités)
+				La Cible est un fichier : MyDestinationFile.csv:SELECT * FROM users
+				La Cible est un fichier EXCEL : MyDestinationFile.xlsx:SELECT * FROM users
+				La Cible est un fichier XML : MyDestinationFile.xml:SELECT * FROM users
+				La Cible est un fichier JSON : MyDestinationFile.json:SELECT * FROM users
+				La Cible est une boîte mail : Email@MyProvider.com:SELECT * FROM users
+				La Cible est l'objet AD 'users' : users:SELECT * FROM users (les champs Source doivent correspondre à des attributs AD valides)
+				La Cible est l'objet AD 'groups' : groups:SELECT * FROM users (les champs Source doivent correspondre à des attributs AD valides)
+				La Cible est un Webservice : /url/myWebservice:SELECT * users ("/url/myWebservice" est seulement la queue de l'URL : la racine est définie dans la Connexion)
+			</Exemples>
+		</QUERY_AD>
+		<QUERY_MB>
+			<Name>QUERY MB</Name>
+			<Content>
+				Vous allez requêter une boîte mail en utilisant Fuzible SQL, un langage SQL parfaitement standard : vous requêtez une BAL comme des tables SQL.
+				N'importe quel "SELECT", du plus simple au plus complexe, sera pris en charge (transformations, aggrégations, jointures...)
+				L'assistant de requête s'ouvrira ponctuellement (sous forme d'un petit menu contextuel) pour vous aider à choisir la syntaxe.
+				La liste des champs disponibles est un ensemble de champs propres à une boîte mail, et vous seront proposés pendant la saisie de la requête.
+
+				Il est préférable de commencer par un "SELECT * FROM" suivi de l'adresse mail pour voir ce qu'il est possible de récupérer.
+				L'adresse mail doit bien entendu être compatible avec le fournisseur d'accès paramétré dans votre connexion.
+				Si vous voulez requêter une autre adresse que celle qui a été saisie dans la chaîne de connexion, mais du même fournisseur, vous pouvez procéder ainsi :
+				OUTPUT:SELECT * FROM Email@MyProvider.com[myPassword]
+				Vous forcez ainsi la connexion à une boîte en utilisant le mot de passe entre crochets.
+
+				Vous pouvez écrire plusieurs requêtes à la suite.
+
+				Chaque requête doit être précédée de "OUTPUT:SELECT...".
+			</Content>
+			<Exemples>
+				La Cible est une base de données : MyDestinationTable:SELECT * FROM Email@MyProvider.com (la table sera crée si inexistante. Sinon, seuls les champs identiques entre la Source et la Cible seront traités)
+				La Cible est un fichier : MyDestinationFile.csv:SELECT * FROM Email@MyProvider.com
+				La Cible est un fichier EXCEL : MyDestinationFile.xlsx:SELECT * FROM Email@MyProvider.com
+				La Cible est un fichier XML : MyDestinationFile.xml:SELECT * FROM Email@MyProvider.com
+				La Cible est un fichier JSON : MyDestinationFile.json:SELECT * FROM Email@MyProvider.com
+				La Cible est une boîte mail : Email@MyProvider.com:SELECT * FROM Email@MyProvider.com
+				La Cible est l'objet AD 'users' : users:SELECT * FROM Email@MyProvider.com (les champs Source doivent correspondre à des attributs AD valides)
+				La Cible est l'objet AD 'groups' : groups:SELECT * FROM Email@MyProvider.com (les champs Source doivent correspondre à des attributs AD valides)
+				La Cible est un Webservice : /url/myWebservice:SELECT * Email@MyProvider.com ("/url/myWebservice" est seulement la queue de l'URL : la racine est définie dans la Connexion)
+			</Exemples>
+		</QUERY_MB>
+		<QUERY_NS>
+			<Name>QUERY NS</Name>
+			<Content>
+				Vous allez requêter une BDD MongoDB en utilisant Fuzible SQL, un langage SQL parfaitement standard : vous requêtez des collections comme des tables SQL.
+				N'importe quel "SELECT", du plus simple au plus complexe, sera pris en charge (transformations, aggrégations, jointures...)
+				L'assistant de requête s'ouvrira ponctuellement (sous forme d'un petit menu contextuel) pour vous aider à choisir la syntaxe, les collections et les champs.
+
+				Vous pouvez écrire plusieurs requêtes à la suite.
+
+				Chaque requête doit être précédée de "OUTPUT:SELECT...".
+			</Content>
+			<Exemples>
+				La Cible est une base de données : MyDestinationTable:SELECT * FROM myCollection (la table sera crée si inexistante. Sinon, seuls les champs identiques entre la Source et la Cible seront traités)
+				La Cible est un fichier : MyDestinationFile.csv:SELECT * FROM myCollection
+				La Cible est un fichier EXCEL : MyDestinationFile.xlsx:SELECT * FROM myCollection
+				La Cible est un fichier XML : MyDestinationFile.xml:SELECT * FROM myCollection
+				La Cible est un fichier JSON : MyDestinationFile.json:SELECT * FROM myCollection
+				La Cible est une boîte mail : Email@MyProvider.com:SELECT * FROM myCollection
+				La Cible est l'objet AD 'users' : users:SELECT * FROM myCollection (les champs Source doivent correspondre à des attributs AD valides)
+				La Cible est l'objet AD 'groups' : groups:SELECT * FROM myCollection (les champs Source doivent correspondre à des attributs AD valides)
+				La Cible est un Webservice : /url/myWebservice:SELECT * myCollection ("/url/myWebservice" est seulement la queue de l'URL : la racine est définie dans la Connexion)
+			</Exemples>
+		</QUERY_NS>
+	</help_fr>
+</helpfile>
