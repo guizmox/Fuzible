@@ -492,9 +492,9 @@ namespace FuzibleFramework
                         DataTable dt = dsJson.Tables[dsJson.Tables.IndexOf(sTableName)];
                         dt.Columns[string.Concat(dt.TableName, "_id")].ColumnName = tuple.Item1;
                         if (dtTuple.Rows.Count == 0)
-                        { 
-                            dtTuple = dt.Clone(); 
-                            dtTuple.TableName = tuple.Item1; 
+                        {
+                            dtTuple = dt.Clone();
+                            dtTuple.TableName = tuple.Item1;
                         }
                         foreach (DataRow dr in dt.Rows)
                         {
@@ -771,6 +771,7 @@ namespace FuzibleFramework
                         else if (scJs[iC].Equals(Convert.ToChar("[")) && iIntoSentence % 2 == 0) { iLevel++; if (iLevel == 1) { iOpen = iC; } }
                         else if (scJs[iC].Equals(Convert.ToChar("]")) && iIntoSentence % 2 == 0) { iLevel--; if (iLevel == 0) { bClose = true; } }
                         else if (scJs[iC].Equals(Convert.ToChar("\"")))
+                        {
                             if (!scJs[iC - 1].Equals(Convert.ToChar("\\")) || (scJs[iC - 1].Equals(Convert.ToChar("\\")) && scJs[iC - 2].Equals(Convert.ToChar("\\"))))
                             {
                                 iIntoSentence++;
